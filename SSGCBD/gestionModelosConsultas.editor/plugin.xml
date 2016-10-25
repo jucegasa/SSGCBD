@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.presentation.GestionmodelosconsultasModelWizardID"
+            name="%_UI_GestionmodelosconsultasModelWizard_label"
+            class="gestionmodelosconsultas.presentation.GestionmodelosconsultasModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/GestionmodelosconsultasModelFile.gif">
+         <description>%_UI_GestionmodelosconsultasModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.presentation.GestionmodelosconsultasEditorID"
+            name="%_UI_GestionmodelosconsultasEditor_label"
+            icon="icons/full/obj16/GestionmodelosconsultasModelFile.gif"
+            extensions="gestionmodelosconsultas"
+            class="gestionmodelosconsultas.presentation.GestionmodelosconsultasEditor"
+            contributorClass="gestionmodelosconsultas.presentation.GestionmodelosconsultasActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.rules.factoryrules.presentation.FactoryrulesModelWizardID"
+            name="%_UI_FactoryrulesModelWizard_label"
+            class="gestionmodelosconsultas.rules.factoryrules.presentation.FactoryrulesModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/FactoryrulesModelFile.gif">
+         <description>%_UI_FactoryrulesModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.rules.factoryrules.presentation.FactoryrulesEditorID"
+            name="%_UI_FactoryrulesEditor_label"
+            icon="icons/full/obj16/FactoryrulesModelFile.gif"
+            extensions="factoryrules"
+            class="gestionmodelosconsultas.rules.factoryrules.presentation.FactoryrulesEditor"
+            contributorClass="gestionmodelosconsultas.rules.factoryrules.presentation.FactoryrulesActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.entitymodel.presentation.EntitymodelModelWizardID"
+            name="%_UI_EntitymodelModelWizard_label"
+            class="gestionmodelosconsultas.entitymodel.presentation.EntitymodelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/EntitymodelModelFile.gif">
+         <description>%_UI_EntitymodelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.entitymodel.presentation.EntitymodelEditorID"
+            name="%_UI_EntitymodelEditor_label"
+            icon="icons/full/obj16/EntitymodelModelFile.gif"
+            extensions="entitymodel"
+            class="gestionmodelosconsultas.entitymodel.presentation.EntitymodelEditor"
+            contributorClass="gestionmodelosconsultas.entitymodel.presentation.EntitymodelActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.presentation.SysinfoModelWizardID"
+            name="%_UI_SysinfoModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.presentation.SysinfoModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SysinfoModelFile.gif">
+         <description>%_UI_SysinfoModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.presentation.SysinfoEditorID"
+            name="%_UI_SysinfoEditor_label"
+            icon="icons/full/obj16/SysinfoModelFile.gif"
+            extensions="sysinfo"
+            class="gestionmodelosconsultas.sysinfo.presentation.SysinfoEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.presentation.SysinfoActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.people.presentation.PeopleModelWizardID"
+            name="%_UI_PeopleModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.people.presentation.PeopleModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/PeopleModelFile.gif">
+         <description>%_UI_PeopleModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.people.presentation.PeopleEditorID"
+            name="%_UI_PeopleEditor_label"
+            icon="icons/full/obj16/PeopleModelFile.gif"
+            extensions="people"
+            class="gestionmodelosconsultas.sysinfo.people.presentation.PeopleEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.people.presentation.PeopleActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.data.presentation.DataModelWizardID"
+            name="%_UI_DataModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.data.presentation.DataModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DataModelFile.gif">
+         <description>%_UI_DataModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.data.presentation.DataEditorID"
+            name="%_UI_DataEditor_label"
+            icon="icons/full/obj16/DataModelFile.gif"
+            extensions="data"
+            class="gestionmodelosconsultas.sysinfo.data.presentation.DataEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.data.presentation.DataActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.data.docmgt.presentation.DocmgtModelWizardID"
+            name="%_UI_DocmgtModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.data.docmgt.presentation.DocmgtModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DocmgtModelFile.gif">
+         <description>%_UI_DocmgtModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.data.docmgt.presentation.DocmgtEditorID"
+            name="%_UI_DocmgtEditor_label"
+            icon="icons/full/obj16/DocmgtModelFile.gif"
+            extensions="docmgt"
+            class="gestionmodelosconsultas.sysinfo.data.docmgt.presentation.DocmgtEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.data.docmgt.presentation.DocmgtActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.network.presentation.NetworkModelWizardID"
+            name="%_UI_NetworkModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.network.presentation.NetworkModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/NetworkModelFile.gif">
+         <description>%_UI_NetworkModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.network.presentation.NetworkEditorID"
+            name="%_UI_NetworkEditor_label"
+            icon="icons/full/obj16/NetworkModelFile.gif"
+            extensions="network"
+            class="gestionmodelosconsultas.sysinfo.network.presentation.NetworkEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.network.presentation.NetworkActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.function.presentation.FunctionModelWizardID"
+            name="%_UI_FunctionModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.function.presentation.FunctionModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/FunctionModelFile.gif">
+         <description>%_UI_FunctionModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.function.presentation.FunctionEditorID"
+            name="%_UI_FunctionEditor_label"
+            icon="icons/full/obj16/FunctionModelFile.gif"
+            extensions="function"
+            class="gestionmodelosconsultas.sysinfo.function.presentation.FunctionEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.function.presentation.FunctionActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.time.presentation.TimeModelWizardID"
+            name="%_UI_TimeModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.time.presentation.TimeModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TimeModelFile.gif">
+         <description>%_UI_TimeModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.time.presentation.TimeEditorID"
+            name="%_UI_TimeEditor_label"
+            icon="icons/full/obj16/TimeModelFile.gif"
+            extensions="time"
+            class="gestionmodelosconsultas.sysinfo.time.presentation.TimeEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.time.presentation.TimeActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.vision.presentation.VisionModelWizardID"
+            name="%_UI_VisionModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.vision.presentation.VisionModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/VisionModelFile.gif">
+         <description>%_UI_VisionModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.vision.presentation.VisionEditorID"
+            name="%_UI_VisionEditor_label"
+            icon="icons/full/obj16/VisionModelFile.gif"
+            extensions="vision"
+            class="gestionmodelosconsultas.sysinfo.vision.presentation.VisionEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.vision.presentation.VisionActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.sysinfo.core.presentation.CoreModelWizardID"
+            name="%_UI_CoreModelWizard_label"
+            class="gestionmodelosconsultas.sysinfo.core.presentation.CoreModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/CoreModelFile.gif">
+         <description>%_UI_CoreModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.sysinfo.core.presentation.CoreEditorID"
+            name="%_UI_CoreEditor_label"
+            icon="icons/full/obj16/CoreModelFile.gif"
+            extensions="core"
+            class="gestionmodelosconsultas.sysinfo.core.presentation.CoreEditor"
+            contributorClass="gestionmodelosconsultas.sysinfo.core.presentation.CoreActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.presentation.ModeloconsultasModelWizardID"
+            name="%_UI_ModeloconsultasModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.presentation.ModeloconsultasModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ModeloconsultasModelFile.gif">
+         <description>%_UI_ModeloconsultasModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.presentation.ModeloconsultasEditorID"
+            name="%_UI_ModeloconsultasEditor_label"
+            icon="icons/full/obj16/ModeloconsultasModelFile.gif"
+            extensions="modeloconsultas"
+            class="gestionmodelosconsultas.modeloconsultas.presentation.ModeloconsultasEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.presentation.ModeloconsultasActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.que.presentation.QueModelWizardID"
+            name="%_UI_QueModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.que.presentation.QueModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/QueModelFile.gif">
+         <description>%_UI_QueModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.que.presentation.QueEditorID"
+            name="%_UI_QueEditor_label"
+            icon="icons/full/obj16/QueModelFile.gif"
+            extensions="que"
+            class="gestionmodelosconsultas.modeloconsultas.que.presentation.QueEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.que.presentation.QueActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.quien.presentation.QuienModelWizardID"
+            name="%_UI_QuienModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.quien.presentation.QuienModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/QuienModelFile.gif">
+         <description>%_UI_QuienModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.quien.presentation.QuienEditorID"
+            name="%_UI_QuienEditor_label"
+            icon="icons/full/obj16/QuienModelFile.gif"
+            extensions="quien"
+            class="gestionmodelosconsultas.modeloconsultas.quien.presentation.QuienEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.quien.presentation.QuienActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.como.presentation.ComoModelWizardID"
+            name="%_UI_ComoModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.como.presentation.ComoModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ComoModelFile.gif">
+         <description>%_UI_ComoModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.como.presentation.ComoEditorID"
+            name="%_UI_ComoEditor_label"
+            icon="icons/full/obj16/ComoModelFile.gif"
+            extensions="como"
+            class="gestionmodelosconsultas.modeloconsultas.como.presentation.ComoEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.como.presentation.ComoActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.cuando.presentation.CuandoModelWizardID"
+            name="%_UI_CuandoModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.cuando.presentation.CuandoModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/CuandoModelFile.gif">
+         <description>%_UI_CuandoModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.cuando.presentation.CuandoEditorID"
+            name="%_UI_CuandoEditor_label"
+            icon="icons/full/obj16/CuandoModelFile.gif"
+            extensions="cuando"
+            class="gestionmodelosconsultas.modeloconsultas.cuando.presentation.CuandoEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.cuando.presentation.CuandoActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.donde.presentation.DondeModelWizardID"
+            name="%_UI_DondeModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.donde.presentation.DondeModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DondeModelFile.gif">
+         <description>%_UI_DondeModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.donde.presentation.DondeEditorID"
+            name="%_UI_DondeEditor_label"
+            icon="icons/full/obj16/DondeModelFile.gif"
+            extensions="donde"
+            class="gestionmodelosconsultas.modeloconsultas.donde.presentation.DondeEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.donde.presentation.DondeActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.model.presentation.ModelModelWizardID"
+            name="%_UI_ModelModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.model.presentation.ModelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ModelModelFile.gif">
+         <description>%_UI_ModelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.model.presentation.ModelEditorID"
+            name="%_UI_ModelEditor_label"
+            icon="icons/full/obj16/ModelModelFile.gif"
+            extensions="model"
+            class="gestionmodelosconsultas.modeloconsultas.model.presentation.ModelEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.model.presentation.ModelActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.resultset.presentation.ResultsetModelWizardID"
+            name="%_UI_ResultsetModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.presentation.ResultsetModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ResultsetModelFile.gif">
+         <description>%_UI_ResultsetModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.resultset.presentation.ResultsetEditorID"
+            name="%_UI_ResultsetEditor_label"
+            icon="icons/full/obj16/ResultsetModelFile.gif"
+            extensions="resultset"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.presentation.ResultsetEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.resultset.presentation.ResultsetActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultquien.presentation.ResultquienModelWizardID"
+            name="%_UI_ResultquienModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultquien.presentation.ResultquienModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ResultquienModelFile.gif">
+         <description>%_UI_ResultquienModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultquien.presentation.ResultquienEditorID"
+            name="%_UI_ResultquienEditor_label"
+            icon="icons/full/obj16/ResultquienModelFile.gif"
+            extensions="resultquien"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultquien.presentation.ResultquienEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.resultset.resultquien.presentation.ResultquienActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultque.presentation.ResultqueModelWizardID"
+            name="%_UI_ResultqueModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultque.presentation.ResultqueModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ResultqueModelFile.gif">
+         <description>%_UI_ResultqueModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultque.presentation.ResultqueEditorID"
+            name="%_UI_ResultqueEditor_label"
+            icon="icons/full/obj16/ResultqueModelFile.gif"
+            extensions="resultque"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultque.presentation.ResultqueEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.resultset.resultque.presentation.ResultqueActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.presentation.ResultdondeModelWizardID"
+            name="%_UI_ResultdondeModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.presentation.ResultdondeModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ResultdondeModelFile.gif">
+         <description>%_UI_ResultdondeModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.presentation.ResultdondeEditorID"
+            name="%_UI_ResultdondeEditor_label"
+            icon="icons/full/obj16/ResultdondeModelFile.gif"
+            extensions="resultdonde"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.presentation.ResultdondeEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.presentation.ResultdondeActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultcomo.presentation.ResultcomoModelWizardID"
+            name="%_UI_ResultcomoModelWizard_label"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultcomo.presentation.ResultcomoModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ResultcomoModelFile.gif">
+         <description>%_UI_ResultcomoModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.modeloconsultas.resultset.resultcomo.presentation.ResultcomoEditorID"
+            name="%_UI_ResultcomoEditor_label"
+            icon="icons/full/obj16/ResultcomoModelFile.gif"
+            extensions="resultcomo"
+            class="gestionmodelosconsultas.modeloconsultas.resultset.resultcomo.presentation.ResultcomoEditor"
+            contributorClass="gestionmodelosconsultas.modeloconsultas.resultset.resultcomo.presentation.ResultcomoActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.memoms.presentation.MemomsModelWizardID"
+            name="%_UI_MemomsModelWizard_label"
+            class="gestionmodelosconsultas.memoms.presentation.MemomsModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/MemomsModelFile.gif">
+         <description>%_UI_MemomsModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.memoms.presentation.MemomsEditorID"
+            name="%_UI_MemomsEditor_label"
+            icon="icons/full/obj16/MemomsModelFile.gif"
+            extensions="memoms"
+            class="gestionmodelosconsultas.memoms.presentation.MemomsEditor"
+            contributorClass="gestionmodelosconsultas.memoms.presentation.MemomsActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.memoms.info.presentation.InfoModelWizardID"
+            name="%_UI_InfoModelWizard_label"
+            class="gestionmodelosconsultas.memoms.info.presentation.InfoModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/InfoModelFile.gif">
+         <description>%_UI_InfoModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.memoms.info.presentation.InfoEditorID"
+            name="%_UI_InfoEditor_label"
+            icon="icons/full/obj16/InfoModelFile.gif"
+            extensions="info"
+            class="gestionmodelosconsultas.memoms.info.presentation.InfoEditor"
+            contributorClass="gestionmodelosconsultas.memoms.info.presentation.InfoActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated gestionModelosConsultas -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="gestionmodelosconsultas.memoms.comunicacion.presentation.ComunicacionModelWizardID"
+            name="%_UI_ComunicacionModelWizard_label"
+            class="gestionmodelosconsultas.memoms.comunicacion.presentation.ComunicacionModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ComunicacionModelFile.gif">
+         <description>%_UI_ComunicacionModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated gestionModelosConsultas -->
+      <editor
+            id="gestionmodelosconsultas.memoms.comunicacion.presentation.ComunicacionEditorID"
+            name="%_UI_ComunicacionEditor_label"
+            icon="icons/full/obj16/ComunicacionModelFile.gif"
+            extensions="comunicacion"
+            class="gestionmodelosconsultas.memoms.comunicacion.presentation.ComunicacionEditor"
+            contributorClass="gestionmodelosconsultas.memoms.comunicacion.presentation.ComunicacionActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

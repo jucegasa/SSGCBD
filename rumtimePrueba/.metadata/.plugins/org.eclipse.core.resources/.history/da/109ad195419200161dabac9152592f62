@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooldataform:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tooldataform="http:///tooldataform.ecore" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore">
+  <listProyecto listDataFormDiagram="//@listProyecto.0/@listDiagram.0">
+    <listDiagram xsi:type="tooldataform.formmodel.concreta:DataForm_Diagram" theProject="//@listProyecto.0">
+      <listarelacion xsi:type="tooldataform.formmodel.concreta:Containment" name="name1" aRol="ownedByTable1" bRol="listTable1" binding="si" source="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0" target="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0/@listGraphicalContainer.0"/>
+      <listarelacion xsi:type="tooldataform.formmodel.concreta:Containment" name="name2" aRol="ownedByTable2" bRol="listTable2" binding="si" source="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.1" target="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.1/@listGraphicalContainer.0"/>
+      <theInterface positionX="0" positionY="0" width="756" height="461">
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Table1" positionX="43" positionY="33" width="256" height="266">
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Table1" positionX="25" positionY="14" width="-1" height="-1">
+            <listColumView name="Nombre"/>
+            <listColumView name="Telefono"/>
+            <listColumView name="Edad"/>
+          </listGraphicalContainer>
+        </listGraphicalContainer>
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Table2" positionX="393" positionY="23" width="236" height="266">
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Table2" positionX="35" positionY="19" width="-1" height="-1">
+            <listColumView name="Departamento"/>
+            <listColumView name="Ciudad"/>
+          </listGraphicalContainer>
+        </listGraphicalContainer>
+      </theInterface>
+    </listDiagram>
+  </listProyecto>
+</tooldataform:ModelFactory>

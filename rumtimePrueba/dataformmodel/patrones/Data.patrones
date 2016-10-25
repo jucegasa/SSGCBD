@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patrones:FactoryPatrones xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:patrones="http:///patrones.ecore">
+  <theFactoryUbicacionColombia>
+    <listPaises nombre="Colombia">
+      <listDeptos nombre="Amazonas">
+        <listMpios nombre="El Encanto"/>
+        <listMpios nombre="La Chorrera"/>
+        <listMpios nombre="La Pedrera"/>
+        <listMpios nombre="La Victoria"/>
+        <listMpios nombre="Leticia"/>
+        <listMpios nombre="MiritíParaná"/>
+        <listMpios nombre="Puerto Alegría"/>
+        <listMpios nombre="Puerto Alegría"/>
+        <listMpios nombre="Puerto Arica"/>
+        <listMpios nombre="Puerto Nariño"/>
+        <listMpios nombre="Puerto Santander"/>
+        <listMpios nombre="Tarapacá"/>
+      </listDeptos>
+      <listDeptos nombre="Antioquia">
+        <listMpios nombre="ABEJORRAL"/>
+        <listMpios nombre="ABRIAQUI"/>
+        <listMpios nombre="ALEJANDRIA"/>
+        <listMpios nombre="AMAGA"/>
+        <listMpios nombre="AMALFI"/>
+        <listMpios nombre="ANDES"/>
+        <listMpios nombre="ANGELOPOLIS"/>
+        <listMpios nombre="ANGOSTURA"/>
+        <listMpios nombre="ANORI"/>
+        <listMpios nombre=" SANTA FE DE ANTIOQUIA"/>
+        <listMpios nombre="ANZA"/>
+        <listMpios nombre="APARTADO"/>
+        <listMpios nombre="ARBOLETES"/>
+      </listDeptos>
+      <listDeptos nombre="Arauca"/>
+      <listDeptos nombre="Atlantico"/>
+      <listDeptos nombre="Bolivar"/>
+      <listDeptos nombre="Boyacá"/>
+      <listDeptos nombre="Caldas"/>
+      <listDeptos nombre="Caquetá"/>
+      <listDeptos nombre="Casanare"/>
+      <listDeptos nombre="Cauca"/>
+      <listDeptos nombre="Cesar"/>
+      <listDeptos nombre="Chocó"/>
+      <listDeptos nombre="Córdoba"/>
+      <listDeptos nombre="Cundinamarca"/>
+      <listDeptos nombre="Guainía"/>
+      <listDeptos nombre="Guaviare"/>
+      <listDeptos nombre="Huila"/>
+      <listDeptos nombre="La Guajira"/>
+      <listDeptos nombre="Magdalena"/>
+      <listDeptos nombre="Meta"/>
+      <listDeptos nombre="Nariño"/>
+      <listDeptos nombre="Norte de Santander"/>
+      <listDeptos nombre="Putumayo"/>
+      <listDeptos nombre="Quindio"/>
+      <listDeptos nombre="Risaralda"/>
+      <listDeptos nombre="San Andres y Providencia"/>
+      <listDeptos nombre="Santander"/>
+      <listDeptos nombre="Sucre"/>
+      <listDeptos nombre="Tolima"/>
+      <listDeptos nombre="Valle del Cauca"/>
+      <listDeptos nombre="Vaupés"/>
+      <listDeptos nombre="Vichada"/>
+    </listPaises>
+  </theFactoryUbicacionColombia>
+  <theFactoryDireccion>
+    <theFactoryDireccionColombia>
+      <listDireccionColombia direccion="Car 19 calle 2 casa 2 urbanizacion El Lago" urbanizacion="El lago" carrera="19" calle="2" casa="2" thePersonaNatural="//@theFactoryActor/@theFactoryPersonaNatural/@listPersonaNatural.1"/>
+      <listDireccionColombia direccion="Car 19 calle 1 casa 3 Urbanizacion El dorado" urbanizacion="El dorado" carrera="19" calle="1" casa="3" thePersonaNatural="//@theFactoryActor/@theFactoryPersonaNatural/@listPersonaNatural.0"/>
+    </theFactoryDireccionColombia>
+    <theFactoryDireccionArgentina/>
+  </theFactoryDireccion>
+  <theFactoryMaestroDetalle>
+    <theFactoryOrden>
+      <listOrden numero="001" fecha="10/11/2015" total="8341700" receptor="//@theFactoryActor/@theFactoryPersonaNatural/@listPersonaNatural.0" emisor="//@theFactoryActor/@theFactoryPersonaNatural/@listPersonaNatural.1">
+        <listDetalleOrden cantidad="2" subTotal="1278000" producto="//@theFactoryProducto/@listProducto.1"/>
+        <listDetalleOrden cantidad="8" subTotal="4399200" producto="//@theFactoryProducto/@listProducto.2"/>
+        <listDetalleOrden cantidad="5" subTotal="2664500" producto="//@theFactoryProducto/@listProducto.0"/>
+      </listOrden>
+    </theFactoryOrden>
+  </theFactoryMaestroDetalle>
+  <theFactoryActor>
+    <theFactoryPersonaNatural>
+      <listPersonaNatural nombres="María Mireya" apellidos="Acevedo Manríquez" identificacion="1094895" fechaNacimiento="01/05/1988" theDireccionColombia="//@theFactoryDireccion/@theFactoryDireccionColombia/@listDireccionColombia.1" orden="//@theFactoryMaestroDetalle/@theFactoryOrden/@listOrden.0"/>
+      <listPersonaNatural nombres="Luis Carlos" apellidos="Garcia Lopez" identificacion="10945285621" fechaNacimiento="01/05/1988" theDireccionColombia="//@theFactoryDireccion/@theFactoryDireccionColombia/@listDireccionColombia.0" theOrden="//@theFactoryMaestroDetalle/@theFactoryOrden/@listOrden.0"/>
+    </theFactoryPersonaNatural>
+    <theFactoryPersonaJuridica>
+      <listPersonaJuridica razonSocial="Razon Social" proposito="Proposito" fechaCreacion="12/01/2000" identificacion="58965"/>
+    </theFactoryPersonaJuridica>
+  </theFactoryActor>
+  <theFactoryProducto>
+    <listProducto detalleOrden="//@theFactoryMaestroDetalle/@theFactoryOrden/@listOrden.0/@listDetalleOrden.2" nombre="Consola Xbox" codigo="003" descripcion="Consola Xbox 4gb + Control Edicion 2014" fechaCreacion="01/05/2015" valor="532900">
+      <listSubProductos nombre="Control" codigo="005" descripcion="Control XBox" fechaCreacion="01/05/2015" valor="50000"/>
+    </listProducto>
+    <listProducto detalleOrden="//@theFactoryMaestroDetalle/@theFactoryOrden/@listOrden.0/@listDetalleOrden.0" nombre="Portátil ACER ES1-311-C2XF" codigo="001" descripcion="Procesador: Intel Celeron N2840" fechaCreacion="06/11/2015" valor="639.000"/>
+    <listProducto detalleOrden="//@theFactoryMaestroDetalle/@theFactoryOrden/@listOrden.0/@listDetalleOrden.1" nombre="Ipad Mini " codigo="002" descripcion="Ipad Mini / Wi-Fi / 16gb / Space Gray / Mf432e/A" fechaCreacion="10/01/2015" valor="549900"/>
+  </theFactoryProducto>
+</patrones:FactoryPatrones>

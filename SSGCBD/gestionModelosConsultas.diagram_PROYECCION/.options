@@ -1,0 +1,7 @@
+# Tracing options for the gestionModelosConsultas.diagram_PROYECCION plug-in
+
+# Common issues
+gestionModelosConsultas.diagram_PROYECCION/debug=false
+
+# Visual IDs
+gestionModelosConsultas.diagram_PROYECCION/debug/visualID=false

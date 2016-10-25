@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gestionmodelosconsultas" nsURI="http:///gestionmodelosconsultas.ecore"
+    nsPrefix="gestionmodelosconsultas">
+  <eClassifiers xsi:type="ecore:EClass" name="ModelFactory">
+    <eOperations name="cargar" eType="#//ModelFactory">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="ModelFactory modelFactory = null;&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI(&quot;platform:/resource/testConsultas/modelos/produccion.gestionmodelosconsultas&quot;);&#xD;&#xA;&#x9;&#x9;org.eclipse.emf.ecore.resource.ResourceSet resourceSet= new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();&#xD;&#xA;&#x9;&#x9;org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);&#xD;&#xA;&#x9;&#x9;try {&#xD;&#xA;&#x9;&#x9;&#x9;resource.load(java.util.Collections.EMPTY_MAP);&#xD;&#xA;&#x9;&#x9;&#x9;modelFactory = (ModelFactory) resource.getContents().get(0);&#xD;&#xA;&#x9;&#x9;} catch (java.io.IOException e) {&#xD;&#xA;&#x9;&#x9;&#x9;// TO-DO Auto-generated catch block&#xD;&#xA;&#x9;&#x9;&#x9;e.printStackTrace();&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;return modelFactory;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="salvar">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="ModelFactory modelFactory = this;&#xD;&#xA;&#x9;&#x9;  &#xD;&#xA;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;  org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI(&quot;platform:/resource/testConsultas/modelos/produccion.gestionmodelosconsultas&quot;);&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;  org.eclipse.emf.ecore.resource.ResourceSet resourceSet= new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;  org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);&#xD;&#xA;&#x9;&#x9;  resource.getContents().add(modelFactory);&#xD;&#xA;&#x9;&#x9;  try {&#xD;&#xA;&#x9;&#x9;   resource.save(java.util.Collections.EMPTY_MAP);&#xD;&#xA;&#x9;&#x9;  } catch (java.io.IOException e) {&#xD;&#xA;&#x9;&#x9;   // TO-DO Auto-generated catch block&#xD;&#xA;&#x9;&#x9;   e.printStackTrace();&#xD;&#xA;&#x9;&#x9;  }&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;  return;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rulesFactory" lowerBound="1"
+        eType="#//rules/factoryrules/RulesFactory" containment="true" eOpposite="#//rules/factoryrules/RulesFactory/ModelFactory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="factoryModeloConsultas"
+        lowerBound="1" eType="#//modeloconsultas/FactoryModeloConsulta" containment="true"
+        eOpposite="#//modeloconsultas/FactoryModeloConsulta/ModelFactory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramEntity" lowerBound="1"
+        eType="#//entitymodel/DiagramEntity" containment="true" eOpposite="#//entitymodel/DiagramEntity/ModelFactory"/>
+  </eClassifiers>
+  <eSubpackages name="rules" nsURI="http:///gestionmodelosconsultas/rules.ecore" nsPrefix="gestionmodelosconsultas.rules">
+    <eSubpackages name="factoryrules" nsURI="http:///gestionmodelosconsultas/rules/factoryrules.ecore"
+        nsPrefix="gestionmodelosconsultas.rules.factoryrules">
+      <eClassifiers xsi:type="ecore:EClass" name="RulesFactory">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ModelFactory" eType="#//ModelFactory"
+            transient="true" eOpposite="#//ModelFactory/rulesFactory"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="listRuleDiagramEntity"
+            upperBound="-1" eType="#//rules/factoryrules/Rule" containment="true"
+            eOpposite="#//rules/factoryrules/Rule/RulesFactory"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Rule">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RulesFactory" eType="#//rules/factoryrules/RulesFactory"
+            transient="true" eOpposite="#//rules/factoryrules/RulesFactory/listRuleDiagramEntity"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="listChildRule" upperBound="-1"
+            eType="#//rules/factoryrules/ChildRule" containment="true" eOpposite="#//rules/factoryrules/ChildRule/Rule"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ChildRule" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Rule" eType="#//rules/factoryrules/Rule"
+            transient="true" eOpposite="#//rules/factoryrules/Rule/listChildRule"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EntityName" eSuperTypes="#//rules/factoryrules/ChildRule"/>
+      <eClassifiers xsi:type="ecore:EClass" name="RelationName" eSuperTypes="#//rules/factoryrules/ChildRule"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="entitymodel" nsURI="http:///gestionmodelosconsultas/entitymodel.ecore"
+      nsPrefix="gestionmodelosconsultas.entitymodel">
+    <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//entitymodel/ModelElementEntity">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedByFactoryEntity"
+          eType="#//entitymodel/DiagramEntity" transient="true" eOpposite="#//entitymodel/DiagramEntity/listEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listAttributes" upperBound="-1"
+          eType="#//entitymodel/Attribute" containment="true" eOpposite="#//entitymodel/Attribute/Entity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EntityRelation" eSuperTypes="#//entitymodel/ModelElementEntity">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="atributteForeingKeySource"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="atributtePrimaryKeyTarget"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicitySource" eType="#//entitymodel/Multiplicity"
+          defaultValueLiteral="many_to_one"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicityTarget" eType="#//entitymodel/Multiplicity"
+          defaultValueLiteral="one_to_many"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="theFactoryEntity" eType="#//entitymodel/DiagramEntity"
+          transient="true" eOpposite="#//entitymodel/DiagramEntity/listEntityRelation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//entitymodel/Entity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//entitymodel/Entity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleRelation" eSuperTypes="#//entitymodel/EntityRelation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AssociativeEntity" eSuperTypes="#//entitymodel/Entity"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//entitymodel/Type"
+          defaultValueLiteral="string"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="visible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributeType" eType="#//entitymodel/AttributeType"
+          defaultValueLiteral="ordinary"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="Entity" eType="#//entitymodel/Entity"
+          transient="true" eOpposite="#//entitymodel/Entity/listAttributes"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ElementoRealizacionValueAttribute"
+          upperBound="-1" eType="#//entitymodel/ElementoRealizacionValueAttribute"
+          eOpposite="#//entitymodel/ElementoRealizacionValueAttribute/valueAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ElementoRealizacionVisibleAttribute"
+          upperBound="-1" eType="#//entitymodel/ElementoRealizacionVisibleAttribute"
+          eOpposite="#//entitymodel/ElementoRealizacionVisibleAttribute/visibleAttribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelElementEntity" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ElementoRealizacionDiagramEntity"
+          upperBound="-1" eType="#//entitymodel/ElementoRealizacionDiagramEntity"
+          eOpposite="#//entitymodel/ElementoRealizacionDiagramEntity/modelElementEntity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="AttributeType">
+      <eLiterals name="primaryKey" value="1"/>
+      <eLiterals name="ordinary"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Multiplicity">
+      <eLiterals name="one_to_many" value="1"/>
+      <eLiterals name="many_to_one" value="2"/>
+      <eLiterals name="one_to_one" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DiagramEntity">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ModelFactory" eType="#//ModelFactory"
+          transient="true" eOpposite="#//ModelFactory/diagramEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listEntity" upperBound="-1"
+          eType="#//entitymodel/Entity" containment="true" eOpposite="#//entitymodel/Entity/ownedByFactoryEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listEntityRelation" upperBound="-1"
+          eType="#//entitymodel/EntityRelation" containment="true" eOpposite="#//entitymodel/EntityRelation/theFactoryEntity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RealizacionDiagramEntity">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ModeloConsulta" eType="#//modeloconsultas/ModeloConsulta"
+          transient="true" eOpposite="#//modeloconsultas/ModeloConsulta/realizacionDiagramEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listElementoRealizacionDiagramEntity"
+          upperBound="-1" eType="#//entitymodel/ElementoRealizacionDiagramEntity"
+          containment="true" eOpposite="#//entitymodel/ElementoRealizacionDiagramEntity/RealizacionDiagramEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="realizacionVisibleAttribute"
+          lowerBound="1" eType="#//entitymodel/ElementoRealizacionVisibleAttribute"
+          containment="true" eOpposite="#//entitymodel/ElementoRealizacionVisibleAttribute/RealizacionDiagramEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listValues" upperBound="-1"
+          eType="#//entitymodel/Value" containment="true" eOpposite="#//entitymodel/Value/RealizacionDiagramEntity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementoRealizacionDiagramEntity">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipo" eType="#//entitymodel/TipoModelElementEntity"
+          defaultValueLiteral="entity"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombreModelElementEntity"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modelElementEntity" lowerBound="1"
+          eType="#//entitymodel/ModelElementEntity" eOpposite="#//entitymodel/ModelElementEntity/ElementoRealizacionDiagramEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="RealizacionDiagramEntity"
+          eType="#//entitymodel/RealizacionDiagramEntity" transient="true" eOpposite="#//entitymodel/RealizacionDiagramEntity/listElementoRealizacionDiagramEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listElementoRealizacionAttribute"
+          upperBound="-1" eType="#//entitymodel/ElementoRealizacionValueAttribute"
+          containment="true" eOpposite="#//entitymodel/ElementoRealizacionValueAttribute/ElementoRealizacionDiagramEntity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TipoModelElementEntity">
+      <eLiterals name="entity" value="1"/>
+      <eLiterals name="relation" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Type">
+      <eLiterals name="string" value="1"/>
+      <eLiterals name="int" value="2"/>
+      <eLiterals name="float" value="3"/>
+      <eLiterals name="date" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementoRealizacionValueAttribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="valueAttribute" upperBound="-1"
+          eType="#//entitymodel/Attribute" eOpposite="#//entitymodel/Attribute/ElementoRealizacionValueAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ElementoRealizacionDiagramEntity"
+          eType="#//entitymodel/ElementoRealizacionDiagramEntity" transient="true"
+          eOpposite="#//entitymodel/ElementoRealizacionDiagramEntity/listElementoRealizacionAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+          eType="#//entitymodel/Value" eOpposite="#//entitymodel/Value/ElementoRealizacionValueAttribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementoRealizacionVisibleAttribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="RealizacionDiagramEntity"
+          eType="#//entitymodel/RealizacionDiagramEntity" transient="true" eOpposite="#//entitymodel/RealizacionDiagramEntity/realizacionVisibleAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="visibleAttribute" upperBound="-1"
+          eType="#//entitymodel/Attribute" eOpposite="#//entitymodel/Attribute/ElementoRealizacionVisibleAttribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Value">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ElementoRealizacionValueAttribute"
+          upperBound="-1" eType="#//entitymodel/ElementoRealizacionValueAttribute"
+          eOpposite="#//entitymodel/ElementoRealizacionValueAttribute/values"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="RealizacionDiagramEntity"
+          eType="#//entitymodel/RealizacionDiagramEntity" transient="true" eOpposite="#//entitymodel/RealizacionDiagramEntity/listValues"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="sysinfo" nsURI="http:///gestionmodelosconsultas/sysinfo.ecore"
+      nsPrefix="gestionmodelosconsultas.sysinfo">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="version inicial de sistema de  información genérico para una organización"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Paquete" eSuperTypes="#//sysinfo/core/ElementoModelo">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
+          eType="#//sysinfo/core/ElementoModelo" containment="true" eOpposite="#//sysinfo/core/ElementoModelo/owner"/>
+    </eClassifiers>
+    <eSubpackages name="people" nsURI="http:///gestionmodelosconsultas/sysinfo/people.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.people">
+      <eClassifiers xsi:type="ecore:EClass" name="People_View" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Directorio" lowerBound="1"
+            eType="#//sysinfo/people/Directorio" containment="true" eOpposite="#//sysinfo/people/Directorio/People_View"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Organizacion" lowerBound="1"
+            eType="#//sysinfo/people/Organizacion" containment="true" eOpposite="#//sysinfo/people/Organizacion/People_View"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="UnidadOrganizacional" eSuperTypes="#//sysinfo/people/Quien">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Rol" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Rol" containment="true" eOpposite="#//sysinfo/people/Rol/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Organizacion" eType="#//sysinfo/people/Organizacion"
+            transient="true" eOpposite="#//sysinfo/people/Organizacion/organizacion"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Edificio" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/network/Edificio" eOpposite="#//sysinfo/network/Edificio/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="unidad" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/UnidadOrganizacional" containment="true"
+            eOpposite="#//sysinfo/people/UnidadOrganizacional/unidadPadre"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="unidadPadre" eType="#//sysinfo/people/UnidadOrganizacional"
+            transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/unidad"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Actor" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Actor" containment="true" eOpposite="#//sysinfo/people/Actor/unidad"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="theActores" lowerBound="1"
+            eType="#//sysinfo/people/Actores" containment="true" eOpposite="#//sysinfo/people/Actores/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Roles" lowerBound="1"
+            eType="#//sysinfo/people/Roles" containment="true" eOpposite="#//sysinfo/people/Roles/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Depositos" lowerBound="1"
+            eType="#//sysinfo/network/Depositos" containment="true" eOpposite="#//sysinfo/network/Depositos/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Copias" lowerBound="1"
+            eType="#//sysinfo/data/docmgt/Copias" containment="true" eOpposite="#//sysinfo/data/docmgt/Copias/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Copia" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/data/docmgt/Copia" containment="true"
+            eOpposite="#//sysinfo/data/docmgt/Copia/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="susDepositos" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/network/Deposito" containment="true"
+            eOpposite="#//sysinfo/network/Deposito/UnidadOrganizacional"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instanciacionesprocesos"
+            upperBound="-1" eType="#//sysinfo/function/InstanciaProceso" containment="true"
+            eOpposite="#//sysinfo/function/InstanciaProceso/UnidadOrganizacional"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Rol" eSuperTypes="#//sysinfo/people/Quien">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+            eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/Rol"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Actor" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Actor" eOpposite="#//sysinfo/people/Actor/Rol"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Roles" eType="#//sysinfo/people/Roles"
+            transient="true" eOpposite="#//sysinfo/people/Roles/Rol"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Contacto" eSuperTypes="#//sysinfo/core/ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Directorio" eType="#//sysinfo/people/Directorio"
+            transient="true" eOpposite="#//sysinfo/people/Directorio/Contacto"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="quien" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Quien" eOpposite="#//sysinfo/people/Quien/contacto"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Mensaje" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/data/docmgt/Mensaje" eOpposite="#//sysinfo/data/docmgt/Mensaje/Contacto"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="destinatariocomunicacion"
+            upperBound="-1" eType="#//memoms/comunicacion/Comunicacion" eOpposite="#//memoms/comunicacion/Comunicacion/destinatario"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="remitentecomunicacion"
+            upperBound="-1" eType="#//memoms/comunicacion/Comunicacion" eOpposite="#//memoms/comunicacion/Comunicacion/remitente"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Directorio" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="People_View" eType="#//sysinfo/people/People_View"
+            transient="true" eOpposite="#//sysinfo/people/People_View/Directorio"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Contacto" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Contacto" containment="true"
+            eOpposite="#//sysinfo/people/Contacto/Directorio"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Organizacion" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="People_View" eType="#//sysinfo/people/People_View"
+            transient="true" eOpposite="#//sysinfo/people/People_View/Organizacion"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="organizacion" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/UnidadOrganizacional" containment="true"
+            eOpposite="#//sysinfo/people/UnidadOrganizacional/Organizacion"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//sysinfo/people/Quien">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Rol" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Rol" eOpposite="#//sysinfo/people/Rol/Actor"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="unidad" eType="#//sysinfo/people/UnidadOrganizacional"
+            transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/Actor"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Actores" eType="#//sysinfo/people/Actores"
+            transient="true" eOpposite="#//sysinfo/people/Actores/Actor"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ejecuta" upperBound="-1"
+            eType="#//sysinfo/function/Actividad" eOpposite="#//sysinfo/function/Actividad/ejecutantes"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="procesosResponsable"
+            upperBound="-1" eType="#//sysinfo/function/InstanciaProceso" eOpposite="#//sysinfo/function/InstanciaProceso/actorResponsable"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Quien" eSuperTypes="#//sysinfo/core/ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="contacto" lowerBound="1"
+            eType="#//sysinfo/people/Contacto" eOpposite="#//sysinfo/people/Contacto/quien"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="theDocumento" upperBound="-1"
+            eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/theRol"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Actores">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+            eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/theActores"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Actor" upperBound="-1"
+            eType="#//sysinfo/people/Actor" containment="true" eOpposite="#//sysinfo/people/Actor/Actores"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Roles">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+            eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/Roles"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Rol" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Rol" containment="true" eOpposite="#//sysinfo/people/Rol/Roles"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="data" nsURI="http:///gestionmodelosconsultas/sysinfo/data.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.data">
+      <eClassifiers xsi:type="ecore:EClass" name="Data_View" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Indice" lowerBound="1"
+            eType="#//sysinfo/data/docmgt/Indice" containment="true" eOpposite="#//sysinfo/data/docmgt/Indice/Data_View"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Libreria" lowerBound="1"
+            eType="#//sysinfo/data/docmgt/Libreria" containment="true" eOpposite="#//sysinfo/data/docmgt/Libreria/Data_View"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Orientacion" lowerBound="1"
+            eType="#//sysinfo/data/docmgt/Orientacion" containment="true" eOpposite="#//sysinfo/data/docmgt/Orientacion/Data_View"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Glosario" lowerBound="1"
+            eType="#//sysinfo/data/docmgt/Glosario" containment="true" eOpposite="#//sysinfo/data/docmgt/Glosario/Data_View"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Distribucion" lowerBound="1"
+            eType="#//sysinfo/data/docmgt/Distribucion" containment="true" eOpposite="#//sysinfo/data/docmgt/Distribucion/Data_View"/>
+      </eClassifiers>
+      <eSubpackages name="docmgt" nsURI="http:///gestionmodelosconsultas/sysinfo/data/docmgt.ecore"
+          nsPrefix="gestionmodelosconsultas.sysinfo.data.docmgt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Metamodelo de documentos"/>
+        </eAnnotations>
+        <eClassifiers xsi:type="ecore:EClass" name="Documento" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="1) Diploma, carta, relación u otro escrito que ilustra acerca de algún hecho, principalmente de los históricos.&#xD;&#xA;2) Cualquier otra cosa que sirve para ilustrar o comprobar algo.&#xD;&#xA;3) Se compone de párrafos o frases, generalmente siguiendo una estructura gramatical predefinida.&#xD;&#xA;&#xD;&#xA;Un documento no es mas que una especificación dentro del sistema.  El contenido de un documento se crea por intermedio de uno o mas elementos documentales.&#xD;&#xA;&#xD;&#xA;Dentro del sistema no deben crearse múltiples registros para un mismo archivo.  &#xD;&#xA;Se debe tener un control de cuantos elementos documentales contiene un documento.&#xD;&#xA;&#xD;&#xA;Responsable:&#xD;&#xA;- Unidad Organizacional:Worker"/>
+          </eAnnotations>
+          <eOperations name="Registrar">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Responsable: Unidad Organizacional:Worker"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="Aprobar">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Responsable: Unidad Organizacional:Worker"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="Expirar">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Responsable: Unidad Organizacional:Worker"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Doc" eType="#//sysinfo/data/docmgt/Doc"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Doc/Documento"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="titulo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Título del documento. &#xD;&#xA;Para el caso de un documento el título coincide con el nombre.  &#xD;&#xA;Para el caso de un elemento documental el titulo coincide con el título del documento, es decir, el título es el nombre unificador entre el documento y los elementod documentales."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="edicion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="vigencia" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="La vigencia le da valor a un documento dentro de un periodo de tiempo, a su vez, este valor le da valor a la autoevaluación dentro de un periodo de tiempo."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="estado" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="mantiene la información del estado de cada documento."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suVersion" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Version" eOpposite="#//sysinfo/data/docmgt/Version/suDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="contextoDocumento"
+              lowerBound="1" upperBound="-1" eType="#//sysinfo/data/docmgt/IndexEntry"
+              eOpposite="#//sysinfo/data/docmgt/IndexEntry/suDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PalabraClave" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/PalabraClave" eOpposite="#//sysinfo/data/docmgt/PalabraClave/Documento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suContenido" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Contenido" containment="true" eOpposite="#//sysinfo/data/docmgt/Contenido/suDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suItem" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Item" eOpposite="#//sysinfo/data/docmgt/Item/suDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="derivadas" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/base"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/derivadas"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suBaseline" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Baseline" containment="true" eOpposite="#//sysinfo/data/docmgt/Baseline/suDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="theTipoDocumento"
+              lowerBound="1" eType="#//sysinfo/data/docmgt/TipoDocumento" eOpposite="#//sysinfo/data/docmgt/TipoDocumento/theDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Producto" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Producto" eOpposite="#//sysinfo/data/docmgt/Producto/Documento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="theRol" upperBound="-1"
+              eType="#//sysinfo/people/Quien" eOpposite="#//sysinfo/people/Quien/theDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="asociado" upperBound="-1"
+              eType="#//sysinfo/function/Actividad" eOpposite="#//sysinfo/function/Actividad/genera"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="TablaRetencionDocumental"
+              lowerBound="1" eType="#//memoms/info/TablaRetencionDocumental" eOpposite="#//memoms/info/TablaRetencionDocumental/Documento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Expediente" upperBound="-1"
+              eType="#//memoms/info/Expediente" eOpposite="#//memoms/info/Expediente/Documento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Observacion" upperBound="-1"
+              eType="#//memoms/info/Observacion" containment="true" eOpposite="#//memoms/info/Observacion/Documento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Anexo" upperBound="-1"
+              eType="#//memoms/info/Anexo" containment="true" eOpposite="#//memoms/info/Anexo/Documento"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Plantilla" eSuperTypes="#//sysinfo/data/docmgt/Documento">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Son plantillas de WORD. &#xD;&#xA;&#xD;&#xA;Responsable:&#xD;&#xA;- Unidad Organizacional:Worker"/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Orientacion" eType="#//sysinfo/data/docmgt/Orientacion"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Orientacion/Plantilla"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suTipo" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/TipoDocumento" eOpposite="#//sysinfo/data/docmgt/TipoDocumento/plantilla"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Guia" eSuperTypes="#//sysinfo/data/docmgt/Documento">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Documento que contiene información importante en la elaboración del documento de Autoevaluación.&#xD;&#xA;&#xD;&#xA;Responsable:&#xD;&#xA;- Unidad Organizacional:Worker"/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Orientacion" eType="#//sysinfo/data/docmgt/Orientacion"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Orientacion/Guia"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suTipo" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/TipoDocumento" eOpposite="#//sysinfo/data/docmgt/TipoDocumento/guia"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ListaChequeo" eSuperTypes="#//sysinfo/data/docmgt/Documento">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Documento que sirve para verificar la consistencia, completitud y validez del documento de autoevaluación.&#xD;&#xA;&#xD;&#xA;Responsable:&#xD;&#xA;- Unidad Organizacional:Worker"/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Orientacion" eType="#//sysinfo/data/docmgt/Orientacion"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Orientacion/ListaChequeo"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suTipo" upperBound="-1"
+              eType="#//sysinfo/data/docmgt/TipoDocumento" eOpposite="#//sysinfo/data/docmgt/TipoDocumento/lista"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Contenido">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="El contenido es equivalente al indice de documento, tal como en word, el contenido se compone de varias entradas de indice de contenido, en este caso item´s.&#xD;&#xA;&#xD;&#xA;Al menos uno de los elementos documentales debe contener información del contenido y estructura del documento.&#xD;&#xA;&#xD;&#xA;Debe existir una organización de los elementos documentales que se encuentran dentro de un documento.&#xD;&#xA;&#xD;&#xA;Responsable:&#xD;&#xA;- Unidad Organizacional:Worker"/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suItem" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Item" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Item/suContenido"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suDocumento" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Documento" transient="true" eOpposite="#//sysinfo/data/docmgt/Documento/suContenido"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TipoDocumento" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Un tipo de documento especifica el tipo de un documento. Las instancias tipicas son libros y reportes."/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Orientacion" eType="#//sysinfo/data/docmgt/Orientacion"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Orientacion/TipoDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="lista" eType="#//sysinfo/data/docmgt/ListaChequeo"
+              eOpposite="#//sysinfo/data/docmgt/ListaChequeo/suTipo"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="guia" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Guia" eOpposite="#//sysinfo/data/docmgt/Guia/suTipo"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="plantilla" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Plantilla" eOpposite="#//sysinfo/data/docmgt/Plantilla/suTipo"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="theDocumento" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/theTipoDocumento"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Copia" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Una copia representa los items fisicos, como todas las copias impresas de un libro. Un documento debe existir en varias copias.&#xD;&#xA;&#xD;&#xA;o un cd."/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Copias" eType="#//sysinfo/data/docmgt/Copias"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Copias/Copia"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="formato" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="puede ser:&#xD;&#xA;&#xD;&#xA;físico: una copia impresa.&#xD;&#xA;lógico: una copia en un medio magnetico."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="consecutivo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Deposito" lowerBound="1"
+              eType="#//sysinfo/network/Deposito" eOpposite="#//sysinfo/network/Deposito/Copia"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Mensaje" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Mensaje" eOpposite="#//sysinfo/data/docmgt/Mensaje/Copia"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Producto" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Producto" eOpposite="#//sysinfo/data/docmgt/Producto/Copia"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+              eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/Copia"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Version" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Un documento puede ser una enmienda a otro documento o puede existir en varios formatos o en varios lenguajes. &#xD;&#xA;&#xD;&#xA;De esta manera, se dice que una version de un documento contiene la misma información pero publicada en un diferente formato, lenguaje o medio; de lo contrario, este puede ser un documento totalmente diferente."/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Doc" eType="#//sysinfo/data/docmgt/Doc"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Doc/Version"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="se debe justificar la creación de una nueva versión del documento"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="cuenta" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="formato" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="true: esta versión es semanticamente equivalente a la versión base excepto por un cambio de formato.&#xD;&#xA;&#xD;&#xA;false: esta versión corresponde a un cambio semántico. Es decir se ha cambiado parcialmente o totalmente el contenido de la versión base."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suDocumento" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/suVersion"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Version" eOpposite="#//sysinfo/data/docmgt/Version/derivadas"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="derivadas" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Version" eOpposite="#//sysinfo/data/docmgt/Version/base"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IndexEntry" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Index entry es una clase usada para &quot;indexar&quot; (indice), Un docuemento puede ser indexado en una version, tipo de documento, o autor, por ejemplo. Cada Index Entry es una referencia a uno o mas objetos, como autor, titulo, o tema, y es un indice para justo un documento. El indice es una estrategia para identificar documentos a través de un set de informacion asociada con el documento."/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suDocumento" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/contextoDocumento"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Indice" eType="#//sysinfo/data/docmgt/Indice"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Indice/indice"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suElemento" upperBound="-1"
+              eType="#//sysinfo/core/ElementoModelo" eOpposite="#//sysinfo/core/ElementoModelo/contexto"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PalabraClave" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Glosario" eType="#//sysinfo/data/docmgt/Glosario"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Glosario/PalabraClave"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Documento" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/PalabraClave"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Item">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Un item es una entrada al indice del documento.&#xD;&#xA;&#xD;&#xA;1. adv. c. U. para hacer distinción de artículos o capítulos en una escritura u otro instrumento, o como señal de adición. &#xD;&#xA; 2. m. Cada uno de dichos artículos o capítulos. &#xD;&#xA; 3. m. Aditamento, añadidura. &#xD;&#xA; 4. m. Inform. Cada uno de los elementos que forman parte de un dato. &#xD;&#xA; 5. m. Psicol. Cada una de las partes o unidades de que se compone una prueba, un test, un cuestionario. &#xD;&#xA;"/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="texto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="texto que aparece en la entrada del contenido cuando se genera el indice del documento."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="hInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Es el texto de ayuda para la posterior elaboración de cada item dentro del documento.  Es similar a el texto azul que aparece en las plantillas del RUP."/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suContenido" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Contenido" transient="true" eOpposite="#//sysinfo/data/docmgt/Contenido/suItem"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suDocumento" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/suItem"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Baseline" eType="#//sysinfo/data/docmgt/Baseline"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Baseline/suItem"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Baseline">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suDocumento" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Documento" transient="true" eOpposite="#//sysinfo/data/docmgt/Documento/suBaseline"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suItem" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Item" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Item/Baseline"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Indice" eSuperTypes="#//sysinfo/Paquete">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Data_View" eType="#//sysinfo/data/Data_View"
+              transient="true" eOpposite="#//sysinfo/data/Data_View/Indice"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="indice" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/IndexEntry" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/IndexEntry/Indice"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Producto" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Doc" eType="#//sysinfo/data/docmgt/Doc"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Doc/Producto"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="ubicacion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="es la ubicación del archivo en el sistema de archivos&#xD;&#xA;"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Documento" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/Producto"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Copia" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Copia" eOpposite="#//sysinfo/data/docmgt/Copia/Producto"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Mensaje" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Distribucion es una clase que representa la la distribucion de una copia. Una copia puede ser distribuida varias veces, cada vez en una diferente ubicacion. La distribucion puede ser via correo electronico, por intranet, o por internet. Los atributos tipicos son remitente, destinatario, y metodo de distribucion."/>
+          </eAnnotations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Distribucion" eType="#//sysinfo/data/docmgt/Distribucion"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Distribucion/Mensaje"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="asunto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="mensaje" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Copia" lowerBound="1"
+              eType="#//sysinfo/data/docmgt/Copia" eOpposite="#//sysinfo/data/docmgt/Copia/Mensaje"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Contacto" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/people/Contacto" eOpposite="#//sysinfo/people/Contacto/Mensaje"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Fecha" lowerBound="1"
+              eType="#//sysinfo/time/Fecha" eOpposite="#//sysinfo/time/Fecha/Mensaje"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Glosario" eSuperTypes="#//sysinfo/Paquete">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Data_View" eType="#//sysinfo/data/Data_View"
+              transient="true" eOpposite="#//sysinfo/data/Data_View/Glosario"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="PalabraClave" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/PalabraClave" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/PalabraClave/Glosario"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Libreria" eSuperTypes="#//sysinfo/Paquete">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Data_View" eType="#//sysinfo/data/Data_View"
+              transient="true" eOpposite="#//sysinfo/data/Data_View/Libreria"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Doc" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Doc" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Doc/Libreria"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Distribucion" eSuperTypes="#//sysinfo/Paquete">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Mensaje" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Mensaje" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Mensaje/Distribucion"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Data_View" eType="#//sysinfo/data/Data_View"
+              transient="true" eOpposite="#//sysinfo/data/Data_View/Distribucion"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Orientacion" eSuperTypes="#//sysinfo/Paquete">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Data_View" eType="#//sysinfo/data/Data_View"
+              transient="true" eOpposite="#//sysinfo/data/Data_View/Orientacion"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Plantilla" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Plantilla" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Plantilla/Orientacion"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Guia" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Guia" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Guia/Orientacion"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ListaChequeo" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/ListaChequeo" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/ListaChequeo/Orientacion"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="TipoDocumento" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/TipoDocumento" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/TipoDocumento/Orientacion"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Doc" eSuperTypes="#//sysinfo/core/ElementoModelo">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Documento" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Documento" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Documento/Doc"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Producto" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Producto" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Producto/Doc"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Version" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Version" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Version/Doc"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Libreria" eType="#//sysinfo/data/docmgt/Libreria"
+              transient="true" eOpposite="#//sysinfo/data/docmgt/Libreria/Doc"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Copias">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+              eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/Copias"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="Copia" lowerBound="1"
+              upperBound="-1" eType="#//sysinfo/data/docmgt/Copia" containment="true"
+              eOpposite="#//sysinfo/data/docmgt/Copia/Copias"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="network" nsURI="http:///gestionmodelosconsultas/sysinfo/network.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.network">
+      <eClassifiers xsi:type="ecore:EClass" name="Disco" eSuperTypes="#//sysinfo/network/Deposito">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Medio magnetico de almacenamiento (CD, Disco Duro, Memoria, Dikette)."/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencia" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="referencia a un CD. Puede ser el nombre de una recopilación o de una edición.&#xD;&#xA;En general, consiste en almacenar el nombre del medio magnético donde se piensa almacenar el documento bien sea para tenerlo en un estante o para enviarlo a alguien"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Armario" eSuperTypes="#//sysinfo/network/Deposito">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Medio fisico de almacenamiento (Armario, Carpeta, Archivador)."/>
+        </eAnnotations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Deposito" eSuperTypes="#//sysinfo/Paquete">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Un elemento de almacenamiento es el &quot;lugar&quot; donde se almacenan o guardan la copias. Pueden ser medios magneticos (Disco), o medios fisicos (Armario)."/>
+        </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Depositos" eType="#//sysinfo/network/Depositos"
+            transient="true" eOpposite="#//sysinfo/network/Depositos/Deposito"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Copia" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/data/docmgt/Copia" eOpposite="#//sysinfo/data/docmgt/Copia/Deposito"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="suDeposito" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/network/Deposito" containment="true"
+            eOpposite="#//sysinfo/network/Deposito/container"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+            eType="#//sysinfo/network/Deposito" transient="true" eOpposite="#//sysinfo/network/Deposito/suDeposito"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+            eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/susDepositos"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Network_View" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Edificio" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/network/Edificio" containment="true"
+            eOpposite="#//sysinfo/network/Edificio/Network_View"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Edificio" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+            lowerBound="1" upperBound="-1" eType="#//sysinfo/people/UnidadOrganizacional"
+            eOpposite="#//sysinfo/people/UnidadOrganizacional/Edificio"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Network_View" eType="#//sysinfo/network/Network_View"
+            transient="true" eOpposite="#//sysinfo/network/Network_View/Edificio"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Depositos">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+            eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/Depositos"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Deposito" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/network/Deposito" containment="true"
+            eOpposite="#//sysinfo/network/Deposito/Depositos"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="function" nsURI="http:///gestionmodelosconsultas/sysinfo/function.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.function">
+      <eClassifiers xsi:type="ecore:EClass" name="Function_View" eSuperTypes="#//sysinfo/Paquete"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Actividad" eSuperTypes="#//sysinfo/core/ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="estado" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ejecutantes" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Actor" eOpposite="#//sysinfo/people/Actor/ejecuta"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="InstanciaProceso" eType="#//sysinfo/function/InstanciaProceso"
+            transient="true" eOpposite="#//sysinfo/function/InstanciaProceso/actividades"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="genera" upperBound="-1"
+            eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/asociado"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="InstanciaProceso" eSuperTypes="#//sysinfo/core/ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="actividades" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/function/Actividad" containment="true"
+            eOpposite="#//sysinfo/function/Actividad/InstanciaProceso"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="UnidadOrganizacional"
+            eType="#//sysinfo/people/UnidadOrganizacional" transient="true" eOpposite="#//sysinfo/people/UnidadOrganizacional/instanciacionesprocesos"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="actorResponsable" lowerBound="1"
+            eType="#//sysinfo/people/Actor" eOpposite="#//sysinfo/people/Actor/procesosResponsable"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Proceso"/>
+    </eSubpackages>
+    <eSubpackages name="time" nsURI="http:///gestionmodelosconsultas/sysinfo/time.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.time">
+      <eClassifiers xsi:type="ecore:EClass" name="Time_View" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Agenda" lowerBound="1"
+            eType="#//sysinfo/time/Agenda" containment="true" eOpposite="#//sysinfo/time/Agenda/Time_View"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Fecha" eSuperTypes="#//sysinfo/core/ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="dia" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="mes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ano" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Calendario" eType="#//sysinfo/time/Calendario"
+            transient="true" eOpposite="#//sysinfo/time/Calendario/Fecha"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Mensaje" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/data/docmgt/Mensaje" eOpposite="#//sysinfo/data/docmgt/Mensaje/Fecha"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Calendario">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Fecha" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/time/Fecha" containment="true" eOpposite="#//sysinfo/time/Fecha/Calendario"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Agenda" eType="#//sysinfo/time/Agenda"
+            transient="true" eOpposite="#//sysinfo/time/Agenda/Calendario"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="suCalendario" upperBound="-1"
+            eType="#//sysinfo/time/Calendario" containment="true" eOpposite="#//sysinfo/time/Calendario/plan"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="plan" eType="#//sysinfo/time/Calendario"
+            transient="true" eOpposite="#//sysinfo/time/Calendario/suCalendario"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Agenda" eSuperTypes="#//sysinfo/Paquete">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Time_View" eType="#//sysinfo/time/Time_View"
+            transient="true" eOpposite="#//sysinfo/time/Time_View/Agenda"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Calendario" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/time/Calendario" containment="true"
+            eOpposite="#//sysinfo/time/Calendario/Agenda"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="vision" nsURI="http:///gestionmodelosconsultas/sysinfo/vision.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.vision">
+      <eClassifiers xsi:type="ecore:EClass" name="Vision_View" eSuperTypes="#//sysinfo/Paquete"/>
+    </eSubpackages>
+    <eSubpackages name="core" nsURI="http:///gestionmodelosconsultas/sysinfo/core.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.core">
+      <eClassifiers xsi:type="ecore:EClass" name="ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//sysinfo/Paquete"
+            transient="true" eOpposite="#//sysinfo/Paquete/element"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="contexto" upperBound="-1"
+            eType="#//sysinfo/data/docmgt/IndexEntry" eOpposite="#//sysinfo/data/docmgt/IndexEntry/suElemento"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="from" upperBound="-1"
+            eType="#//sysinfo/core/ElementoModelo" eOpposite="#//sysinfo/core/ElementoModelo/to"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="to" upperBound="-1"
+            eType="#//sysinfo/core/ElementoModelo" eOpposite="#//sysinfo/core/ElementoModelo/from"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="memo" nsURI="http:///gestionmodelosconsultas/sysinfo/memo.ecore"
+        nsPrefix="gestionmodelosconsultas.sysinfo.memo"/>
+  </eSubpackages>
+  <eSubpackages name="modeloconsultas" nsURI="http:///gestionmodelosconsultas/modeloconsultas.ecore"
+      nsPrefix="gestionmodelosconsultas.modeloconsultas">
+    <eClassifiers xsi:type="ecore:EClass" name="ModeloConsulta">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="realizacionDiagramEntity"
+          lowerBound="1" eType="#//entitymodel/RealizacionDiagramEntity" containment="true"
+          eOpposite="#//entitymodel/RealizacionDiagramEntity/ModeloConsulta"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="FactoryModeloConsulta"
+          eType="#//modeloconsultas/FactoryModeloConsulta" transient="true" eOpposite="#//modeloconsultas/FactoryModeloConsulta/listModeloConsulta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listEADiagram" upperBound="-1"
+          eType="#//modeloconsultas/model/EADiagram" containment="true" eOpposite="#//modeloconsultas/model/EADiagram/ModeloConsulta"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listResultado" upperBound="-1"
+          eType="#//modeloconsultas/resultset/Resultado" containment="true" eOpposite="#//modeloconsultas/resultset/Resultado/ModeloConsulta"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FactoryModeloConsulta">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ModelFactory" eType="#//ModelFactory"
+          transient="true" eOpposite="#//ModelFactory/factoryModeloConsultas"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="listModeloConsulta" upperBound="-1"
+          eType="#//modeloconsultas/ModeloConsulta" containment="true" eOpposite="#//modeloconsultas/ModeloConsulta/FactoryModeloConsulta"/>
+    </eClassifiers>
+    <eSubpackages name="que" nsURI="http:///gestionmodelosconsultas/modeloconsultas/que.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.que">
+      <eClassifiers xsi:type="ecore:EClass" name="Documento" eSuperTypes="#//sysinfo/data/docmgt/Documento #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Comunicacion" eSuperTypes="#//memoms/comunicacion/Comunicacion #//modeloconsultas/model/ElementoConsulta"/>
+    </eSubpackages>
+    <eSubpackages name="quien" nsURI="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.quien">
+      <eClassifiers xsi:type="ecore:EClass" name="UnidadOrganizacional" eSuperTypes="#//sysinfo/people/UnidadOrganizacional #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Contacto" eSuperTypes="#//sysinfo/people/Contacto #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//sysinfo/people/Actor #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Rol" eSuperTypes="#//sysinfo/people/Rol #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Quien" eSuperTypes="#//modeloconsultas/model/ElementoConsulta #//sysinfo/people/Quien"/>
+    </eSubpackages>
+    <eSubpackages name="como" nsURI="http:///gestionmodelosconsultas/modeloconsultas/como.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.como">
+      <eClassifiers xsi:type="ecore:EClass" name="ActividadProceso" eSuperTypes="#//sysinfo/function/Actividad #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="InstanciaProceso" eSuperTypes="#//sysinfo/function/InstanciaProceso #//modeloconsultas/model/ElementoConsulta"/>
+    </eSubpackages>
+    <eSubpackages name="cuando" nsURI="http:///gestionmodelosconsultas/modeloconsultas/cuando.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.cuando">
+      <eClassifiers xsi:type="ecore:EClass" name="Fecha" eSuperTypes="#//sysinfo/time/Fecha #//modeloconsultas/model/ElementoConsulta"/>
+    </eSubpackages>
+    <eSubpackages name="donde" nsURI="http:///gestionmodelosconsultas/modeloconsultas/donde.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.donde">
+      <eClassifiers xsi:type="ecore:EClass" name="Deposito" eSuperTypes="#//sysinfo/network/Deposito #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Disco" eSuperTypes="#//sysinfo/network/Disco #//modeloconsultas/model/ElementoConsulta"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Armario" eSuperTypes="#//sysinfo/network/Armario #//modeloconsultas/model/ElementoConsulta"/>
+    </eSubpackages>
+    <eSubpackages name="porque" nsURI="http:///gestionmodelosconsultas/modeloconsultas/porque.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.porque"/>
+    <eSubpackages name="model" nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.model">
+      <eClassifiers xsi:type="ecore:EClass" name="Relacion" eSuperTypes="#//sysinfo/core/ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="estereotipo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="EADiagram" eType="#//modeloconsultas/model/EADiagram"
+            transient="true" eOpposite="#//modeloconsultas/model/EADiagram/listRelacion"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+            eType="#//modeloconsultas/model/ElementoConsulta"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+            eType="#//modeloconsultas/model/ElementoConsulta"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Campo">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombreCampo" eType="#//modeloconsultas/model/NombreCampo"
+            defaultValueLiteral="default"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="criterio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="seleccion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElementoConsulta"
+            eType="#//modeloconsultas/model/ElementoConsulta" transient="true" eOpposite="#//modeloconsultas/model/ElementoConsulta/listCampos"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="NombreCampo">
+        <eLiterals name="idUnidadOrganizacional" value="1"/>
+        <eLiterals name="nombre" value="2"/>
+        <eLiterals name="descripcion" value="3"/>
+        <eLiterals name="idActividadProceso" value="4"/>
+        <eLiterals name="fechaInicio" value="5"/>
+        <eLiterals name="fechaFin" value="6"/>
+        <eLiterals name="idRol" value="7"/>
+        <eLiterals name="idActor" value="8"/>
+        <eLiterals name="apellido" value="9"/>
+        <eLiterals name="email" value="10"/>
+        <eLiterals name="idInstanciaProceso" value="11"/>
+        <eLiterals name="idContacto" value="12"/>
+        <eLiterals name="username" value="13"/>
+        <eLiterals name="telefono" value="14"/>
+        <eLiterals name="password" value="15"/>
+        <eLiterals name="idDocumento" value="16"/>
+        <eLiterals name="titulo" value="17"/>
+        <eLiterals name="edicion" value="18"/>
+        <eLiterals name="vigencia" value="19"/>
+        <eLiterals name="estado" value="20"/>
+        <eLiterals name="fechaCreacion" value="21"/>
+        <eLiterals name="anexo" value="22"/>
+        <eLiterals name="tipo" value="23"/>
+        <eLiterals name="comentarios" value="24"/>
+        <eLiterals name="idDeposito" value="25"/>
+        <eLiterals name="idQuien" value="26"/>
+        <eLiterals name="idArmario" value="27"/>
+        <eLiterals name="idDisco" value="28"/>
+        <eLiterals name="referencia" value="29"/>
+        <eLiterals name="idComunicacion" value="30"/>
+        <eLiterals name="asunto" value="31"/>
+        <eLiterals name="default"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EADiagram" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="listRelacion" upperBound="-1"
+            eType="#//modeloconsultas/model/Relacion" containment="true" eOpposite="#//modeloconsultas/model/Relacion/EADiagram"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ModeloConsulta" eType="#//modeloconsultas/ModeloConsulta"
+            transient="true" eOpposite="#//modeloconsultas/ModeloConsulta/listEADiagram"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="listElementoConsulta"
+            upperBound="-1" eType="#//modeloconsultas/model/ElementoConsulta" containment="true"
+            eOpposite="#//modeloconsultas/model/ElementoConsulta/EADiagram"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ViewModel" eSuperTypes="#//modeloconsultas/model/EADiagram"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ElementoConsulta" abstract="true"
+          eSuperTypes="#//sysinfo/core/ElementoModelo">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="EADiagram" eType="#//modeloconsultas/model/EADiagram"
+            transient="true" eOpposite="#//modeloconsultas/model/EADiagram/listElementoConsulta"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="listCampos" upperBound="-1"
+            eType="#//modeloconsultas/model/Campo" containment="true" eOpposite="#//modeloconsultas/model/Campo/ownedElementoConsulta"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Proyeccion" eSuperTypes="#//modeloconsultas/model/EADiagram"/>
+    </eSubpackages>
+    <eSubpackages name="resultset" nsURI="http:///gestionmodelosconsultas/modeloconsultas/resultset.ecore"
+        nsPrefix="gestionmodelosconsultas.modeloconsultas.resultset">
+      <eClassifiers xsi:type="ecore:EClass" name="Resultado">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ModeloConsulta" eType="#//modeloconsultas/ModeloConsulta"
+            transient="true" eOpposite="#//modeloconsultas/ModeloConsulta/listResultado"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="listResultElement"
+            upperBound="-1" eType="#//modeloconsultas/resultset/ResultElement" containment="true"
+            eOpposite="#//modeloconsultas/resultset/ResultElement/Resultado"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ElementoModeloResultado" abstract="true"
+          eSuperTypes="#//modeloconsultas/resultset/ResultElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="listElementoModeloResultado"
+            upperBound="-1" eType="#//modeloconsultas/resultset/ElementoModeloResultado"
+            containment="true" eOpposite="#//modeloconsultas/resultset/ElementoModeloResultado/ElementoModeloResultado"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ElementoModeloResultado"
+            eType="#//modeloconsultas/resultset/ElementoModeloResultado" transient="true"
+            eOpposite="#//modeloconsultas/resultset/ElementoModeloResultado/listElementoModeloResultado"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ResultElement" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Resultado" eType="#//modeloconsultas/resultset/Resultado"
+            transient="true" eOpposite="#//modeloconsultas/resultset/Resultado/listResultElement"/>
+      </eClassifiers>
+      <eSubpackages name="resultquien" nsURI="http:///gestionmodelosconsultas/modeloconsultas/resultset/resultquien.ecore"
+          nsPrefix="gestionmodelosconsultas.modeloconsultas.resultset.resultquien">
+        <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idActor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="apellido" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnidadOrganizacional" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idUnidadOrganizacional"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Rol" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idRol" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Contacto" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idContacto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="telefono" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="resultque" nsURI="http:///gestionmodelosconsultas/modeloconsultas/resultset/resultque.ecore"
+          nsPrefix="gestionmodelosconsultas.modeloconsultas.resultset.resultque">
+        <eClassifiers xsi:type="ecore:EClass" name="Documento" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idDocumento" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="titulo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="edicion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="vigencia" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="estado" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="fechaCreacion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="anexo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="comentarios" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Comunicacion" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idComunicacion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="asunto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="resultdonde" nsURI="http:///gestionmodelosconsultas/modeloconsultas/resultset/resultdonde.ecore"
+          nsPrefix="gestionmodelosconsultas.modeloconsultas.resultset.resultdonde">
+        <eClassifiers xsi:type="ecore:EClass" name="Deposito" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idDeposito" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Disco" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idDisco" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="referencia" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Armario" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idArmario" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="resultcomo" nsURI="http:///gestionmodelosconsultas/modeloconsultas/resultset/resultcomo.ecore"
+          nsPrefix="gestionmodelosconsultas.modeloconsultas.resultset.resultcomo">
+        <eClassifiers xsi:type="ecore:EClass" name="InstanciaProceso" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idInstanciaProceso"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ActividadProceso" eSuperTypes="#//modeloconsultas/resultset/ElementoModeloResultado">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="idActividadProceso"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="fechaInicio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="fechaFin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="memoms" nsURI="http:///gestionmodelosconsultas/memoms.ecore"
+      nsPrefix="gestionmodelosconsultas.memoms">
+    <eClassifiers xsi:type="ecore:EClass" name="MemoFactory" eSuperTypes="#//sysinfo/core/ElementoModelo">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="TablaRetencionDocumental"
+          lowerBound="1" eType="#//memoms/info/TablaRetencionDocumental" containment="true"
+          eOpposite="#//memoms/info/TablaRetencionDocumental/MemoFactory"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="Actividad" lowerBound="1"
+          upperBound="-1" eType="#//memoms/info/Actividad" containment="true" eOpposite="#//memoms/info/Actividad/MemoFactory"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="Memorando" lowerBound="1"
+          upperBound="-1" eType="#//memoms/comunicacion/Memorando" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="Circular" lowerBound="1"
+          upperBound="-1" eType="#//memoms/comunicacion/Circular" containment="true"/>
+    </eClassifiers>
+    <eSubpackages name="info" nsURI="http:///gestionmodelosconsultas/memoms/info.ecore"
+        nsPrefix="gestionmodelosconsultas.memoms.info">
+      <eClassifiers xsi:type="ecore:EClass" name="Observacion">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Documento" eType="#//sysinfo/data/docmgt/Documento"
+            transient="true" eOpposite="#//sysinfo/data/docmgt/Documento/Observacion"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="observacion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="check" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Expediente">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Documento" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/Expediente"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Anexo">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Documento" eType="#//sysinfo/data/docmgt/Documento"
+            transient="true" eOpposite="#//sysinfo/data/docmgt/Documento/Anexo"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="archivo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteObject"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Actividad">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Memorando" upperBound="-1"
+            eType="#//memoms/comunicacion/Memorando" eOpposite="#//memoms/comunicacion/Memorando/Actividad"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="MemoFactory" eType="#//memoms/MemoFactory"
+            transient="true" eOpposite="#//memoms/MemoFactory/Actividad"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="estado" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TablaRetencionDocumental">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Documento" upperBound="-1"
+            eType="#//sysinfo/data/docmgt/Documento" eOpposite="#//sysinfo/data/docmgt/Documento/TablaRetencionDocumental"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="SerieDocumental" lowerBound="1"
+            upperBound="-1" eType="#//memoms/info/SerieDocumental" containment="true"
+            eOpposite="#//memoms/info/SerieDocumental/TablaRetencionDocumental"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="MemoFactory" eType="#//memoms/MemoFactory"
+            transient="true" eOpposite="#//memoms/MemoFactory/TablaRetencionDocumental"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SerieDocumental">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="TablaRetencionDocumental"
+            eType="#//memoms/info/TablaRetencionDocumental" transient="true" eOpposite="#//memoms/info/TablaRetencionDocumental/SerieDocumental"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="subserie" lowerBound="1"
+            upperBound="-1" eType="#//memoms/info/SerieDocumental" eOpposite="#//memoms/info/SerieDocumental/serie"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="serie" lowerBound="1"
+            eType="#//memoms/info/SerieDocumental" eOpposite="#//memoms/info/SerieDocumental/subserie"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="codigo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="retencionAnios" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="disposicionFinal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="descripcion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="comunicacion" nsURI="http:///gestionmodelosconsultas/memoms/comunicacion.ecore"
+        nsPrefix="gestionmodelosconsultas.memoms.comunicacion">
+      <eClassifiers xsi:type="ecore:EClass" name="Comunicacion" abstract="true" eSuperTypes="#//sysinfo/data/docmgt/Documento">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="destinatario" lowerBound="1"
+            upperBound="-1" eType="#//sysinfo/people/Contacto" eOpposite="#//sysinfo/people/Contacto/destinatariocomunicacion"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="remitente" lowerBound="1"
+            eType="#//sysinfo/people/Contacto" eOpposite="#//sysinfo/people/Contacto/remitentecomunicacion"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="numeroRadicado" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="asunto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="contenido" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Memorando" eSuperTypes="#//memoms/comunicacion/Comunicacion">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Actividad" upperBound="-1"
+            eType="#//memoms/info/Actividad" eOpposite="#//memoms/info/Actividad/Memorando"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Circular" eSuperTypes="#//memoms/comunicacion/Comunicacion"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="datatypes" nsURI="http:///gestionmodelosconsultas/datatypes.ecore"
+      nsPrefix="gestionmodelosconsultas.datatypes">
+    <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
+  </eSubpackages>
+</ecore:EPackage>

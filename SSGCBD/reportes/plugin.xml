@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///reportes.ecore"
+            class="reportes.ReportesPackage"
+            genModel="model/reportes.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///reportes/domain.ecore"
+            class="reportes.domain.DomainPackage"
+            genModel="model/reportes.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http:///reportes/ui.ecore"
+            class="reportes.ui.UiPackage"
+            genModel="model/reportes.genmodel"/>
+   </extension>
+
+</plugin>

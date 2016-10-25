@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="reportes"
+    nsURI="http:///reportes.ecore" nsPrefix="reportes">
+  <eClassifiers xsi:type="ecore:EClass" name="ModelFactory">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="theDomain" lowerBound="1"
+        eType="#//domain/Domain" containment="true" eOpposite="#//domain/Domain/theModelFactory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="theUI" lowerBound="1" eType="#//ui/UI"
+        containment="true" eOpposite="#//ui/UI/theModelFactory"/>
+  </eClassifiers>
+  <eSubpackages name="domain" nsURI="http:///reportes/domain.ecore" nsPrefix="reportes.domain">
+    <eClassifiers xsi:type="ecore:EClass" name="Domain">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="theModelFactory" eType="#//ModelFactory"
+          transient="true" eOpposite="#//ModelFactory/theDomain"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="UI" upperBound="-1" eType="#//ui/UI"
+          eOpposite="#//ui/UI/Domain"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="ui" nsURI="http:///reportes/ui.ecore" nsPrefix="reportes.ui">
+    <eClassifiers xsi:type="ecore:EClass" name="UI">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="theModelFactory" eType="#//ModelFactory"
+          transient="true" eOpposite="#//ModelFactory/theUI"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="Domain" upperBound="-1"
+          eType="#//domain/Domain" eOpposite="#//domain/Domain/UI"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="theReporte" lowerBound="1"
+          eType="#//ui/Reporte" containment="true" eOpposite="#//ui/Reporte/theUI"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Reporte">
+      <eOperations name="generarReporte"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="theUI" eType="#//ui/UI"
+          transient="true" eOpposite="#//ui/UI/theReporte"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

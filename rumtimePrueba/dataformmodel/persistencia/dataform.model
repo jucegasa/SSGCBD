@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:FactoryModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:model="model.ecore">
+  <theUIManager theDomain="//@theDomain">
+<theNameViewModel  >
+      <theContenedorTable1  >
+ 
+       </theContenedorTable1>
+
+      <theContenedorTable2  >
+ 
+       </theContenedorTable2>
+
+      <theContenedorContainer2  >
+ 
+       </theContenedorContainer2>
+
+      <theContenedorContainer3  >
+ 
+       </theContenedorContainer3>
+     </theNameViewModel>
+   </theUIManager>
+<theDomain theUIManager="//@theUIManager">
+ </theDomain>
+</model:FactoryModel>

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model
+Bundle-SymbolicName: reportes.model
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: reportes.model.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ reportes;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: reportes.model

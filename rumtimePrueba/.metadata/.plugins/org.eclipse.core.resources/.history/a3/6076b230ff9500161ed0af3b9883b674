@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore" xsi:schemaLocation="http:///tooldataform/formmodel/concreta.ecore http:///tooldataform.ecore#//concreta" xmi:id="_Eh5mAJX_Eea8jPX41Cjk8g" type="Metamodelodataform" measurementUnit="Pixel">
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Eh5mAZX_Eea8jPX41Cjk8g"/>
+  <element xmi:type="tooldataform.formmodel.concreta:DataForm_Diagram" href="pruebamemorandos.tooldataform#//@listProyecto.0/@listDiagram.0"/>
+</notation:Diagram>

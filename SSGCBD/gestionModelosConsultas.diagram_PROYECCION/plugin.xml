@@ -1,0 +1,868 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="gestionmodelosconsultas_diagram_PROYECCION"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="gestionmodelosconsultas_diagram_PROYECCION"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="true"?>
+      <editor
+         id="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/ModelDiagramFile.gif"
+         extensions="gestionmodelosconsultas_diagram_PROYECCION"
+         default="true"
+         class="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditor"
+         matchingStrategy="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasMatchingStrategy"
+         contributorClass="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="gestionmodelosconsultas.diagram_PROYECCION.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/ModelDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasCreationWizard"
+  	     id="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="gestionModelosConsultas.diagram_PROYECCION.InitDiagram"
+            nameFilter="*.gestionmodelosconsultas"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="gestionModelosConsultas.diagram_PROYECCION.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="GestionModelosConsultas_PROYECCIONPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="save">
+               </GlobalActionId>
+            </ElementType>        
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="GestionModelosConsultas_PROYECCIONPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="GestionModelosConsultas_PROYECCIONRender">
+         <Priority name="Lowest"/>
+         <ViewId id="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="gestionmodelosconsultas.diagram_PROYECCION.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="true"?>
+      <page
+            id="gestionModelosConsultas.diagram.general"
+            name="%prefpage.gestionModelosConsultas.diagram.general"
+            class="gestionmodelosconsultas.diagram_PROYECCION.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="gestionModelosConsultas.diagram.appearance"
+            name="%prefpage.gestionModelosConsultas.diagram.appearance"
+            category="gestionModelosConsultas.diagram.general"
+            class="gestionmodelosconsultas.diagram_PROYECCION.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="gestionModelosConsultas.diagram.connections"
+            name="%prefpage.gestionModelosConsultas.diagram.connections"
+            category="gestionModelosConsultas.diagram.general"
+            class="gestionmodelosconsultas.diagram_PROYECCION.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="gestionModelosConsultas.diagram.printing"
+            name="%prefpage.gestionModelosConsultas.diagram.printing"
+            category="gestionModelosConsultas.diagram.general"
+            class="gestionmodelosconsultas.diagram_PROYECCION.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="gestionModelosConsultas.diagram.rulersAndGrid"
+            name="%prefpage.gestionModelosConsultas.diagram.rulersAndGrid"
+            category="gestionModelosConsultas.diagram.general"
+            class="gestionmodelosconsultas.diagram_PROYECCION.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="gestionModelosConsultas.diagram_PROYECCION"
+            labelProvider="gestionmodelosconsultas.diagram_PROYECCION.sheet.GestionModelosConsultasSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="gestionModelosConsultas.diagram_PROYECCION">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="gestionModelosConsultas.diagram_PROYECCION">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="gestionmodelosconsultas.diagram_PROYECCION.sheet.GestionModelosConsultasPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.GestionModelosConsultasViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="GestionModelosConsultas_PROYECCION"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,3001,3002,3003,3004,3005,3006,3007,3008,3009,3010,3011,3012"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.GestionModelosConsultasEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="GestionModelosConsultas_PROYECCION"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,3001,3002,3003,3004,3005,3006,3007,3008,3009,3010,3011,3012"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4001"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5044,5045,5046,5001,5003,5005,5007,5009,5011,5013,5015,5017,5019,5021,5023"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value="7015,7016,7017,7018,7019,7020,7021,7022,7023,7024,7025,7026,7027"/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+   
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfProyeccionEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.ProyeccionEditPart" id="Proyeccion_1000"/>
+         <context elements="Proyeccion_1000"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfUnidadOrganizacionalEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.UnidadOrganizacionalEditPart" id="UnidadOrganizacional_2015"/>
+         <context elements="UnidadOrganizacional_2015"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfDocumentoEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.DocumentoEditPart" id="Documento_2016"/>
+         <context elements="Documento_2016"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfActividadEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.ActividadEditPart" id="Actividad_2017"/>
+         <context elements="Actividad_2017"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfActorEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.ActorEditPart" id="Actor_2018"/>
+         <context elements="Actor_2018"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfArmarioEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.ArmarioEditPart" id="Armario_2019"/>
+         <context elements="Armario_2019"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfComunicacionEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.ComunicacionEditPart" id="Comunicacion_2020"/>
+         <context elements="Comunicacion_2020"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfContactoEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.ContactoEditPart" id="Contacto_2021"/>
+         <context elements="Contacto_2021"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfDepositoEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.DepositoEditPart" id="Deposito_2022"/>
+         <context elements="Deposito_2022"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfDiscoEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.DiscoEditPart" id="Disco_2023"/>
+         <context elements="Disco_2023"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfInstanciaProcesoEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.InstanciaProcesoEditPart" id="InstanciaProceso_2024"/>
+         <context elements="InstanciaProceso_2024"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfQuienEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.QuienEditPart" id="Quien_2025"/>
+         <context elements="Quien_2025"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfRolEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.RolEditPart" id="Rol_2026"/>
+         <context elements="Rol_2026"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfFechaEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.FechaEditPart" id="Fecha_2027"/>
+         <context elements="Fecha_2027"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampoEditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.CampoEditPart" id="Campo_3001"/>
+         <context elements="Campo_3001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo2EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo2EditPart" id="Campo_3002"/>
+         <context elements="Campo_3002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo3EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo3EditPart" id="Campo_3003"/>
+         <context elements="Campo_3003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo4EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo4EditPart" id="Campo_3004"/>
+         <context elements="Campo_3004"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo5EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo5EditPart" id="Campo_3005"/>
+         <context elements="Campo_3005"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo6EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo6EditPart" id="Campo_3006"/>
+         <context elements="Campo_3006"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo7EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo7EditPart" id="Campo_3007"/>
+         <context elements="Campo_3007"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo8EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo8EditPart" id="Campo_3008"/>
+         <context elements="Campo_3008"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo9EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo9EditPart" id="Campo_3009"/>
+         <context elements="Campo_3009"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo10EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo10EditPart" id="Campo_3010"/>
+         <context elements="Campo_3010"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo11EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo11EditPart" id="Campo_3011"/>
+         <context elements="Campo_3011"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.assistants.GestionModelosConsultasModelingAssistantProviderOfCampo12EditPart">
+         <Priority name="Lowest"/>
+         <object class="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.Campo12EditPart" id="Campo_3012"/>
+         <context elements="Campo_3012"/>
+      </modelingAssistantProvider>
+      
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.GestionModelosConsultasIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="gestionmodelosconsultas.diagram_PROYECCION.providers.GestionModelosConsultasParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Proyeccion_1000"
+               name="%metatype.name.Proyeccion_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Proyeccion"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.ProyeccionEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.UnidadOrganizacional_2015"
+               name="%metatype.name.UnidadOrganizacional_2015"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="UnidadOrganizacional"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.UnidadOrganizacionalEditHelper">
+            <param name="semanticHint" value="2015"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/que.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Documento_2016"
+               name="%metatype.name.Documento_2016"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Documento"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.DocumentoEditHelper">
+            <param name="semanticHint" value="2016"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/como.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Actividad_2017"
+               name="%metatype.name.Actividad_2017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Actividad"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.ActividadEditHelper">
+            <param name="semanticHint" value="2017"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Actor_2018"
+               name="%metatype.name.Actor_2018"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Actor"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.ActorEditHelper">
+            <param name="semanticHint" value="2018"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/donde.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Armario_2019"
+               name="%metatype.name.Armario_2019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Armario"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.ArmarioEditHelper">
+            <param name="semanticHint" value="2019"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/que.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Comunicacion_2020"
+               name="%metatype.name.Comunicacion_2020"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Comunicacion"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.ComunicacionEditHelper">
+            <param name="semanticHint" value="2020"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Contacto_2021"
+               name="%metatype.name.Contacto_2021"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Contacto"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.ContactoEditHelper">
+            <param name="semanticHint" value="2021"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/donde.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Deposito_2022"
+               name="%metatype.name.Deposito_2022"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Deposito"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.DepositoEditHelper">
+            <param name="semanticHint" value="2022"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/donde.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Disco_2023"
+               name="%metatype.name.Disco_2023"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Disco"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.DiscoEditHelper">
+            <param name="semanticHint" value="2023"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/como.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.InstanciaProceso_2024"
+               name="%metatype.name.InstanciaProceso_2024"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="InstanciaProceso"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.InstanciaProcesoEditHelper">
+            <param name="semanticHint" value="2024"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Quien_2025"
+               name="%metatype.name.Quien_2025"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Quien"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.QuienEditHelper">
+            <param name="semanticHint" value="2025"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Rol_2026"
+               name="%metatype.name.Rol_2026"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Rol"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.RolEditHelper">
+            <param name="semanticHint" value="2026"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/cuando.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Fecha_2027"
+               name="%metatype.name.Fecha_2027"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Fecha"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.FechaEditHelper">
+            <param name="semanticHint" value="2027"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"
+               name="%metatype.name.Campo_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Campo"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.CampoEditHelper">
+            <param name="semanticHint" value="3001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3002"
+               name="%metatype.name.Campo_3002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3003"
+               name="%metatype.name.Campo_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3004"
+               name="%metatype.name.Campo_3004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3004"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3005"
+               name="%metatype.name.Campo_3005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3005"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3006"
+               name="%metatype.name.Campo_3006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3006"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3007"
+               name="%metatype.name.Campo_3007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3007"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3008"
+               name="%metatype.name.Campo_3008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3008"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3009"
+               name="%metatype.name.Campo_3009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3009"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3010"
+               name="%metatype.name.Campo_3010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3010"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3011"
+               name="%metatype.name.Campo_3011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3011"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <specializationType
+               id="gestionModelosConsultas.diagram_PROYECCION.Campo_3012"
+               name="%metatype.name.Campo_3012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+            <param name="semanticHint" value="3012"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http:///gestionmodelosconsultas/modeloconsultas/model.ecore">
+         <metamodelType
+               id="gestionModelosConsultas.diagram_PROYECCION.Relacion_4001"
+               name="%metatype.name.Relacion_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Relacion"
+               edithelper="gestionmodelosconsultas.diagram_PROYECCION.edit.helpers.RelacionEditHelper">
+            <param name="semanticHint" value="4001"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="gestionModelosConsultas.diagram_PROYECCION.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="gestionModelosConsultas.diagram_PROYECCION.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="gestionModelosConsultas.diagram_PROYECCION.TypeContext">
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Proyeccion_1000"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.UnidadOrganizacional_2015"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Documento_2016"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Actividad_2017"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Actor_2018"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Armario_2019"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Comunicacion_2020"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Contacto_2021"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Deposito_2022"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Disco_2023"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.InstanciaProceso_2024"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Quien_2025"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Rol_2026"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Fecha_2027"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3001"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3002"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3003"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3004"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3005"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3006"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3007"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3008"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3009"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3010"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3011"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Campo_3012"/>
+         <elementType ref="gestionModelosConsultas.diagram_PROYECCION.Relacion_4001"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="gestionModelosConsultas.diagram_PROYECCION.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="gestionModelosConsultas.diagram_PROYECCION"
+           properties="isURIEditorInput"
+           class="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="gestionModelosConsultas.diagram_PROYECCION.resourceContent"/>
+			<contentExtension pattern="gestionModelosConsultas.diagram_PROYECCION.domainResourceContent"/>
+            <contentExtension pattern="gestionModelosConsultas.diagram_PROYECCION.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="gestionModelosConsultas.diagram_PROYECCION.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="gestionModelosConsultas.diagram_PROYECCION.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasNavigatorContentProvider" 
+            labelProvider="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasNavigatorLabelProvider"
+            icon="icons/obj16/ModelDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="gestionmodelosconsultas_diagram_PROYECCION"/>
+               </and>
+               <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasAbstractNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasAbstractNavigatorItem"/>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="gestionModelosConsultas.diagram_PROYECCION.navigatorSorter" 
+               class="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="gestionmodelosconsultas_diagram_PROYECCION"/>
+                  </and>
+                  <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="gestionModelosConsultas.diagram_PROYECCION.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasDomainNavigatorContentProvider" 
+            labelProvider="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasDomainNavigatorLabelProvider"
+            icon="icons/obj16/ModelDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="gestionmodelosconsultas"/>
+               </and>
+               <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="gestionModelosConsultas.diagram_PROYECCION.navigatorActionProvider"
+            class="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasAbstractNavigatorItem"/>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="gestionModelosConsultas.diagram_PROYECCION.navigatorLinkHelper"
+            class="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="gestionModelosConsultas.diagram_PROYECCION.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.navigator.GestionModelosConsultasAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="gestionmodelosconsultas.diagram_PROYECCION.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="gestionmodelosconsultas.diagram_PROYECCION.updateDiagram"
+         contextId="gestionmodelosconsultas.diagram_PROYECCION.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <?gmfgen generated="true"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="gestionModelosConsultas.diagram_PROYECCION.LoadResourceAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="gestionmodelosconsultas.diagram_PROYECCION.edit.parts.ProyeccionEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
+      <?gmfgen generated="true"?>
+      <category id="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <command id="gestionModelosConsultas.diagram_PROYECCION.LoadResourceAction"
+         name="Load Resource"
+         categoryId="gestionmodelosconsultas.diagram_PROYECCION.part.GestionModelosConsultasDiagramEditorID"
+         defaultHandler="gestionmodelosconsultas.diagram_PROYECCION.part.LoadResourceAction"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+      <?gmfgen generated="true"?>
+   </extension>
+
+   <!-- optionally, specify keybindings -->
+</plugin>

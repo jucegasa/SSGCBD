@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/gestionModelosConsultas/src" modelPluginID="gestionModelosConsultas"
+    modelName="GestionModelosConsultas" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.rose" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>C:\Users\Admin\Documents\IVAN-SILVIO -SQL MODELS\SQLModels\Eclipse Sql Models\info\gestionModelosConsultas.mdl</foreignModel>
+  <genPackages prefix="Gestionmodelosconsultas" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#/">
+    <genClasses ecoreClass="gestionModelosConsultas.ecore#//ModelFactory">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//ModelFactory/rulesFactory"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//ModelFactory/factoryModeloConsultas"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//ModelFactory/diagramEntity"/>
+      <genOperations ecoreOperation="gestionModelosConsultas.ecore#//ModelFactory/cargar"/>
+      <genOperations ecoreOperation="gestionModelosConsultas.ecore#//ModelFactory/salvar"/>
+    </genClasses>
+    <nestedGenPackages prefix="Rules" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//rules">
+      <nestedGenPackages prefix="Factoryrules" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//rules/factoryrules">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//rules/factoryrules/RulesFactory">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//rules/factoryrules/RulesFactory/ModelFactory"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//rules/factoryrules/RulesFactory/listRuleDiagramEntity"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//rules/factoryrules/Rule">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//rules/factoryrules/Rule/name"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//rules/factoryrules/Rule/RulesFactory"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//rules/factoryrules/Rule/listChildRule"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="gestionModelosConsultas.ecore#//rules/factoryrules/ChildRule">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//rules/factoryrules/ChildRule/name"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//rules/factoryrules/ChildRule/Rule"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//rules/factoryrules/EntityName"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//rules/factoryrules/RelationName"/>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Entitymodel" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//entitymodel">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="gestionModelosConsultas.ecore#//entitymodel/AttributeType">
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/AttributeType/primaryKey"/>
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/AttributeType/ordinary"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="gestionModelosConsultas.ecore#//entitymodel/Multiplicity">
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/Multiplicity/one_to_many"/>
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/Multiplicity/many_to_one"/>
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/Multiplicity/one_to_one"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="gestionModelosConsultas.ecore#//entitymodel/TipoModelElementEntity">
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/TipoModelElementEntity/entity"/>
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/TipoModelElementEntity/relation"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="gestionModelosConsultas.ecore#//entitymodel/Type">
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/Type/string"/>
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/Type/int"/>
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/Type/float"/>
+        <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//entitymodel/Type/date"/>
+      </genEnums>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/Entity">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/Entity/ownedByFactoryEntity"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/Entity/listAttributes"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/EntityRelation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/EntityRelation/atributteForeingKeySource"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/EntityRelation/atributtePrimaryKeyTarget"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/EntityRelation/multiplicitySource"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/EntityRelation/multiplicityTarget"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/EntityRelation/theFactoryEntity"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/EntityRelation/source"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/EntityRelation/target"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/SimpleRelation"/>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/AssociativeEntity"/>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/Attribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/Attribute/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/Attribute/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/Attribute/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/Attribute/visible"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/Attribute/attributeType"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/Attribute/Entity"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/Attribute/ElementoRealizacionValueAttribute"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/Attribute/ElementoRealizacionVisibleAttribute"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="gestionModelosConsultas.ecore#//entitymodel/ModelElementEntity">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/ModelElementEntity/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/ModelElementEntity/stereotype"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ModelElementEntity/ElementoRealizacionDiagramEntity"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/DiagramEntity">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/DiagramEntity/ModelFactory"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/DiagramEntity/listEntity"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/DiagramEntity/listEntityRelation"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/RealizacionDiagramEntity">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/RealizacionDiagramEntity/ModeloConsulta"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/RealizacionDiagramEntity/listElementoRealizacionDiagramEntity"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/RealizacionDiagramEntity/realizacionVisibleAttribute"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/RealizacionDiagramEntity/listValues"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionDiagramEntity">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionDiagramEntity/tipo"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionDiagramEntity/nombreModelElementEntity"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionDiagramEntity/modelElementEntity"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionDiagramEntity/RealizacionDiagramEntity"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionDiagramEntity/listElementoRealizacionAttribute"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionValueAttribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionValueAttribute/nombre"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionValueAttribute/valueAttribute"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionValueAttribute/ElementoRealizacionDiagramEntity"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionValueAttribute/values"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionVisibleAttribute">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionVisibleAttribute/nombre"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionVisibleAttribute/RealizacionDiagramEntity"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/ElementoRealizacionVisibleAttribute/visibleAttribute"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//entitymodel/Value">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//entitymodel/Value/value"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/Value/ElementoRealizacionValueAttribute"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//entitymodel/Value/RealizacionDiagramEntity"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Sysinfo" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo">
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/Paquete">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/Paquete/tipo"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/Paquete/element"/>
+      </genClasses>
+      <nestedGenPackages prefix="People" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/people">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/People_View">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/People_View/Directorio"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/People_View/Organizacion"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Rol"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Organizacion"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Edificio"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/unidad"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/unidadPadre"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Actor"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/theActores"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Roles"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Depositos"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Copias"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/Copia"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/susDepositos"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/UnidadOrganizacional/instanciacionesprocesos"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Rol">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Rol/UnidadOrganizacional"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Rol/Actor"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Rol/Roles"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Contacto">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Contacto/Directorio"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Contacto/quien"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Contacto/Mensaje"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Contacto/destinatariocomunicacion"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Contacto/remitentecomunicacion"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Directorio">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Directorio/People_View"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Directorio/Contacto"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Organizacion">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Organizacion/People_View"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Organizacion/organizacion"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Actor">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Actor/Rol"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Actor/unidad"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Actor/Actores"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Actor/ejecuta"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Actor/procesosResponsable"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Quien">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Quien/contacto"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Quien/theDocumento"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Actores">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Actores/UnidadOrganizacional"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Actores/Actor"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/people/Roles">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Roles/UnidadOrganizacional"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/people/Roles/Rol"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Data" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/data">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/Data_View">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/Data_View/Indice"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/Data_View/Libreria"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/Data_View/Orientacion"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/Data_View/Glosario"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/Data_View/Distribucion"/>
+        </genClasses>
+        <nestedGenPackages prefix="Docmgt" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/data/docmgt">
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Doc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/descripcion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/titulo"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/edicion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/vigencia"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/estado"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/suVersion"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/contextoDocumento"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/PalabraClave"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/suContenido"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/suItem"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/derivadas"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/base"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/suBaseline"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/theTipoDocumento"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Producto"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/theRol"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/asociado"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/TablaRetencionDocumental"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Expediente"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Observacion"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Anexo"/>
+            <genOperations ecoreOperation="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Registrar"/>
+            <genOperations ecoreOperation="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Aprobar"/>
+            <genOperations ecoreOperation="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Documento/Expirar"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Plantilla">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Plantilla/Orientacion"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Plantilla/suTipo"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Guia">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Guia/Orientacion"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Guia/suTipo"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/ListaChequeo">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/ListaChequeo/Orientacion"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/ListaChequeo/suTipo"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Contenido">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Contenido/suItem"/>
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Contenido/suDocumento"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/TipoDocumento">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/TipoDocumento/Orientacion"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/TipoDocumento/lista"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/TipoDocumento/guia"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/TipoDocumento/plantilla"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/TipoDocumento/theDocumento"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia/Copias"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia/formato"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia/consecutivo"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia/Deposito"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia/Mensaje"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia/Producto"/>
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copia/UnidadOrganizacional"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version/Doc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version/descripcion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version/cuenta"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version/formato"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version/suDocumento"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version/base"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Version/derivadas"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/IndexEntry">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/IndexEntry/suDocumento"/>
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/IndexEntry/Indice"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/IndexEntry/suElemento"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/PalabraClave">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/PalabraClave/Glosario"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/PalabraClave/Documento"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Item">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Item/texto"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Item/hInt"/>
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Item/suContenido"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Item/suDocumento"/>
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Item/Baseline"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Baseline">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Baseline/suDocumento"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Baseline/suItem"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Indice">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Indice/Data_View"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Indice/indice"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Producto">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Producto/Doc"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Producto/ubicacion"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Producto/Documento"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Producto/Copia"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Mensaje">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Mensaje/Distribucion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Mensaje/asunto"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Mensaje/mensaje"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Mensaje/Copia"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Mensaje/Contacto"/>
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Mensaje/Fecha"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Glosario">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Glosario/Data_View"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Glosario/PalabraClave"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Libreria">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Libreria/Data_View"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Libreria/Doc"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Distribucion">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Distribucion/Mensaje"/>
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Distribucion/Data_View"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Orientacion">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Orientacion/Data_View"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Orientacion/Plantilla"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Orientacion/Guia"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Orientacion/ListaChequeo"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Orientacion/TipoDocumento"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Doc">
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Doc/Documento"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Doc/Producto"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Doc/Version"/>
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Doc/Libreria"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copias">
+            <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copias/UnidadOrganizacional"/>
+            <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/data/docmgt/Copias/Copia"/>
+          </genClasses>
+        </nestedGenPackages>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Network" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/network">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/network/Disco">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/network/Disco/referencia"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/network/Armario"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/network/Deposito">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Deposito/Depositos"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Deposito/Copia"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Deposito/suDeposito"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Deposito/container"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Deposito/UnidadOrganizacional"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/network/Network_View">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Network_View/Edificio"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/network/Edificio">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Edificio/UnidadOrganizacional"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Edificio/Network_View"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/network/Depositos">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Depositos/UnidadOrganizacional"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/network/Depositos/Deposito"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Function" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/function">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/function/Function_View"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/function/Actividad">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/function/Actividad/descripcion"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/function/Actividad/estado"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/function/Actividad/ejecutantes"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/function/Actividad/InstanciaProceso"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/function/Actividad/genera"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/function/InstanciaProceso">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/function/InstanciaProceso/descripcion"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/function/InstanciaProceso/actividades"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/function/InstanciaProceso/UnidadOrganizacional"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/function/InstanciaProceso/actorResponsable"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/function/Proceso"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Time" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/time">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/time/Time_View">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Time_View/Agenda"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/time/Fecha">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/time/Fecha/dia"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/time/Fecha/mes"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/time/Fecha/ano"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Fecha/Calendario"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Fecha/Mensaje"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/time/Calendario">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/time/Calendario/nombre"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Calendario/Fecha"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Calendario/Agenda"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Calendario/suCalendario"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Calendario/plan"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/time/Agenda">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Agenda/Time_View"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/time/Agenda/Calendario"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Vision" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/vision">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/vision/Vision_View"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/core">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//sysinfo/core/ElementoModelo">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/core/ElementoModelo/owner"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/core/ElementoModelo/contexto"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//sysinfo/core/ElementoModelo/nombre"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/core/ElementoModelo/from"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//sysinfo/core/ElementoModelo/to"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Memo" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//sysinfo/memo"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Modeloconsultas" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas">
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/ModeloConsulta">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/ModeloConsulta/realizacionDiagramEntity"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/ModeloConsulta/nombre"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/ModeloConsulta/FactoryModeloConsulta"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/ModeloConsulta/listEADiagram"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/ModeloConsulta/listResultado"/>
+      </genClasses>
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/FactoryModeloConsulta">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/FactoryModeloConsulta/ModelFactory"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/FactoryModeloConsulta/listModeloConsulta"/>
+      </genClasses>
+      <nestedGenPackages prefix="Que" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/que">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/que/Documento"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/que/Comunicacion"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Quien" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/quien">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/quien/UnidadOrganizacional"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/quien/Contacto"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/quien/Actor"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/quien/Rol"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/quien/Quien"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Como" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/como">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/como/ActividadProceso"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/como/InstanciaProceso"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Cuando" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/cuando">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/cuando/Fecha"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Donde" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/donde">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/donde/Deposito"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/donde/Disco"/>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/donde/Armario"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Porque" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/porque"/>
+      <nestedGenPackages prefix="Model" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/model">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo">
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idUnidadOrganizacional"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/nombre"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/descripcion"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idActividadProceso"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/fechaInicio"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/fechaFin"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idRol"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idActor"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/apellido"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/email"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idInstanciaProceso"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idContacto"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/username"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/telefono"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/password"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idDocumento"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/titulo"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/edicion"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/vigencia"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/estado"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/fechaCreacion"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/anexo"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/tipo"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/comentarios"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idDeposito"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idQuien"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idArmario"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idDisco"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/referencia"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/idComunicacion"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/asunto"/>
+          <genEnumLiterals ecoreEnumLiteral="gestionModelosConsultas.ecore#//modeloconsultas/model/NombreCampo/default"/>
+        </genEnums>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/model/Relacion">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/model/Relacion/estereotipo"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/model/Relacion/order"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/Relacion/EADiagram"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/Relacion/target"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/Relacion/source"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/model/Campo">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/model/Campo/nombreCampo"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/model/Campo/criterio"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/model/Campo/seleccion"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/Campo/ownedElementoConsulta"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/model/EADiagram">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/model/EADiagram/nombre"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/EADiagram/listRelacion"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/EADiagram/ModeloConsulta"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/EADiagram/listElementoConsulta"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/model/ViewModel"/>
+        <genClasses image="false" ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/model/ElementoConsulta">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/model/ElementoConsulta/order"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/ElementoConsulta/EADiagram"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/model/ElementoConsulta/listCampos"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/model/Proyeccion"/>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Resultset" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/resultset">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/Resultado">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/Resultado/nombre"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/resultset/Resultado/ModeloConsulta"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/resultset/Resultado/listResultElement"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/ElementoModeloResultado">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/ElementoModeloResultado/key"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/resultset/ElementoModeloResultado/listElementoModeloResultado"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/resultset/ElementoModeloResultado/ElementoModeloResultado"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/ResultElement">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//modeloconsultas/resultset/ResultElement/Resultado"/>
+        </genClasses>
+        <nestedGenPackages prefix="Resultquien" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien">
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Actor">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Actor/idActor"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Actor/nombre"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Actor/apellido"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Actor/email"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Actor/descripcion"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/UnidadOrganizacional">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/UnidadOrganizacional/idUnidadOrganizacional"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/UnidadOrganizacional/nombre"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/UnidadOrganizacional/descripcion"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Rol">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Rol/idRol"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Rol/nombre"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Rol/descripcion"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Contacto">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Contacto/idContacto"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Contacto/username"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Contacto/password"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Contacto/telefono"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Contacto/nombre"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultquien/Contacto/descripcion"/>
+          </genClasses>
+        </nestedGenPackages>
+        <nestedGenPackages prefix="Resultque" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque">
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/idDocumento"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/titulo"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/edicion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/vigencia"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/estado"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/fechaCreacion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/anexo"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/tipo"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Documento/comentarios"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Comunicacion">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Comunicacion/idComunicacion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultque/Comunicacion/asunto"/>
+          </genClasses>
+        </nestedGenPackages>
+        <nestedGenPackages prefix="Resultdonde" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde">
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Deposito">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Deposito/idDeposito"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Deposito/descripcion"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Disco">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Disco/idDisco"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Disco/referencia"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Disco/descripcion"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Armario">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Armario/idArmario"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultdonde/Armario/descripcion"/>
+          </genClasses>
+        </nestedGenPackages>
+        <nestedGenPackages prefix="Resultcomo" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo">
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/InstanciaProceso">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/InstanciaProceso/idInstanciaProceso"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/InstanciaProceso/nombre"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/InstanciaProceso/descripcion"/>
+          </genClasses>
+          <genClasses ecoreClass="gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/ActividadProceso">
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/ActividadProceso/idActividadProceso"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/ActividadProceso/nombre"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/ActividadProceso/descripcion"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/ActividadProceso/fechaInicio"/>
+            <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//modeloconsultas/resultset/resultcomo/ActividadProceso/fechaFin"/>
+          </genClasses>
+        </nestedGenPackages>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Memoms" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//memoms">
+      <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/MemoFactory">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/MemoFactory/TablaRetencionDocumental"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/MemoFactory/Actividad"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/MemoFactory/Memorando"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/MemoFactory/Circular"/>
+      </genClasses>
+      <nestedGenPackages prefix="Info" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//memoms/info">
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/info/Observacion">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/Observacion/Documento"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/Observacion/observacion"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/Observacion/check"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/info/Expediente">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/Expediente/Documento"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/info/Anexo">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/Anexo/Documento"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/Anexo/id"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/Anexo/archivo"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/info/Actividad">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/Actividad/Memorando"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/Actividad/MemoFactory"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/Actividad/id"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/Actividad/descripcion"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/Actividad/estado"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/info/TablaRetencionDocumental">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/TablaRetencionDocumental/Documento"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/TablaRetencionDocumental/SerieDocumental"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/TablaRetencionDocumental/MemoFactory"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/TablaRetencionDocumental/descripcion"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/info/SerieDocumental">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/TablaRetencionDocumental"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/subserie"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/serie"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/codigo"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/nombre"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/retencionAnios"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/disposicionFinal"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/info/SerieDocumental/descripcion"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Comunicacion" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//memoms/comunicacion">
+        <genClasses image="false" ecoreClass="gestionModelosConsultas.ecore#//memoms/comunicacion/Comunicacion">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/comunicacion/Comunicacion/destinatario"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/comunicacion/Comunicacion/remitente"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/comunicacion/Comunicacion/numeroRadicado"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/comunicacion/Comunicacion/asunto"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gestionModelosConsultas.ecore#//memoms/comunicacion/Comunicacion/contenido"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/comunicacion/Memorando">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference gestionModelosConsultas.ecore#//memoms/comunicacion/Memorando/Actividad"/>
+        </genClasses>
+        <genClasses ecoreClass="gestionModelosConsultas.ecore#//memoms/comunicacion/Circular"/>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Datatypes" disposableProviderFactory="true" ecorePackage="gestionModelosConsultas.ecore#//datatypes">
+      <genDataTypes ecoreDataType="gestionModelosConsultas.ecore#//datatypes/Object"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

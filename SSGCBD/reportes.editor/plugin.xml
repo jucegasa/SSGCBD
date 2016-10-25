@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="reportes.presentation.ReportesModelWizardID"
+            name="%_UI_ReportesModelWizard_label"
+            class="reportes.presentation.ReportesModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/ReportesModelFile.gif">
+         <description>%_UI_ReportesModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="reportes.presentation.ReportesEditorID"
+            name="%_UI_ReportesEditor_label"
+            icon="icons/full/obj16/ReportesModelFile.gif"
+            extensions="reportes"
+            class="reportes.presentation.ReportesEditor"
+            contributorClass="reportes.presentation.ReportesActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="reportes.domain.presentation.DomainModelWizardID"
+            name="%_UI_DomainModelWizard_label"
+            class="reportes.domain.presentation.DomainModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/DomainModelFile.gif">
+         <description>%_UI_DomainModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="reportes.domain.presentation.DomainEditorID"
+            name="%_UI_DomainEditor_label"
+            icon="icons/full/obj16/DomainModelFile.gif"
+            extensions="domain"
+            class="reportes.domain.presentation.DomainEditor"
+            contributorClass="reportes.domain.presentation.DomainActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="reportes.ui.presentation.UiModelWizardID"
+            name="%_UI_UiModelWizard_label"
+            class="reportes.ui.presentation.UiModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/UiModelFile.gif">
+         <description>%_UI_UiModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="reportes.ui.presentation.UiEditorID"
+            name="%_UI_UiEditor_label"
+            icon="icons/full/obj16/UiModelFile.gif"
+            extensions="ui"
+            class="reportes.ui.presentation.UiEditor"
+            contributorClass="reportes.ui.presentation.UiActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

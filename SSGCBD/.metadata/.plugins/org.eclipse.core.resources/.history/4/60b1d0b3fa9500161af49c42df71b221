@@ -1,0 +1,23 @@
+package pruebaInterfaz;
+
+public class Convert {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public static int convertToInt(String s){
+		
+		int res =0;
+		
+		
+		int m = s.length()-1;
+		
+		for(int i=m;i>=0;i--){
+			
+		}
+		return res;
+	}
+
+}
