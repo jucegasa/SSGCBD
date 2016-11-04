@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename field &apos;result&apos; in &apos;reportes.view.GenerateCode&apos; to &apos;namesViewModels&apos;&#x0D;&#x0A;- Original project: &apos;reportes.view&apos;&#x0D;&#x0A;- Original element: &apos;reportes.view.GenerateCode.result&apos;&#x0D;&#x0A;- Renamed element: &apos;reportes.view.GenerateCode.namesViewModels&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;result&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;reportes.view{GenerateCode.java[GenerateCode^result" name="namesViewModels" references="true" setter="false" stamp="1467227648848" textual="false" version="1.0"/>
-</session>

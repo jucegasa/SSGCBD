@@ -18,7 +18,6 @@ Export-Package: reportes,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  gestionModelosConsultas;bundle-version="1.0.0",
- pruebamemorandos;bundle-version="1.0.0",
  gestionModelosConsultas.generate;bundle-version="1.0.0",
  gestionModelosConsultas.model;bundle-version="1.0.0"
 Eclipse-LazyStart: true

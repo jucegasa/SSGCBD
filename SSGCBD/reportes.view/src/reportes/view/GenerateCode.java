@@ -1,52 +1,17 @@
 package reportes.view;
 
 import gestionmodelosconsultas.compilador.CompiladorProyeccion;
-import gestionmodelosconsultas.entitymodel.Entity;
-import gestionmodelosconsultas.entitymodel.EntitymodelFactory;
-import gestionmodelosconsultas.memoms.comunicacion.Comunicacion;
-import gestionmodelosconsultas.memoms.comunicacion.Memorando;
-import gestionmodelosconsultas.modeloconsultas.FactoryModeloConsulta;
-import gestionmodelosconsultas.modeloconsultas.ModeloConsulta;
-import gestionmodelosconsultas.modeloconsultas.como.ComoFactory;
-import gestionmodelosconsultas.modeloconsultas.impl.FactoryModeloConsultaImpl;
+
 import gestionmodelosconsultas.modeloconsultas.model.EADiagram;
-import gestionmodelosconsultas.modeloconsultas.model.ElementoConsulta;
-import gestionmodelosconsultas.modeloconsultas.model.Relacion;
-import gestionmodelosconsultas.modeloconsultas.model.ViewModel;
-import gestionmodelosconsultas.modeloconsultas.model.impl.EADiagramImpl;
 import gestionmodelosconsultas.modeloconsultas.que.Documento;
 import gestionmodelosconsultas.modeloconsultas.que.QueFactory;
 import gestionmodelosconsultas.modeloconsultas.resultset.Resultado;
 import gestionmodelosconsultas.modeloconsultas.resultset.resultque.impl.DocumentoImpl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import javax.swing.UIManager;
-
-import model.FactoryModel;
-import model.uimanager.ContenedorMemorando;
-import model.uimanager.MemorandoViewModel;
-import model.uimanager.UimanagerFactory;
-import model.uimanager.impl.ContenedorMemorandoImpl;
-import model.uimanager.impl.MemorandoViewModelImpl;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 
-import pruebamemorandos.view.view.views.VentanaMemorandoViewPart;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import reportes.model.ModelFactoryModel;
 import tooldataform.formmodel.concreta.*;
 import tooldataform.formmodel.containers.GraphicalContainer;
 import tooldataform.*;
@@ -147,31 +112,20 @@ public class GenerateCode {
 	
 	public void copiarResultado() {
 		
-		Resultado result = modelFactoryMC.getFactoryModeloConsultas().getListModeloConsulta().get(0).getListResultado().get(0);
-		model.ModelFactory modelFactory = model.ModelFactory.eINSTANCE;
-		FactoryModel factoryModel = modelFactory.createFactoryModel();
-		factoryModel = factoryModel.cargar();
-		DocumentoImpl d = null;
-		String id, tipo, hora;
+//		Resultado result = modelFactoryMC.getFactoryModeloConsultas().getListModeloConsulta().get(0).getListResultado().get(0);
+//		
+//		DocumentoImpl d = null;
+//		String id, tipo, hora;
+//		
+//		for (int i = 0; i < result.getListResultElement().size(); i++) {
+//			
+//			d = (DocumentoImpl) result.getListResultElement().get(i);
+//			hora = d.getFechaCreacion().split(" ")[1];
+//			tipo = d.getTipo();
+//			id = d.getKey();
+//			
+//		}
 		
-		for (int i = 0; i < result.getListResultElement().size(); i++) {
-			
-			d = (DocumentoImpl) result.getListResultElement().get(i);
-			hora = d.getFechaCreacion().split(" ")[1];
-			tipo = d.getTipo();
-			id = d.getKey();
-			
-			MemorandoViewModel m= UimanagerFactory.eINSTANCE.createMemorandoViewModel();
-			m.setHora(hora);
-			m.setId(id);
-			m.setTipo(tipo);
-			factoryModel.getTheUIManager().getTheVentanaMemorandoViewModel().getTheContenedorMemorando().getListMemorando().add(m);
-		}
-		factoryModel.salvar();
-		pruebamemorandos.view.view.ModelFactoryModel model = pruebamemorandos.view.view.ModelFactoryModel.getInstance();
-	    model.update();
-	    VentanaMemorandoViewPart ventanaMemorandoViewPart = model.getVentanaMemorandoViewPart();
-	    ventanaMemorandoViewPart.updateData();
 	}
 		
 }

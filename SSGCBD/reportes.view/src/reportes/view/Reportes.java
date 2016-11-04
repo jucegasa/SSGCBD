@@ -33,6 +33,8 @@ public class Reportes extends ViewPart {
 
 	ModelFactory modelFactory;
 	
+	GeneracionDF g;
+	
 	public Reportes() {
 		inicializar();
 	}
@@ -86,7 +88,7 @@ public class Reportes extends ViewPart {
 				   Unzip unzip = new Unzip();
 				   unzip.unzip(root,s);
 				   String url = unzip.getDir(s);
-				   GeneracionDF g = new GeneracionDF(url,root);
+				   g = new GeneracionDF(url,root);
 				try {
 					g.generate();
 					JOptionPane.showMessageDialog(null,"se genero");
@@ -108,9 +110,21 @@ public class Reportes extends ViewPart {
 				}
 			}
 		});
-		btnGenerardataform.setBounds(232, 30, 120, 25);
+		btnGenerardataform.setBounds(180, 30, 120, 25);
 		toolkit.adapt(btnGenerardataform, true, true);
 		btnGenerardataform.setText("GenerarDataform");
+		
+		Button btnGenerarDiagrama = new Button(container, SWT.NONE);
+		btnGenerarDiagrama.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				g.generateDiagram();
+			}
+		});
+		btnGenerarDiagrama.setBounds(330, 30, 107, 25);
+		toolkit.adapt(btnGenerarDiagrama, true, true);
+		btnGenerarDiagrama.setText("Generar Diagrama");
 		createActions();
 		initializeToolBar();
 		initializeMenu();

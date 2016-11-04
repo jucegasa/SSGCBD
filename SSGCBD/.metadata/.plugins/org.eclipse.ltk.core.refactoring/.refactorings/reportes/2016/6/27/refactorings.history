@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Extract local variable &apos;inputStream&apos; from expression &apos;in=new FileInputStream(origen)&apos;&#x0D;&#x0A;- Original project: &apos;reportes&apos;&#x0D;&#x0A;- Variable name: &apos;inputStream&apos;&#x0D;&#x0A;- Destination method: &apos;reportes.impl.ModelFactoryImpl.copiarProducciones()&apos;&#x0D;&#x0A;- Variable expression: &apos;in=new FileInputStream(origen)&apos;&#x0D;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;inputStream&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src&lt;reportes.impl{ModelFactoryImpl.java" name="inputStream" replace="true" selection="9954 32" stamp="1467058474756" version="1.0"/>
-</session>

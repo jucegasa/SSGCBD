@@ -1,6 +1,5 @@
 package reportes.view;
 
-
 class Nodo implements Comparable<Nodo> {
 
 	int x,y;

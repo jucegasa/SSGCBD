@@ -31,7 +31,7 @@ public class Unzip {
 	}
 	
 	public void unzip(String url,String di) {
-		Enumeration entries;
+		Enumeration<?> entries;
 		ZipFile zipFile;
 		
 		String dir = getDir(di)+"/";

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:tooldataform.core="http:///tooldataform/core.ecore" xsi:schemaLocation="http:///tooldataform/core.ecore http:///tooldataform.ecore#//core" xmi:id="_P5pxEEOwEea1LO_oDxVaRA" type="Metamodelodataform_Datos" measurementUnit="Pixel">
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_P5pxEUOwEea1LO_oDxVaRA"/>
-  <element xmi:type="tooldataform.core:DatosDF_Diagram" href="model.tooldataform#//@listProyecto.0/@listDiagram.2"/>
-</notation:Diagram>
