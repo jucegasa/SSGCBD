@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gestionmodelosconsultas.modeloconsultas.model="http:///gestionmodelosconsultas/modeloconsultas/model.ecore" xmlns:gestionmodelosconsultas.modeloconsultas.que="http:///gestionmodelosconsultas/modeloconsultas/que.ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http:///gestionmodelosconsultas/modeloconsultas/model.ecore http:///gestionmodelosconsultas.ecore#//modeloconsultas/model http:///gestionmodelosconsultas/modeloconsultas/que.ecore http:///gestionmodelosconsultas.ecore#//modeloconsultas/que" xmi:id="_awG9IJ0cEeafN54FHmPdfA" type="GestionModelosConsultas_VIEWMODEL" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_buPZUJ0cEeafN54FHmPdfA" type="2016">
+    <children xmi:type="notation:DecorationNode" xmi:id="_buPZVZ0cEeafN54FHmPdfA" type="5032"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_buQAYJ0cEeafN54FHmPdfA" type="7016">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_buQAYZ0cEeafN54FHmPdfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_buQAYp0cEeafN54FHmPdfA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_buPZUZ0cEeafN54FHmPdfA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_buPZUp0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_buPZU50cEeafN54FHmPdfA"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.que:Documento" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.3/@listElementoConsulta.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_buPZVJ0cEeafN54FHmPdfA" x="445" y="165"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_awG9IZ0cEeafN54FHmPdfA"/>
+  <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:ViewModel" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.3"/>
+</notation:Diagram>

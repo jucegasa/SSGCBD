@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore" xsi:schemaLocation="http:///tooldataform/formmodel/concreta.ecore http:///tooldataform.ecore#//concreta" xmi:id="_t0rMIKaREea6jdvpCuiLNg" type="Metamodelodataform" measurementUnit="Pixel">
+  
+  
+  
+  <children xmi:type="notation:Node"  type="2003">
+    <children xmi:type="notation:DecorationNode"  type="5012"/>
+    <children xmi:type="notation:BasicCompartment"  type="7001"/>
+    
+    <children xmi:type="notation:BasicCompartment"  type="7005" collapsed="true">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uEX1AaaREea6jdvpCuiLNg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uEX1AqaREea6jdvpCuiLNg"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_uEX1A6aREea6jdvpCuiLNg" type="7006" collapsed="true">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_uEX1BKaREea6jdvpCuiLNg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_uEX1BaaREea6jdvpCuiLNg"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_uEUxsaaREea6jdvpCuiLNg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uEUxsqaREea6jdvpCuiLNg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_uEUxs6aREea6jdvpCuiLNg"/>
+    <element xmi:type="tooldataform.formmodel.concreta:Interface" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uEUxtKaREea6jdvpCuiLNg" y="35" width="821" height="576"/>
+  </children>
+  
+  
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_t0rMIaaREea6jdvpCuiLNg"/>
+  <element xmi:type="tooldataform.formmodel.concreta:DataForm_Diagram" href="model.tooldataform#//@listProyecto.0/@listDiagram.0"/>
+</notation:Diagram>

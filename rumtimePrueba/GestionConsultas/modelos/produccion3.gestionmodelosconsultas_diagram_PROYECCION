@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gestionmodelosconsultas.modeloconsultas.model="http:///gestionmodelosconsultas/modeloconsultas/model.ecore" xmlns:gestionmodelosconsultas.modeloconsultas.que="http:///gestionmodelosconsultas/modeloconsultas/que.ecore" xmlns:gestionmodelosconsultas.modeloconsultas.quien="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http:///gestionmodelosconsultas/modeloconsultas/model.ecore http:///gestionmodelosconsultas.ecore#//modeloconsultas/model http:///gestionmodelosconsultas/modeloconsultas/que.ecore http:///gestionmodelosconsultas.ecore#//modeloconsultas/que http:///gestionmodelosconsultas/modeloconsultas/quien.ecore http:///gestionmodelosconsultas.ecore#//modeloconsultas/quien" xmi:id="_n6TGgJ0cEeafN54FHmPdfA" type="GestionModelosConsultas_PROYECCION" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_rveBQJ0cEeafN54FHmPdfA" type="2015">
+    <children xmi:type="notation:DecorationNode" xmi:id="_rveBRZ0cEeafN54FHmPdfA" type="5031"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_rveBRp0cEeafN54FHmPdfA" type="7015">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_rveBR50cEeafN54FHmPdfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_rveBSJ0cEeafN54FHmPdfA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_rveBQZ0cEeafN54FHmPdfA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_rveBQp0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_rveBQ50cEeafN54FHmPdfA"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.quien:UnidadOrganizacional" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listElementoConsulta.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rveBRJ0cEeafN54FHmPdfA" x="90" y="120"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_t_RgsJ0cEeafN54FHmPdfA" type="2021">
+    <children xmi:type="notation:DecorationNode" xmi:id="_t_RgtZ0cEeafN54FHmPdfA" type="5037"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_t_Rgtp0cEeafN54FHmPdfA" type="7021">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_t_Rgt50cEeafN54FHmPdfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_t_RguJ0cEeafN54FHmPdfA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_t_RgsZ0cEeafN54FHmPdfA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_t_Rgsp0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_t_Rgs50cEeafN54FHmPdfA"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.quien:Contacto" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listElementoConsulta.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_t_RgtJ0cEeafN54FHmPdfA" x="325" y="130"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_usbhoJ0cEeafN54FHmPdfA" type="2020">
+    <children xmi:type="notation:DecorationNode" xmi:id="_usbhpZ0cEeafN54FHmPdfA" type="5036"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_usbhpp0cEeafN54FHmPdfA" type="7020">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_usbhp50cEeafN54FHmPdfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_usbhqJ0cEeafN54FHmPdfA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_usbhoZ0cEeafN54FHmPdfA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_usbhop0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_usbho50cEeafN54FHmPdfA"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.que:Comunicacion" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listElementoConsulta.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_usbhpJ0cEeafN54FHmPdfA" x="530" y="125"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_vALkEJ0cEeafN54FHmPdfA" type="2016">
+    <children xmi:type="notation:DecorationNode" xmi:id="_vAMLIJ0cEeafN54FHmPdfA" type="5032"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_vAMLIZ0cEeafN54FHmPdfA" type="7016">
+      <children xmi:type="notation:Node" xmi:id="_0BFSIJ0cEeafN54FHmPdfA" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_0BFSJZ0cEeafN54FHmPdfA" type="5003"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_0BFSIZ0cEeafN54FHmPdfA"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_0BFSIp0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_0BFSI50cEeafN54FHmPdfA"/>
+        <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:Campo" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listElementoConsulta.3/@listCampos.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0BFSJJ0cEeafN54FHmPdfA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_3d990J0eEeafN54FHmPdfA" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_3d991Z0eEeafN54FHmPdfA" type="5003"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_3d990Z0eEeafN54FHmPdfA"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_3d990p0eEeafN54FHmPdfA" fontName="Segoe UI"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_3d99050eEeafN54FHmPdfA"/>
+        <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:Campo" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listElementoConsulta.3/@listCampos.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3d991J0eEeafN54FHmPdfA"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_vAMLIp0cEeafN54FHmPdfA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_vAMLI50cEeafN54FHmPdfA"/>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_vALkEZ0cEeafN54FHmPdfA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_vALkEp0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_vALkE50cEeafN54FHmPdfA"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.que:Documento" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listElementoConsulta.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vALkFJ0cEeafN54FHmPdfA" x="770" y="125"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_n6TGgZ0cEeafN54FHmPdfA"/>
+  <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:Proyeccion" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4"/>
+  <edges xmi:type="notation:Connector" xmi:id="_xLRioJ0cEeafN54FHmPdfA" type="4001" source="_rveBQJ0cEeafN54FHmPdfA" target="_t_RgsJ0cEeafN54FHmPdfA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_xLRioZ0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:Relacion" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listRelacion.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_xLRiop0cEeafN54FHmPdfA" points="[75, -6, -125, 3]$[240, -6, 40, 3]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_xtmzoJ0cEeafN54FHmPdfA" type="4001" source="_t_RgsJ0cEeafN54FHmPdfA" target="_usbhoJ0cEeafN54FHmPdfA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_xtmzoZ0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:Relacion" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listRelacion.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_xtmzop0cEeafN54FHmPdfA" points="[19, -3, -141, 0]$[145, -1, -15, 2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xtoBwJ0cEeafN54FHmPdfA" id="(0.759493670886076,0.6046511627906976)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xtoBwZ0cEeafN54FHmPdfA" id="(0.14018691588785046,0.6511627906976745)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_yMM0IJ0cEeafN54FHmPdfA" type="4001" source="_usbhoJ0cEeafN54FHmPdfA" target="_vALkEJ0cEeafN54FHmPdfA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_yMM0IZ0cEeafN54FHmPdfA" fontName="Segoe UI"/>
+    <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:Relacion" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.4/@listRelacion.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_yMM0Ip0cEeafN54FHmPdfA" points="[54, 1, -179, 1]$[231, 22, -2, 22]"/>
+  </edges>
+</notation:Diagram>

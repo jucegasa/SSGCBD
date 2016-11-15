@@ -1,0 +1,793 @@
+package reportes.view;
+
+import tooldataform.ModelFactory;
+import tooldataform.core.CoreFactory;
+import tooldataform.core.Domain_Diagram;
+import tooldataform.core.Project;
+import tooldataform.diagram.edit.parts.DataForm_DiagramEditPart;
+import tooldataform.diagram.part.MetamodelodataformDiagramEditor;
+import tooldataform.diagram.part.MetamodelodataformDiagramEditorPlugin;
+import tooldataform.diagram.part.MetamodelodataformDiagramEditorUtil;
+import tooldataform.diagram.part.MetamodelodataformVisualIDRegistry;
+import tooldataform.formmodel.concreta.ColumView;
+import tooldataform.formmodel.concreta.ConcretaFactory;
+import tooldataform.formmodel.concreta.Container;
+import tooldataform.formmodel.concreta.DataForm_Diagram;
+import tooldataform.formmodel.concreta.Interface;
+import tooldataform.formmodel.concreta.LabelView;
+import tooldataform.formmodel.concreta.TableView;
+import tooldataform.pmoo.Clase;
+import tooldataform.pmoo.PmooFactory;
+import tooldataform.pmoo.Valores;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.eclipse.emf.common.ui.URIEditorInput;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class GeneracionDF {
+
+	 ModelFactory mf;
+	 Project project;
+	 DataForm_Diagram dfDiagram;
+	 Domain_Diagram dmDiagram;
+	 
+	 Clase domainClase;
+	 Interface interface1;
+	 String ruta;
+	 String absolutePath;
+	 
+	 ArrayList<String> listaTablas;
+	 ArrayList<String> listaCombos;
+	 ArrayList<Nodo> listaX;
+	 
+	 String dimens;
+	 int nTablas;
+	 int nx;
+	 int ny;
+	 int xs[] = {1,-1, 0, 0};
+	 int ys[] = {0,0, 1, -1};
+	
+	 
+	 
+	 public GeneracionDF(String ruta,String as){
+		 this.ruta = ruta+"/xl/";
+		 this.absolutePath = as;
+	 }
+	
+	public void generate() throws ParserConfigurationException, SAXException, IOException, EncryptedDocumentException, InvalidFormatException{
+		Init();
+		getTables();
+		MarcarTablas(listaTablas);
+		getExtraInformation();
+		salvarDF();
+	}
+	
+	public void generateDiagram() {
+		
+		salvarDiagram(createDiagram());
+		openDiagram();
+	}
+	
+	public void Init() throws ParserConfigurationException, SAXException, IOException{
+		
+		dimens = getDimention();
+		String inicio = dimens.split(":")[0];
+		String fin = 	dimens.split(":")[1];
+		Nodo coordinate = getCoordinates(inicio);
+		
+		nx = coordinate.x;
+		ny = coordinate.y;
+		
+		Nodo size = getSizes(inicio, fin);
+		
+		System.out.println(dimens);
+		mf= tooldataform.TooldataformFactory.eINSTANCE.createModelFactory();
+		project = CoreFactory.eINSTANCE.createProject();
+		dfDiagram = ConcretaFactory.eINSTANCE.createDataForm_Diagram();
+		dmDiagram = CoreFactory.eINSTANCE.createDomain_Diagram();
+		interface1 = ConcretaFactory.eINSTANCE.createInterface();
+		interface1.setWidth(new Integer(size.x  + 80));
+		interface1.setHeight(new Integer(size.y + 60));
+		System.out.println( (size.x + 80) + " " + (size.y+60));
+		dfDiagram.setTheInterface(interface1);
+		dfDiagram.setOwnedByProject(project);
+		dfDiagram.setItsDiagram(dmDiagram);
+		
+		domainClase = PmooFactory.eINSTANCE.createClase();
+		domainClase.setName("Domain");
+		dmDiagram.getListClase().add(domainClase);
+		project.getListDiagram().add(dmDiagram);
+		project.getListDataFormDiagram().add(dfDiagram);
+		project.setTheModelFactory(mf);
+		mf.getListProyecto().add(project);
+		listaTablas = new ArrayList<String>();
+		listaCombos = new ArrayList<String>();
+		listaX = new ArrayList<Nodo>();
+		
+	}
+	
+	/**
+	 * Metodo que obtiene los combobox que estan en el reporte.
+	 * @param libro Documento XLS del cual se captura la forma del reporte.
+	 */
+	public void getOrderViewModel(Workbook libro){
+		
+		Sheet sheetL =  libro.getSheetAt(0);
+		int nmax = sheetL.getLastRowNum()+1;
+		int primerComboX=0;
+		int primerComboY=0;
+		Cell c;
+		Row r = null;
+		
+		iteradorI: for (int i = 0; i <nmax; i++) {
+			
+			r =  sheetL.getRow(i);
+        	if(r == null) continue;
+        	
+        	for (int j = 0; j <r.getLastCellNum(); j++) {
+	    		c = r.getCell(j);
+	            if(c != null && getCellValue(c).equals("*") ) { 
+	            	//Es combo
+	            	primerComboX=i;
+	            	primerComboY=j-1;
+	            	break iteradorI;
+	            }
+	        }
+	    }
+		
+ 		c = r.getCell(primerComboY);
+		while(c!=null &&  c.getCellType()!=Cell.CELL_TYPE_BLANK){
+			
+			listaCombos.add(getCellValue(c));
+			primerComboX++;
+			r =  sheetL.getRow(primerComboX);
+			if(r==null)
+				break;
+			c = r.getCell(primerComboY);
+		}	
+		
+		
+		for(int i=0;i<listaCombos.size();i++){
+			System.out.println(listaCombos.get(i));
+		}
+	}	 
+	
+	public void getExtraInformation() throws EncryptedDocumentException, InvalidFormatException, IOException{
+		
+		InputStream is = new FileInputStream(absolutePath);
+        Workbook libro = WorkbookFactory.create(is);
+        is = new FileInputStream("/VisitadosLibro1.xlsx");
+        Workbook visit = WorkbookFactory.create(is);  
+        getOrderViewModel(libro);
+        recorrerHoja(libro, visit);
+	}
+	
+
+	public String getDimention()throws ParserConfigurationException, SAXException, IOException{
+		
+		Document doc = getXML(ruta+"worksheets/sheet1.xml");
+		doc.getDocumentElement().normalize();	
+		NodeList nList = doc.getElementsByTagName("dimension");
+		Node node = nList.item(0);
+		String s="";
+		if(node.getNodeType()==Node.ELEMENT_NODE){
+			Element e = (Element)node;
+			s = e.getAttribute("ref");
+		}
+		return s;
+	}
+	
+	
+	public  int getNumberTables() throws ParserConfigurationException, SAXException, IOException{	
+		
+		Document doc = getXML(ruta+"worksheets/sheet1.xml");
+		doc.getDocumentElement().normalize();	
+		NodeList nList = doc.getElementsByTagName("tablePart");
+		return nList.getLength();
+	}
+	
+	public void getTables() throws ParserConfigurationException, SAXException, IOException{
+		
+		int n = getNumberTables();
+		nTablas = n;
+		Document doc;
+		for(int i=1;i<=n;i++){
+			
+			Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
+			containerTablas.setName("Table"+i);
+			doc = getXML(ruta +"tables/table"+i+".xml");
+			
+			String s="";
+			NodeList es = doc.getElementsByTagName("autoFilter");
+			Node node = es.item(0);
+			if(node.getNodeType()==Node.ELEMENT_NODE){
+				Element e = (Element)node;
+				s = e.getAttribute("ref");
+				listaTablas.add(s);
+			}
+			
+			String inicio = s.split(":")[0];
+			String fin = 	s.split(":")[1];
+			
+			int wf= toInt(stractColumn(fin))-1;
+			int wi = toInt(stractColumn(inicio))-1;
+			
+			listaX.add( new Nodo (toInt(stractColumn(inicio))-1, wf-wi+1)  );
+			
+			Nodo coordinates= getCoordinates(inicio);
+			Nodo size = getSizes(inicio, fin);
+	
+			NodeList nList = doc.getElementsByTagName("tableColumn");
+			ArrayList<String> columnas = new ArrayList<String>();
+			
+			for (int j = 0; j < nList.getLength(); j++) {
+				Node nNode = nList.item(j);
+				if(nNode.getNodeType()==Node.ELEMENT_NODE){
+					Element e = (Element)nNode;
+					columnas.add(e.getAttribute("name"));
+				}
+			}
+			TableView tb = ConcretaFactory.eINSTANCE.createTableView();
+			tb.setName("Table"+i);
+			for(int j=0;j<columnas.size();j++){
+				ColumView c= ConcretaFactory.eINSTANCE.createColumView();
+				c.setName(columnas.get(j));
+				tb.getListColumView().add(c);
+			}
+			tb.setWidth(new Integer(size.x));
+			tb.setHeight(new Integer(size.y));
+			tb.setPositionX(new Integer(15));
+			tb.setPositionY(new Integer(15));
+			
+			containerTablas.setWidth(new Integer(size.x + 40));
+			containerTablas.setHeight(new Integer(size.y+ 40));
+			containerTablas.setPositionX(new Integer(coordinates.x - nx + 40 ));
+			containerTablas.setPositionY(new Integer(coordinates.y - ny + 25));
+			containerTablas.getListGraphicalContainer().add(tb);
+			tooldataform.formmodel.concreta.Containment c = ConcretaFactory.eINSTANCE.createContainment();
+			c.setAMultiplicidad(tooldataform.pmoo.Cardinalidad.N);
+			c.setBMultiplicidad(tooldataform.pmoo.Cardinalidad.N);
+			c.setANavegable(Valores.SI);
+			c.setBNavegable(Valores.SI);
+			c.setBinding(Valores.SI);
+			c.setARol("ownedByTable"+i);
+			c.setBRol("listTable"+i);
+			c.setName("name"+i);
+			c.getSource().add(containerTablas);
+			c.getTarget().add(tb);
+			dfDiagram.getListarelacion().add(c);
+			dfDiagram.setTheInterface(interface1);
+			interface1.getListGraphicalContainer().add(containerTablas);
+		}	
+	}
+	
+	public void salvarDF(){
+		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("platform:/resource/GestionConsultas/domain/model.tooldataform");
+		org.eclipse.emf.ecore.resource.ResourceSet resourceSet= new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
+		resource.getContents().add(mf);
+		try {
+			resource.save(java.util.Collections.EMPTY_MAP);
+			
+		} catch (java.io.IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void salvarDiagram(Diagram diagram){
+		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("platform:/resource/GestionConsultas/domain/model.tooldataform_diagram");
+		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
+		resource.getContents().add(diagram);
+		try {
+			resource.save(java.util.Collections.EMPTY_MAP);
+			
+		} catch (java.io.IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public Document getXML(String url)throws ParserConfigurationException, SAXException, IOException{
+		File fXmlFile = new File(url);
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(fXmlFile);
+		return doc;
+	}
+	
+	public void MarcarTablas(ArrayList<String> sizes) throws IOException, EncryptedDocumentException, InvalidFormatException{
+        Workbook visit = new XSSFWorkbook();
+        Sheet sheetV =  visit.createSheet();
+        for(int i=0;i<sizes.size();i++){
+        	String inicio = sizes.get(i).split(":")[0], fin =  sizes.get(i).split(":")[1];
+        	for(int  j = Integer.parseInt(capturarNumeros(inicio))-1 ; j <Integer.parseInt(capturarNumeros(fin)) ;j++){
+        		Row r= sheetV.getRow(j);
+        		if(r==null)
+        			r= sheetV.createRow(j);
+        		
+        		int wf= toInt(stractColumn(fin))-1;
+        		int wi = toInt(stractColumn(inicio))-1;
+        		
+        		for(int k = wi; k <=wf;k++ ){
+        			Cell c = r.createCell(k);
+        			c.setCellValue(1);
+        		}
+        	}
+        }
+        FileOutputStream fos = new FileOutputStream("/VisitadosLibro1.xlsx");
+	    visit.write(fos);
+	    visit.close();
+	    fos.close();
+	}
+	
+	public void reOrganizarTablas(Sheet sheetV){
+		
+		for(int i=0;i<listaTablas.size();i++){
+			String inicio = listaTablas.get(i).split(":")[0], finis = listaTablas.get(i).split(":")[1], fins = dimens.split(":")[1];
+				
+			int j = Integer.parseInt(capturarNumeros(inicio))-1;
+	
+			int finj = toInt(stractColumn(finis))-1;
+			
+			int fini = Integer.parseInt(capturarNumeros(fins))-1;
+
+			Nodo coordinates  = getCoordinates(inicio);
+			
+			int containersV = getAmountContainersV (j, 0 , finj,sheetV);
+       	
+			int YO = interface1.getListGraphicalContainer().get(i).getPositionY();
+			
+			Nodo containersH = getAmountContainersH(j,finj, fini , sheetV);
+					
+			int xs=0;
+			
+			if(containersH.x==0){
+				xs = coordinates.x - nx + 40;
+			}else{
+				xs= (containersH.y*100 + 40*containersH.x) + (40*containersH.x)  + 40;
+			}
+		
+			interface1.getListGraphicalContainer().get(i).setPositionX( xs );
+			interface1.getListGraphicalContainer().get(i).setPositionY(YO + (40*containersV));
+		}
+	}
+	
+	
+	
+	
+	public int getMaxX(ArrayList<Nodo> a){
+		
+		int max = -1;
+		
+		for(int i=0;i<a.size();i++){
+			if(a.get(i).x > max){
+				max = a.get(i).x;
+			}
+		}
+		return max;
+	}
+	
+
+	public static boolean isValid(int i, int j) {
+		if(i >= 0 && i < 1048576  && j >= 0 && j < 16384)
+			return true;
+		return false;
+	}
+	
+	
+	public ArrayList<Nodo> bfs(int i, int j,Sheet sheetL,Sheet sheetV) {	
+		
+		Row r = sheetL.getRow(i);
+		Cell c = r.getCell(j);
+		
+		ArrayList<Nodo> res = new ArrayList<Nodo>();
+ 		Row rv = sheetV.getRow(i);
+		Cell cv = rv.createCell(j);
+		res.add(new Nodo(i, j));
+		cv.setCellValue(1);
+		Queue<Cell> q =   new LinkedList<Cell>();
+		q.add(c);
+		while (!q.isEmpty()) {
+			
+			Cell u = q.peek();
+			q.poll();
+			for(int k = 0; k < 4; k++) {
+				int vx = u.getRowIndex()    + xs[k];
+				int vy = u.getColumnIndex() + ys[k];
+				
+				if(isValid(vx, vy)){
+					r = sheetL.getRow(vx);
+					if(r==null) continue;
+					
+					c = r.getCell(vy);
+					if (c !=null && c.getCellType()!=Cell.CELL_TYPE_BLANK ) {
+						rv = sheetV.getRow(vx);
+						if(rv==null){
+							rv=sheetV.createRow(vx);
+							cv=rv.createCell(vy);
+							cv.setCellValue(1);
+							res.add(new Nodo(vx, vy));
+							q.add(c);
+						}else{
+
+							cv = rv.getCell(vy);
+							if(cv == null) {
+								cv = rv.createCell(vy);
+								cv.setCellValue(1);
+								res.add(new Nodo(vx, vy));
+								q.add(c);
+							}
+						}
+					}						
+				}
+			}
+		}
+		return res;
+	}
+
+	public void recorrerHoja(Workbook libro, Workbook visit) throws IOException {
+		Sheet sheetL =  libro.getSheetAt(0);
+		Sheet sheetV =  visit.getSheetAt(0);
+		
+		int nmax = sheetL.getLastRowNum()+1;
+		
+ 		for (int i = 0; i <nmax; i++) {
+        	Row r =  sheetL.getRow(i);
+        	if(r==null) continue;
+        	
+        	Row rv = sheetV.getRow(i);
+        	if(rv ==null)
+        		rv = sheetV.createRow(i);
+        	
+        	for (int j = 0; j <r.getLastCellNum(); j++) {
+	    		Cell c = r.getCell(j);
+	    		Cell cv = rv.getCell(j);
+	    	
+	            if(c != null && cv==null ) { 
+	            	if(c.getCellType()==Cell.CELL_TYPE_BLANK)
+	            		continue;
+	            	ArrayList<Nodo> res = bfs( i, j,sheetL,sheetV);
+	            	
+	            	Collections.sort(res);
+	            	int m = res.size(); 	
+	            	
+	            	
+	            	String fins  = dimens.split(":")[1];
+	    		
+	    			int finy = toInt(stractColumn(fins))-1;
+	            	int fini = Integer.parseInt(capturarNumeros(dimens.split(":")[1]))-1;;
+	            	
+	            	
+	            	int wf= res.get(m-1).x;
+	    			int wi = res.get(0).x;
+	    			
+	            	listaX.add( new Nodo(  j, wf-wi+1  ) );
+	            	
+	            	int containersV = getAmountContainersV(i, 0, finy ,sheetV);
+	            	
+	            	Nodo containersH = getAmountContainersH(i, j, fini, sheetV);
+	            	
+	            	if(m>1){
+	            		String key =res.get(0).x +"-"+ res.get(0).y+":" + res.get(m-1).x +"-" + res.get(m-1).y ;
+	            	            	
+	            		String inicio = key.split(":")[0];
+	                    String fin  = key.split(":")[1];
+	                  
+	                    Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
+	        			containerTablas.setName("Container"+ (nTablas++));
+	        		
+	         			Nodo coordinates=getCoordinates2(inicio);
+	         			Nodo size = getSizes2(inicio, fin);
+	         			containerTablas.setWidth(new Integer(size.x + 20));
+	        			containerTablas.setHeight(new Integer(size.y + 40));
+	        			
+	        				
+	        			int xs=0;
+	        			
+	        			if(containersH.x==0){
+	        				xs = coordinates.x - nx + 40;
+	        			}else{
+	        				xs= (containersH.y*100 + 40*containersH.x) + (40*containersH.x)  + 40;
+	        			}
+	        			containerTablas.setPositionX(new Integer(xs));
+	        			containerTablas.setPositionY(new Integer(coordinates.y -ny + (40*containersV)  + 25));
+	         			
+	         			Nodo relativo = getCoordinates2(res.get(0).x +"-" +res.get(0).y);
+	         			int relativex = relativo.x ;
+	         			int relativey = relativo.y ;
+	         			
+	         			for(int k=0;k<m;k++){
+	         				int x = res.get(k).x;
+	         				int y = res.get(k).y;
+	         				Row rr = sheetL.getRow(x);
+	         				Cell  cc = rr.getCell(y);
+	         				String e = getCellValue(cc);
+	         				Nodo cor = getCoordinates2(x+"-"+y);
+	         				LabelView label = ConcretaFactory.eINSTANCE.createLabelView();
+	         				label.setName(e);
+	         				label.setId("label"+ (char)(k+64));
+	         				label.setWidth(new Integer(-1));
+		        			label.setHeight(new Integer(-1));
+		        			label.setPositionX(new Integer(cor.x  - relativex + 20 ));
+		        			label.setPositionY(new Integer(cor.y  - relativey + 10));
+	         				containerTablas.getListIndividualElementDataForm().add(label);
+	         			}
+	         			interface1.getListGraphicalContainer().add(containerTablas);
+	            	}
+	            }
+	        }
+	    }
+ 		reOrganizarTablas(sheetV);
+		FileOutputStream fos = new FileOutputStream("/VisitadosLibro1.xlsx");
+	    visit.write(fos);
+	    visit.close();
+	    fos.close();
+	}
+	
+	
+	public int getAmountContainersV(int i, int j,int finY , Sheet sheetV){
+		
+		Row rv;
+		int res =0;
+		
+		int max = -1;
+		
+		for(int l=j ; l <= finY; l++){
+			
+			res=0;
+			for(int k=0;k<i;k++){
+				rv = sheetV.getRow(k);
+				if(rv==null)
+					continue;
+				Cell cv = rv.getCell(l);
+				if(cv!=null){
+					res++;
+					while(cv!=null){
+						k++;
+						rv = sheetV.getRow(k);
+						if(rv==null)
+							break;
+						cv = rv.getCell(l);
+					}
+				}
+			}
+			
+			max = Math.max(max, res);
+		}
+		
+		return max;
+	}
+	
+	
+	public Nodo getAmountContainersH(int i, int j, int fini ,Sheet sheetV){	
+		Row rv;
+		int res =0;
+		int cantidadFilas=0;
+		
+		int max = -1;
+		int maxF = -1;
+		for(int l = i ; l<= fini ;l++){
+			res=0;
+			cantidadFilas=0;
+			
+			for(int k=0;k<j;k++){
+				rv = sheetV.getRow(l);
+				if(rv==null)
+					continue;
+				Cell cv = rv.getCell(k);
+				if(cv!=null){
+					res++;
+					while(cv!=null){
+						k++;
+						cantidadFilas++;
+						rv = sheetV.getRow(l);
+						if(rv==null)
+							break;
+						cv = rv.getCell(k);
+					}
+				}
+				
+			}
+			
+			if(res>max){
+				max = res;
+				maxF = cantidadFilas;
+			}
+		}
+		
+		Nodo x = new Nodo(max, maxF);
+		return x;
+	}
+
+	public Nodo getCoordinates(String inicio){
+		Nodo res;
+		
+		int wi = toInt(stractColumn(inicio))-1;
+		int w = (wi) *80;
+		int h = ( Integer.parseInt(capturarNumeros(inicio))-1)*20;
+		res = new Nodo(w, h);
+		return res;
+	}
+	
+	public String capturarNumeros(String s){
+		int i=0;
+		for(;i<s.length();i++){
+			if( s.charAt(i) >= 65 && s.charAt(i)<=90){
+				continue;
+			}else{
+				break;
+			}
+		}
+		return s.substring(i);
+	}
+	
+	public Nodo getSizes(String inicio,String fin){
+		Nodo res;
+		int wf= toInt(stractColumn(fin))-1;
+		int wi = toInt(stractColumn(inicio))-1;
+		
+		int w = ( wf - wi + 1)*100;
+		int h = ( Integer.parseInt(capturarNumeros(fin)) - Integer.parseInt(capturarNumeros(inicio)) + 1)*20;  
+		res = new Nodo(w, h);
+		return res;
+	}
+	
+	public String stractColumn(String s){
+		
+		String res="";
+		for(int i=0;i<s.length();i++){
+			if( s.charAt(i) >= 65 && s.charAt(i)<=90){
+				res+= s.charAt(i);
+			}else{
+				break;
+			}
+		}
+		
+		
+		return res;
+	}
+	
+	public  Nodo getSizes2(String inicio,String fin){
+		Nodo res;
+		
+		String ws1 = inicio.split("-")[1];
+		String hs1 = inicio.split("-")[0];
+		
+		String ws2 = fin.split("-")[1];
+		String hs2 = fin.split("-")[0];
+		
+		int w = ( (Integer.parseInt(ws2))  -  (Integer.parseInt(ws1)) + 1 )*100;
+		int h = ( Integer.parseInt(hs2) - Integer.parseInt((hs1)) + 1)*20 ;  
+		res = new Nodo(w, h);
+		return res;
+	}
+	
+	public  Nodo getCoordinates2(String inicio){
+		Nodo res;
+		String ws = inicio.split("-")[1];
+		String hs = inicio.split("-")[0];
+		int w = Integer.parseInt(ws) *80;
+		int h = Integer.parseInt(hs) *20;
+		res = new Nodo(w, h);
+		return res;
+	}
+	
+	
+	public int toInt(String s){
+		int res =0;
+		int m = s.length()-1;
+		int e=0;
+		for(int i=m;i>=0;i--){
+			res += ( (s.charAt(i) - 64))*pow(26,e);
+			e++;
+		}
+		return res;
+	}
+	
+	public int pow(int b,int e){
+		int res =1;
+		
+		for(int i=0;i<e;i++){
+			res*=b;
+		}
+		return res;
+	}
+	
+	
+	public String getCellValue(Cell cell){
+		 int cel_Type = cell.getCellType();                           
+	     String res="";
+		 switch(cel_Type){
+	     	case 0: res+=cell.getNumericCellValue();
+	             	break;
+	     	case 1: res+=cell.getStringCellValue();
+	     			break;
+	     	case 4:res+=cell.getBooleanCellValue();
+	             	break;
+	     	case 3:res+="";
+	     			break; 
+	     }
+		 return res;
+	}	
+	public Diagram createDiagram(){
+		//create the diagram
+		int diagramVID = MetamodelodataformVisualIDRegistry.getDiagramVisualID(dfDiagram);
+		if (diagramVID != DataForm_DiagramEditPart.VISUAL_ID) {
+			// error
+		}
+		Diagram diagram = ViewService.createDiagram(dfDiagram,DataForm_DiagramEditPart.MODEL_ID,MetamodelodataformDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+
+		// save the ressource
+		try {
+			dfDiagram.eResource().save(MetamodelodataformDiagramEditorUtil.getSaveOptions());
+		} catch (IOException e) {
+			MetamodelodataformDiagramEditorPlugin.getInstance().logError(
+					"Save operation failed for: " + dfDiagram.eResource(), e); //$NON-NLS-1$
+		}
+//		refresh();
+		return diagram;
+	}
+	
+	
+	public void openDiagram(){
+		//open the diagram
+		try {
+            //find the diagram in the resource
+			Diagram diag = null;
+			EList<EObject> resources = dfDiagram.eResource().getContents();
+			for (EObject eObject : resources) {
+				if(eObject instanceof Diagram){
+					if(((Diagram)eObject).getElement()!=null  && ((Diagram)eObject).getElement().equals(dfDiagram)){
+						diag = (Diagram)eObject;
+						break;
+					}
+				}
+			}
+                   //open it
+			org.eclipse.emf.common.util.URI uri = EcoreUtil.getURI(diag);
+			IWorkbenchPage page = PlatformUI.getWorkbench()	.getActiveWorkbenchWindow().getActivePage();
+			page.openEditor(new URIEditorInput(uri,dfDiagram.getName()),  MetamodelodataformDiagramEditor.ID);
+			
+			
+		} catch (PartInitException e) {
+			MetamodelodataformDiagramEditorPlugin.getInstance().logError(
+					"Unable to open editor", e); //$NON-NLS-1$
+		}
+	}
+	
+}
