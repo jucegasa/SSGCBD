@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Diagram"/>
 <fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformVisualIDRegistry"/>
-<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.diagram.core.services.ViewService"/>
-<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.DataForm_Diagram"/>
 <fullyQualifiedTypeName name="tooldataform.diagram.edit.parts.DataForm_DiagramEditPart"/>
 <fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformDiagramEditorPlugin"/>
 <fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformDiagramEditorUtil"/>
@@ -16,6 +13,25 @@
 <fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformDiagramEditor"/>
 <fullyQualifiedTypeName name="org.eclipse.emf.common.ui.URIEditorInput"/>
 <fullyQualifiedTypeName name="org.eclipse.ui.PartInitException"/>
-<fullyQualifiedTypeName name="reportes.view.GeneracionDF"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Diagram"/>
+<fullyQualifiedTypeName name="reportes.view.Nodo"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array"/>
+<fullyQualifiedTypeName name="reportes.view.GeneracionDF"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="org.eclipse.emf.edit.provider.ChildCreationExtenderManager"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.LayoutConstraint"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Node"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.diagram.core.services.ViewService"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.NotationFactory"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Diagram"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.DataForm_Diagram"/>
+<fullyQualifiedTypeName name="reportes.view.DataformDiagramGeneration"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Interface"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Node"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.DecorationNode"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.BasicCompartment"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Bounds"/>
 </qualifiedTypeNameHistroy>

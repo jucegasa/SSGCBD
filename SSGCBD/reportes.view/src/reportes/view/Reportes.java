@@ -119,7 +119,8 @@ public class Reportes extends ViewPart {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				g.generateDiagram();
+				DataformDiagramGeneration dfDG = new DataformDiagramGeneration(g.mf);
+				dfDG.generateDiagram();
 			}
 		});
 		btnGenerarDiagrama.setBounds(330, 30, 107, 25);

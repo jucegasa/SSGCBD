@@ -5,8 +5,6 @@ import gestionmodelosconsultas.compilador.CompiladorProyeccion;
 import gestionmodelosconsultas.modeloconsultas.model.EADiagram;
 import gestionmodelosconsultas.modeloconsultas.que.Documento;
 import gestionmodelosconsultas.modeloconsultas.que.QueFactory;
-import gestionmodelosconsultas.modeloconsultas.resultset.Resultado;
-import gestionmodelosconsultas.modeloconsultas.resultset.resultque.impl.DocumentoImpl;
 
 import java.util.ArrayList;
 

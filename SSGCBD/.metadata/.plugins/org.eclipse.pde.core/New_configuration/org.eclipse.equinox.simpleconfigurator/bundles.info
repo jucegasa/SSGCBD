@@ -783,11 +783,6 @@ patrones,1.0.0,file:/E:/Eclipse%20SSGCBD/plugins/patrones_1.0.0.jar,4,false
 patrones.edit,1.0.0,file:/E:/Eclipse%20SSGCBD/plugins/patrones.edit_1.0.0.jar,4,false
 patrones.editor,1.0.0,file:/E:/Eclipse%20SSGCBD/plugins/patrones.editor_1.0.0.jar,4,false
 patrones.tests,1.0.0,file:/E:/Eclipse%20SSGCBD/plugins/patrones.tests_1.0.0.jar,4,false
-pruebamemorandos,1.0.0,file:/E:/SSGCBD/SSGCBD/pruebamemorandos/,4,false
-pruebamemorandos.edit,1.0.0.qualifier,file:/E:/SSGCBD/SSGCBD/pruebamemorandos.edit/,4,false
-pruebamemorandos.editor,1.0.0.qualifier,file:/E:/SSGCBD/SSGCBD/pruebamemorandos.editor/,4,false
-pruebamemorandos.tests,1.0.0.qualifier,file:/E:/SSGCBD/SSGCBD/pruebamemorandos.tests/,4,false
-pruebamemorandos.view,1.0.0.qualifier,file:/E:/SSGCBD/SSGCBD/pruebamemorandos.view/,4,false
 reportes,1.0.0,file:/E:/SSGCBD/SSGCBD/reportes/,4,false
 reportes.edit,1.0.0,file:/E:/SSGCBD/SSGCBD/reportes.edit/,4,false
 reportes.editor,1.0.0,file:/E:/SSGCBD/SSGCBD/reportes.editor/,4,false

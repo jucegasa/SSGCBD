@@ -4,11 +4,6 @@ import tooldataform.ModelFactory;
 import tooldataform.core.CoreFactory;
 import tooldataform.core.Domain_Diagram;
 import tooldataform.core.Project;
-import tooldataform.diagram.edit.parts.DataForm_DiagramEditPart;
-import tooldataform.diagram.part.MetamodelodataformDiagramEditor;
-import tooldataform.diagram.part.MetamodelodataformDiagramEditorPlugin;
-import tooldataform.diagram.part.MetamodelodataformDiagramEditorUtil;
-import tooldataform.diagram.part.MetamodelodataformVisualIDRegistry;
 import tooldataform.formmodel.concreta.ColumView;
 import tooldataform.formmodel.concreta.ConcretaFactory;
 import tooldataform.formmodel.concreta.Container;
@@ -32,15 +27,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
-import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -52,11 +39,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
+
 
 public class GeneracionDF {
 
@@ -69,19 +56,24 @@ public class GeneracionDF {
 	 Interface interface1;
 	 String ruta;
 	 String absolutePath;
+	 
 	 ArrayList<String> listaTablas;
 	 ArrayList<String> listaCombos;
-	  
+	 ArrayList<Nodo> listaX;
+	 
+	 String dimens;
 	 int nTablas;
 	 int nx;
 	 int ny;
 	 int xs[] = {1,-1, 0, 0};
 	 int ys[] = {0,0, 1, -1};
 	
+	
 	 public GeneracionDF(String ruta,String as){
 		 this.ruta = ruta+"/xl/";
 		 this.absolutePath = as;
 	 }
+	
 	
 	public void generate() throws ParserConfigurationException, SAXException, IOException, EncryptedDocumentException, InvalidFormatException{
 		Init();
@@ -91,15 +83,15 @@ public class GeneracionDF {
 		salvarDF();
 	}
 	
-	public void generateDiagram() {
-		
-		salvarDiagram(createDiagram());
-		openDiagram();
-	}
-	
+	/**
+	 * Metodo que inicializa la produccion del Dataform
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
 	public void Init() throws ParserConfigurationException, SAXException, IOException{
 		
-		String dimens = getDimention();
+		dimens = getDimention();
 		String inicio = dimens.split(":")[0];
 		String fin = 	dimens.split(":")[1];
 		Nodo coordinate = getCoordinates(inicio);
@@ -131,6 +123,7 @@ public class GeneracionDF {
 		mf.getListProyecto().add(project);
 		listaTablas = new ArrayList<String>();
 		listaCombos = new ArrayList<String>();
+		listaX = new ArrayList<Nodo>();
 		
 	}
 	
@@ -184,7 +177,7 @@ public class GeneracionDF {
 		
 		InputStream is = new FileInputStream(absolutePath);
         Workbook libro = WorkbookFactory.create(is);
-        is = new FileInputStream("C:/Users/admin/Desktop/VisitadosLibro1.xlsx");
+        is = new FileInputStream("/VisitadosLibro1.xlsx");
         Workbook visit = WorkbookFactory.create(is);  
         getOrderViewModel(libro);
         recorrerHoja(libro, visit);
@@ -220,6 +213,7 @@ public class GeneracionDF {
 		nTablas = n;
 		Document doc;
 		for(int i=1;i<=n;i++){
+			
 			Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
 			containerTablas.setName("Table"+i);
 			doc = getXML(ruta +"tables/table"+i+".xml");
@@ -235,6 +229,12 @@ public class GeneracionDF {
 			
 			String inicio = s.split(":")[0];
 			String fin = 	s.split(":")[1];
+			
+			int wf= toInt(stractColumn(fin))-1;
+			int wi = toInt(stractColumn(inicio))-1;
+			
+			listaX.add( new Nodo (toInt(stractColumn(inicio))-1, wf-wi+1)  );
+			
 			Nodo coordinates= getCoordinates(inicio);
 			Nodo size = getSizes(inicio, fin);
 	
@@ -263,7 +263,7 @@ public class GeneracionDF {
 			containerTablas.setWidth(new Integer(size.x + 40));
 			containerTablas.setHeight(new Integer(size.y+ 40));
 			containerTablas.setPositionX(new Integer(coordinates.x - nx + 40 ));
-			containerTablas.setPositionY(new Integer(coordinates.y - ny + 40));
+			containerTablas.setPositionY(new Integer(coordinates.y - ny + 25));
 			containerTablas.getListGraphicalContainer().add(tb);
 			tooldataform.formmodel.concreta.Containment c = ConcretaFactory.eINSTANCE.createContainment();
 			c.setAMultiplicidad(tooldataform.pmoo.Cardinalidad.N);
@@ -296,19 +296,7 @@ public class GeneracionDF {
 
 	}
 	
-	public void salvarDiagram(Diagram diagram){
-		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("platform:/resource/GestionConsultas/domain/model.tooldataform_diagram");
-		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
-		resource.getContents().add(diagram);
-		try {
-			resource.save(java.util.Collections.EMPTY_MAP);
-			
-		} catch (java.io.IOException e) {
-			e.printStackTrace();
-		}
-
-	}
+	
 	
 	public Document getXML(String url)throws ParserConfigurationException, SAXException, IOException{
 		File fXmlFile = new File(url);
@@ -337,12 +325,62 @@ public class GeneracionDF {
         		}
         	}
         }
-        FileOutputStream fos = new FileOutputStream("C:/Users/admin/Desktop/VisitadosLibro1.xlsx");
+        FileOutputStream fos = new FileOutputStream("/VisitadosLibro1.xlsx");
 	    visit.write(fos);
 	    visit.close();
 	    fos.close();
 	}
 	
+	public void reOrganizarTablas(Sheet sheetV){
+		
+		for(int i=0;i<listaTablas.size();i++){
+			String inicio = listaTablas.get(i).split(":")[0], fin = listaTablas.get(i).split(":")[1],fins = dimens.split(":")[1];
+				
+			int j = Integer.parseInt(capturarNumeros(inicio))-1;
+	
+			int filaFinalContenedorTabla = Integer.parseInt(capturarNumeros(fin))-1;
+			
+			int finj = toInt(stractColumn(inicio))-1;
+			
+			int fini = Integer.parseInt(capturarNumeros(fins))-1;
+
+			Nodo coordinates  = getCoordinates(inicio);
+			
+			int containersV = getAmountContainersV (j, 0 , fini,sheetV);
+       	
+			int YO = interface1.getListGraphicalContainer().get(i).getPositionY();
+			
+			Nodo containersH = getAmountContainersH(j,finj, filaFinalContenedorTabla , sheetV);
+					
+			int xs=0;
+			
+			if(containersH.x==0){
+				xs = coordinates.x - nx + 40;
+			}else{
+				xs= (containersH.y*100 + 40*containersH.x) + (40*containersH.x)  + 40;
+			}
+		
+			interface1.getListGraphicalContainer().get(i).setPositionX( xs );
+			interface1.getListGraphicalContainer().get(i).setPositionY(YO + (40*containersV));
+		}
+	}
+	
+	
+	
+	
+	public int getMaxX(ArrayList<Nodo> a){
+		
+		int max = -1;
+		
+		for(int i=0;i<a.size();i++){
+			if(a.get(i).x > max){
+				max = a.get(i).x;
+			}
+		}
+		return max;
+	}
+	
+
 	public static boolean isValid(int i, int j) {
 		if(i >= 0 && i < 1048576  && j >= 0 && j < 16384)
 			return true;
@@ -425,23 +463,47 @@ public class GeneracionDF {
 	            	
 	            	Collections.sort(res);
 	            	int m = res.size(); 	
+	            	
+	            	
+	            	String fins  = dimens.split(":")[1];
+	    		
+	    			int finy = toInt(stractColumn(fins))-1;
+	            	int fini = res.get(m-1).x;
+	            	
+	            	
+	            	int wf= res.get(m-1).x;
+	    			int wi = res.get(0).x;
+	    			
+	            	listaX.add( new Nodo(  j, wf-wi+1  ) );
+	            	
+	            	int containersV = getAmountContainersV(i, 0, finy ,sheetV);
+	            	
+	            	Nodo containersH = getAmountContainersH(i, j, fini, sheetV);
+	            	
 	            	if(m>1){
 	            		String key =res.get(0).x +"-"+ res.get(0).y+":" + res.get(m-1).x +"-" + res.get(m-1).y ;
-	            		
-	            	
+	            	            	
 	            		String inicio = key.split(":")[0];
 	                    String fin  = key.split(":")[1];
-	                    
-	                    
+	                  
 	                    Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
 	        			containerTablas.setName("Container"+ (nTablas++));
 	        		
 	         			Nodo coordinates=getCoordinates2(inicio);
 	         			Nodo size = getSizes2(inicio, fin);
-	         			containerTablas.setWidth(new Integer(size.x + 40));
+	         			containerTablas.setWidth(new Integer(size.x + 20));
 	        			containerTablas.setHeight(new Integer(size.y + 40));
-	        			containerTablas.setPositionX(new Integer(coordinates.x - nx + 40));
-	        			containerTablas.setPositionY(new Integer(coordinates.y -ny + 40));
+	        			
+	        				
+	        			int xs=0;
+	        			
+	        			if(containersH.x==0){
+	        				xs = coordinates.x - nx + 40;
+	        			}else{
+	        				xs= (containersH.y*100 + 40*containersH.x) + (40*containersH.x)  + 40;
+	        			}
+	        			containerTablas.setPositionX(new Integer(xs));
+	        			containerTablas.setPositionY(new Integer(coordinates.y -ny + (40*containersV)  + 25));
 	         			
 	         			Nodo relativo = getCoordinates2(res.get(0).x +"-" +res.get(0).y);
 	         			int relativex = relativo.x ;
@@ -459,8 +521,8 @@ public class GeneracionDF {
 	         				label.setId("label"+ (char)(k+64));
 	         				label.setWidth(new Integer(-1));
 		        			label.setHeight(new Integer(-1));
-		        			label.setPositionX(new Integer(cor.x  - relativex + 15 ));
-		        			label.setPositionY(new Integer(cor.y  - relativey + 15));
+		        			label.setPositionX(new Integer(cor.x  - relativex + 20 ));
+		        			label.setPositionY(new Integer(cor.y  - relativey + 10));
 	         				containerTablas.getListIndividualElementDataForm().add(label);
 	         			}
 	         			interface1.getListGraphicalContainer().add(containerTablas);
@@ -468,18 +530,94 @@ public class GeneracionDF {
 	            }
 	        }
 	    }
-		FileOutputStream fos = new FileOutputStream("C:/Users/admin/Desktop/VisitadosLibro1.xlsx");
+ 		reOrganizarTablas(sheetV);
+		FileOutputStream fos = new FileOutputStream("/VisitadosLibro1.xlsx");
 	    visit.write(fos);
 	    visit.close();
 	    fos.close();
 	}
 	
+	
+	public int getAmountContainersV(int i, int j,int finY , Sheet sheetV){
+		
+		Row rv;
+		int res =0;
+		
+		int max = -1;
+		
+		for(int l=j ; l <= finY; l++){
+			
+			res=0;
+			for(int k=0;k<i;k++){
+				rv = sheetV.getRow(k);
+				if(rv==null)
+					continue;
+				Cell cv = rv.getCell(l);
+				if(cv!=null){
+					res++;
+					while(cv!=null){
+						k++;
+						rv = sheetV.getRow(k);
+						if(rv==null)
+							break;
+						cv = rv.getCell(l);
+					}
+				}
+			}
+			
+			max = Math.max(max, res);
+		}
+		
+		return max;
+	}
+	
+	
+	public Nodo getAmountContainersH(int i, int j, int fini ,Sheet sheetV){	
+		Row rv;
+		int res =0;
+		int cantidadFilas=0;
+		
+		int max = -1;
+		int maxF = -1;
+		for(int l = i ; l<= fini ;l++){
+			res=0;
+			cantidadFilas=0;
+			
+			for(int k=0;k<j;k++){
+				rv = sheetV.getRow(l);
+				if(rv==null)
+					continue;
+				Cell cv = rv.getCell(k);
+				if(cv!=null){
+					res++;
+					while(cv!=null){
+						k++;
+						cantidadFilas++;
+						rv = sheetV.getRow(l);
+						if(rv==null)
+							break;
+						cv = rv.getCell(k);
+					}
+				}
+				
+			}
+			
+			if(res>max){
+				max = res;
+				maxF = cantidadFilas;
+			}
+		}
+		
+		Nodo x = new Nodo(max, maxF);
+		return x;
+	}
+
 	public Nodo getCoordinates(String inicio){
 		Nodo res;
 		
 		int wi = toInt(stractColumn(inicio))-1;
-		int w = (wi) *120;
-		int h = ( Integer.parseInt(capturarNumeros(inicio))-1)*25;
+		int w = (wi) *80;
+		int h = ( Integer.parseInt(capturarNumeros(inicio))-1)*20;
 		res = new Nodo(w, h);
 		return res;
 	}
@@ -541,8 +679,8 @@ public class GeneracionDF {
 		Nodo res;
 		String ws = inicio.split("-")[1];
 		String hs = inicio.split("-")[0];
-		int w = Integer.parseInt(ws) *120;
-		int h = Integer.parseInt(hs) *25;
+		int w = Integer.parseInt(ws) *80;
+		int h = Integer.parseInt(hs) *20;
 		res = new Nodo(w, h);
 		return res;
 	}
@@ -583,53 +721,8 @@ public class GeneracionDF {
 	     			break; 
 	     }
 		 return res;
-	}	
-	public Diagram createDiagram(){
-		//create the diagram
-		int diagramVID = MetamodelodataformVisualIDRegistry.getDiagramVisualID(dfDiagram);
-		if (diagramVID != DataForm_DiagramEditPart.VISUAL_ID) {
-			// error
-		}
-		Diagram diagram = ViewService.createDiagram(dfDiagram,DataForm_DiagramEditPart.MODEL_ID,MetamodelodataformDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
-
-		// save the ressource
-		try {
-			dfDiagram.eResource().save(MetamodelodataformDiagramEditorUtil.getSaveOptions());
-		} catch (IOException e) {
-			MetamodelodataformDiagramEditorPlugin.getInstance().logError(
-					"Save operation failed for: " + dfDiagram.eResource(), e); //$NON-NLS-1$
-		}
-//		refresh();
-		return diagram;
 	}
 	
 	
-	public void openDiagram(){
-		//open the diagram
-
-		try {
-                //find the diagram in the resource
-			Diagram diag = null;
-			EList<EObject> resources = dfDiagram.eResource().getContents();
-			for (EObject eObject : resources) {
-				if(eObject instanceof Diagram){
-					if(((Diagram)eObject).getElement()!=null  && ((Diagram)eObject).getElement().equals(dfDiagram)){
-						diag = (Diagram)eObject;
-						break;
-					}
-				}
-			}
-                   //open it
-			org.eclipse.emf.common.util.URI uri = EcoreUtil.getURI(diag);
-			IWorkbenchPage page = PlatformUI.getWorkbench()	.getActiveWorkbenchWindow().getActivePage();
-			page.openEditor(new URIEditorInput(uri,dfDiagram.getName()),  MetamodelodataformDiagramEditor.ID);
-			
-			
-		} catch (PartInitException e) {
-			MetamodelodataformDiagramEditorPlugin.getInstance().logError(
-					"Unable to open editor", e); //$NON-NLS-1$
-		}
+	
 }
-	
-	}
-
