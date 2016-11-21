@@ -28,10 +28,20 @@
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Diagram"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.DataForm_Diagram"/>
-<fullyQualifiedTypeName name="reportes.view.DataformDiagramGeneration"/>
-<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Interface"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Node"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.DecorationNode"/>
-<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.BasicCompartment"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Bounds"/>
+<fullyQualifiedTypeName name="reportes.view.DataformGeneration"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.containers.GraphicalContainer"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Container"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Interface"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TableView"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ComboView"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.LabelView"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TextView"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ItemCombo"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ColumView"/>
+<fullyQualifiedTypeName name="reportes.view.DataformDiagramGeneration"/>
+<fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.BasicCompartment"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.GraphicalIndividualEement"/>
 </qualifiedTypeNameHistroy>

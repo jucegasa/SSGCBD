@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;reportes.view/src/reportes/view/Nodo.java&apos; to &apos;Coordinate.java&apos;" description="Rename resource &apos;Nodo.java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/reportes/view/Nodo.java" name="Coordinate.java" stamp="1479756594837" updateReferences="true"/>
+</session>
