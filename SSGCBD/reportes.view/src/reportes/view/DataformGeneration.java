@@ -27,6 +27,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -34,6 +35,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import java.awt.font.NumericShaper.Range;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -41,7 +43,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class DataformGeneration{
@@ -139,13 +144,17 @@ public class DataformGeneration{
 	  * de una celda. Se necesita para el BFS
 	  */
 	 protected int xs[] = {1,-1, 0, 0};
-	 
+	 	 
 	 /**
 	  * Arreglo que contiene las posibles adyacencias en Y
 	  * de una celda. Se necesita para el BFS
 	  */
 	protected int ys[] = {0,0, 1, -1};
 	
+	protected int visit[][];
+	
+	
+	 protected ArrayList<Coordinate> mergedRegions[];
 	//--------------------------------------------------------
 	//Constructor
 	//--------------------------------------------------------
@@ -188,6 +197,8 @@ public class DataformGeneration{
 		salvarDF();
 	}
 	
+	
+	
 	/**
 	 * Metodo que sirve para setear los bounds de un contenedor en el dataform
 	 * @param graphicalContainer contenedor al cual se le quiere setear los bounds
@@ -206,7 +217,7 @@ public class DataformGeneration{
 	/**
 	 * Metodo que sirve para setear los atributos de una relacion
 	 * @param c relacion de contaiment a la cual se le setearean los atributos
-	 * @param i i dentificador de la tabla que es dueña de la relacion
+	 * @param i i dentificador de la tabla que es dueï¿½a de la relacion
 	 */
 	public void setAtributesContaimentRelation(tooldataform.formmodel.concreta.Containment c, int i){
 		c.setAMultiplicidad(tooldataform.pmoo.Cardinalidad.N);
@@ -235,6 +246,13 @@ public class DataformGeneration{
 		
 		String inicio = dimens.split(":")[0];
 		String fin = 	dimens.split(":")[1];
+		
+		
+		
+		int w = toInt(stractColumn(fin));
+		int h = ( Integer.parseInt(capturarNumeros(fin)));
+		System.out.println(w + " " + h);
+		visit = new int[h + 1][w +1 ];
 		
 		//Se obtienen las coordenandas relativas
 		Coordinate coordinate = getCoordinates(inicio);
@@ -278,6 +296,7 @@ public class DataformGeneration{
 		 */
 		listTables = new ArrayList<String>();
 		listComboBox = new ArrayList<String>();
+	
 	}
 	
 	/**
@@ -287,9 +306,8 @@ public class DataformGeneration{
 	public void getOrderViewModel(Workbook libro){
 		
 		/*Se obtiene la hoja del libro 
-		 *el cual se analizará
+		 *el cual se analizarï¿½
 		 */
-		
 		Sheet sheetL =  libro.getSheetAt(0);
 		
 		/*Se obtiene la ultima fila a analizar
@@ -357,15 +375,87 @@ public class DataformGeneration{
 		InputStream is = new FileInputStream(absolutePath);
         Workbook libro = WorkbookFactory.create(is);
         
-        //Se carga el excel en donde se marcaran los futuros componentes
-        is = new FileInputStream("/VisitadosLibro1.xlsx");
-        Workbook visit = WorkbookFactory.create(is);  
+        identifyMergedRegions(libro);
         
         //Se obtienen los combobox
         getOrderViewModel(libro);
         
         //Se recorre la hoja para extraer la futura 
-        recorrerHoja(libro, visit);
+        recorrerHoja(libro);
+	}
+	
+	public void identifyMergedRegions(Workbook libro){
+		
+		Sheet sheetL =  libro.getSheetAt(0);
+		List<CellRangeAddress> sortedRegions = sheetL.getMergedRegions();
+		Collections.sort(sortedRegions, new rangeComparator());
+		
+		InitMergedRegions(sortedRegions);
+		
+		
+		for(int i=0;i<sortedRegions.size();i++){
+			CellRangeAddress range = sortedRegions.get(i);
+			int  j = range.getFirstRow();
+			int  l = range.getFirstColumn();
+			int  h = range.getLastColumn();
+			
+			if(visit[j][l] == 0){
+				//exploreMergedRegios(range,visit.getSheetAt(0));
+			}
+			
+		}
+	}
+	
+	public void exploreMergedRegios(int i,int l,int h){
+		
+		//int i = range.getFirstRow();
+		//int l = range.getFirstColumn();
+		//int h = range.getLastColumn();
+		
+		if(!isCellRange(i+1,l)){ 
+			//termina
+		}
+		
+		for(int j=0;j<=mergedRegions[i+1].size();j++){
+			
+			if( mergedRegions[i+1].get(j).getX()>=l &&  mergedRegions[i+1].get(j).getY()<=h ){
+				
+				if(visit[i+1][mergedRegions[i+1].get(j).getX()] == 0){ 
+					//sevisita
+					exploreMergedRegios( i +1, mergedRegions[i+1].get(j).getX() , mergedRegions[i+1].get(j).getY());
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	
+	public void InitMergedRegions(List<CellRangeAddress> sortedRegions ){
+		
+		if(sortedRegions.size()==0)
+			return;
+		mergedRegions = new ArrayList [sortedRegions.get(sortedRegions.size()-1).getLastRow()+1]; 
+		for(int i =0 ; i< mergedRegions.length;i++){
+			mergedRegions[i] = new ArrayList<Coordinate>();
+		}
+		
+		System.out.println("Merged Regions");;
+		for(int i=0;i< sortedRegions.size();i++){
+			CellRangeAddress range = sortedRegions.get(i);
+			mergedRegions[range.getFirstRow() ].add(new Coordinate(range.getFirstColumn(), range.getLastColumn()));
+		}	
+	}
+	
+	public boolean isCellRange(int i, int l){
+		if(mergedRegions[i].size()!=0){
+			for(int j=0;j<mergedRegions[i].size();j++){
+				if(mergedRegions[i].get(j).getX()< l && mergedRegions[i].get(j).getY() > l )
+					return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -420,7 +510,7 @@ public class DataformGeneration{
 	 * Este metodo se encarga de explorar el xml del excel
 	 * y se encarga de extraer las propiedades de cada tabla
 	 * que se encuentran en el y agregar las tablas a la 
-	 * producción del datafrom
+	 * producciï¿½n del datafrom
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
@@ -435,7 +525,7 @@ public class DataformGeneration{
 		Document doc;
 		for(int i=1;i<=n;i++){
 			
-			//Se crea el container que contendrá la tabla
+			//Se crea el container que contendrï¿½ la tabla
 			Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
 			containerTablas.setName("Table"+i);
 			
@@ -483,7 +573,7 @@ public class DataformGeneration{
 			}
 			
 			//Se setean las dimensiones y posicion de la tabla
-			setBoundsGraphicalContainer(tb, 15, 15, size.getX(), size.getY());
+			setBoundsGraphicalContainer(tb, 15, 15, size.getX()+10, size.getY());
 			
 			//Se setean las dimensiones y posicion del contenedor
 			setBoundsGraphicalContainer(containerTablas,coordinates.getX() - nx + 40, coordinates.getY() - ny + 25,
@@ -553,10 +643,6 @@ public class DataformGeneration{
 	 */
 	public void MarcarTablas(ArrayList<String> sizes) throws IOException, EncryptedDocumentException, InvalidFormatException{
        
-		//Se crea el libro de visitados
-		Workbook visit = new XSSFWorkbook();
-        Sheet sheetV =  visit.createSheet();
-       
         for(int i=0;i<sizes.size();i++){
         	//Se obtiene la dimension de la tabla que viene en formato "CeldaInicio:CeldaFinal" ejemplo: C1:P44
         	String inicio = sizes.get(i).split(":")[0], fin =  sizes.get(i).split(":")[1];
@@ -564,27 +650,16 @@ public class DataformGeneration{
         	//Se recorre las filas de la dimension
         	for(int  j = Integer.parseInt(capturarNumeros(inicio))-1 ; j <Integer.parseInt(capturarNumeros(fin)) ;j++){
         		
-        		Row r= sheetV.getRow(j);
-        		if(r==null)
-        			r= sheetV.createRow(j);
-        		
         		//Se obtiene la columna inicial y final
         		int wf= toInt(stractColumn(fin))-1;
         		int wi = toInt(stractColumn(inicio))-1;
         		
         		//Se recorre las columnas de la dimension
         		for(int k = wi; k <=wf;k++ ){
-        			Cell c = r.createCell(k);
-        			//Se le asigna el valor 1, que indica que se visito
-        			c.setCellValue(1);
+        			visit[j][k] = 1;
         		}
         	}
         }
-        //Se guarda el archivo de visitados
-        FileOutputStream fos = new FileOutputStream("/VisitadosLibro1.xlsx");
-	    visit.write(fos);
-	    visit.close();
-	    fos.close();
 	}
 	
 	/**
@@ -592,7 +667,7 @@ public class DataformGeneration{
 	 * leyendo el archivo de visitados y contando cuantos contenedores tiene por encima y por debajo
 	 * @param sheetV Hoja de visitados que contiene la informacionde los contenedores
 	 */
-	public void reOrganizarTablas(Sheet sheetV){
+	public void reOrganizarTablas(){
 		
 		for(int i=0;i<listTables.size();i++){
 			
@@ -609,20 +684,20 @@ public class DataformGeneration{
 			int finj = toInt(stractColumn(inicio))-1;
 			
 			//Se extrae la ultima columna NO nula del excel
-			int fini = Integer.parseInt(capturarNumeros(fins))-1;
+			int fini = visit[0].length;
 
 			//Se calculan las coordenadas iniciales del contendor
 			Coordinate coordinates  = getCoordinates(inicio);
 			
 			//Se calculan la cantidad de contenedores que tiene por encima
-			int containersV = getAmountContainersV (j, 0 , fini,sheetV);
+			int containersV = getAmountContainersV (j, 0 , fini);
        	
 			//Se obtiene el Y actual del contenedor
 			int YO = interface1.getListGraphicalContainer().get(i).getPositionY();
 			
 			//Se obtiene la cantidad de contendores que tiene a la izquierda el contenedor
 			//Y cuantas columnas se estan utilizando
-			Coordinate containersH = getAmountContainersH(j,finj, filaFinalContenedorTabla , sheetV);
+			Coordinate containersH = getAmountContainersH(j,finj, filaFinalContenedorTabla);
 			
 			int xs=0;
 			if(containersH.getX() == 0){ //Si no hay contendores se ubica en la posicion acual
@@ -659,12 +734,28 @@ public class DataformGeneration{
 	 * @return Verdadero si se encuentra en el rango especificado 
 	 * 		   Falso si no cumple
 	 */
-	public static boolean isValid(int i, int j) {
-		if(i >= 0 && i < 1048576  && j >= 0 && j < 16384)
+	public  boolean isValid(int i, int j) {
+		if(i >= 0 && i < visit.length  && j >= 0 && j < visit[0].length)
 			return true;
 		return false;
 	}
 	
+	
+	public void visit(int i, int l, int h, Sheet sheetV){
+		
+		Row  rv; Cell cv;
+		rv = sheetV.getRow(i);	
+		
+		if(rv==null)
+			rv = sheetV.createRow(i);
+		
+		for(int j=l;j<=h;j++){
+			cv = rv.createCell(j);
+			cv.setCellValue(1);
+		}
+		
+	}
+
 	/**
 	 * Algorithmo que sirve para explorar una serie de celdas
 	 * NO NULAS en el excel original a partir de un punto dado
@@ -676,7 +767,7 @@ public class DataformGeneration{
 	 * @param sheetV Hoja del libro de visitados
 	 * @return una lista de coordenadas con las celdas que se visitaron en la exploracion
 	 */
-	public ArrayList<Coordinate> bfs(int i, int j,Sheet sheetL,Sheet sheetV) {	
+	public ArrayList<Coordinate> bfs(int i, int j,Sheet sheetL) {	
 		
 		//Se extrae la fila y columna inicial
 		Row r = sheetL.getRow(i);
@@ -686,9 +777,7 @@ public class DataformGeneration{
 		ArrayList<Coordinate> res = new ArrayList<Coordinate>();
  		
 		//Se prepara la fila y columna en el excel de visitados
-		Row rv = sheetV.getRow(i);
-		Cell cv = rv.createCell(j);
-		cv.setCellValue(1);
+		visit[i][j] = 1;
 		
 		//Agregamos la posicion inicial al arreglo de celdas a retornar
 		res.add(new Coordinate(i, j));
@@ -727,30 +816,16 @@ public class DataformGeneration{
 					
 					//Si la celda no esta creada o esta vacia NO se analiza
 					if (c !=null && c.getCellType()!=Cell.CELL_TYPE_BLANK ) {
-						rv = sheetV.getRow(vx);
 						
 						//Se marca en el excel de visitados esta celda 
 						//Como analizada para no analizarla mas
-						if(rv==null){
-							rv=sheetV.createRow(vx);
-							cv=rv.createCell(vy);
-							cv.setCellValue(1);
+						if(visit[vx][vy] == 0){
+							visit[vx][vy] = 1;
 							
 							//Se agrega a lista la celda (vx,vy) como celda
 							//No NULA y NO VACIA
 							res.add(new Coordinate(vx, vy));
 							q.add(c);
-						}else{
-
-							cv = rv.getCell(vy);
-							if(cv == null) {
-								cv = rv.createCell(vy);
-								cv.setCellValue(1);
-								//Se agrega a lista la celda (vx,vy) como celda
-								//No NULA y NO VACIA
-								res.add(new Coordinate(vx, vy));
-								q.add(c);
-							}
 						}
 					}						
 				}
@@ -768,11 +843,10 @@ public class DataformGeneration{
 	 * @param visit Libro de excel que contiene cuales celdas ya se han analizado
  	 * @throws IOException
 	 */
-	public void recorrerHoja(Workbook libro, Workbook visit) throws IOException {
+	public void recorrerHoja(Workbook libro) throws IOException {
 		
 		//Carga la primera hoja de cada libro (Original, Visitados)
 		Sheet sheetL =  libro.getSheetAt(0);
-		Sheet sheetV =  visit.getSheetAt(0);
 		
 		//Se obtiene la ultima fila a anlizar
 		int nmax = sheetL.getLastRowNum()+1;
@@ -783,19 +857,14 @@ public class DataformGeneration{
  			Row r =  sheetL.getRow(i);
         	if(r==null) continue;
         	
-        	//Se obtiene la fila en el libro de visitados
-        	Row rv = sheetV.getRow(i);
-        	if(rv ==null)
-        		rv = sheetV.createRow(i);
-        	
         	//Se recorre la fila hasta la ultima columna NO NULA
         	for (int j = 0; j <r.getLastCellNum(); j++) {
 	    		
         		//Se obtienen las celdas del original y el visitado en la posicion J
-        		Cell c = r.getCell(j);  Cell cv = rv.getCell(j);
+        		Cell c = r.getCell(j);
         		
         		//Si la celda es nula en el original no se analiza y se continua
-	            if(c != null && cv==null ) { 
+	            if(c != null && visit[i][j] == 0) { 
 	            	
 	            	//Si la celda esta vacia no se analiza y se continua 
 	            	if(c.getCellType()==Cell.CELL_TYPE_BLANK)
@@ -804,24 +873,21 @@ public class DataformGeneration{
 	            	//Se ejecuta el BFS con el fin de buscar 
 	            	//Mas celdas no nulas 
 	            	//Para almacenarlas en un mismo contendor
-	            	ArrayList<Coordinate> res = bfs( i, j,sheetL,sheetV);
+	            	ArrayList<Coordinate> res = bfs( i, j,sheetL);
 	            	
 	            	//Se ordenan las celdas encontradas
 	            	Collections.sort(res);
 	            	
 	            	int m = res.size(); 	
 	            	
-	            	//Se obtiene la ultima celda NO nula de toda la hoja
-	            	String fins  = dimens.split(":")[1];
-	            	
-	    			int finy = toInt(stractColumn(fins))-1;
+	    			int finy = visit[0].length;
 	            	int fini = res.get(m-1).getX();
 	            	
 	            	//Se calcula cuantos contendores existen por encima de este contendor
-	            	int containersV = getAmountContainersV(i, 0, finy ,sheetV);
+	            	int containersV = getAmountContainersV(i, 0, finy);
 	            	
 	            	//Se calcula cuantos contenedores existen a la izquierda de este contendor
-	            	Coordinate containersH = getAmountContainersH(i, j, fini, sheetV);
+	            	Coordinate containersH = getAmountContainersH(i, j, fini);
 	            	
 	            	if(m>1){
 	            		//Se extraen las dimenciones del contenedor que contendra a las celdas encontradas
@@ -834,7 +900,7 @@ public class DataformGeneration{
 	                    Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
 	        			containerTablas.setName("Container"+ (nTablas++));
 	        		
-	        			//Se establece las coordenadas y el tamaño
+	        			//Se establece las coordenadas y el tamaï¿½o
 	         			Coordinate coordinates=getCoordinates2(inicio);
 	         			Coordinate size = getSizes2(inicio, fin);
 	         			
@@ -888,11 +954,7 @@ public class DataformGeneration{
 	    }
  		
  		//Se reorganizan las tablas
- 		reOrganizarTablas(sheetV);
-		FileOutputStream fos = new FileOutputStream("/VisitadosLibro1.xlsx");
-	    visit.write(fos);
-	    visit.close();
-	    fos.close();
+ 		reOrganizarTablas();
 	}
 		
 	/**
@@ -907,26 +969,17 @@ public class DataformGeneration{
 	 * @return la cantidad de conta iner que hay por encima del contenedor 
 	 * 		   que se encuentra en la posicion (i, j) del excel
 	 */
-	public int getAmountContainersV(int i, int j,int finY , Sheet sheetV){
+	public int getAmountContainersV(int i, int j,int finY){
 		
-		Row rv;
 		int res =0;
 		int max = -1;
-		for(int l=j ; l <= finY; l++){
+		for(int l=j ; l <finY; l++){
 			res=0;
 			for(int k=0;k<i;k++){
-				rv = sheetV.getRow(k);
-				if(rv==null)
-					continue;
-				Cell cv = rv.getCell(l);
-				if(cv!=null){
+				if(visit[k][l] != 0){
 					res++;
-					while(cv!=null){
+					while(visit[k][l] != 0){
 						k++;
-						rv = sheetV.getRow(k);
-						if(rv==null)
-							break;
-						cv = rv.getCell(l);
 					}
 				}
 			}	
@@ -942,13 +995,13 @@ public class DataformGeneration{
 	 * que estan a la izquierda de este contenedor
 	 * @param i numero de fila donde se encuentra el contenedor
 	 * @param j numero de columna donde se encuentra el contenedor
-	 * @param fini final del arhivo en fiñas
+	 * @param fini final del arhivo en fiï¿½as
 	 * @param sheetV hoja de visitados para verificar los contendores
 	 * @return la cantidad de containers que hay a la izquierda del contenedor 
 	 * 		   que se encuentra en la posicion (i, j) del excel
 	 */
-	public Coordinate getAmountContainersH(int i, int j, int fini ,Sheet sheetV){	
-		Row rv;
+	public Coordinate getAmountContainersH(int i, int j, int fini){	
+
 		int res =0;
 		int cantidadFilas=0;
 		int max = -1;
@@ -957,19 +1010,11 @@ public class DataformGeneration{
 			res=0;
 			cantidadFilas=0;
 			for(int k=0;k<j;k++){
-				rv = sheetV.getRow(l);
-				if(rv==null)
-					continue;
-				Cell cv = rv.getCell(k);
-				if(cv!=null){
+				if(visit[l][k] != 0){
 					res++;
-					while(cv!=null){
+					while(visit[l][k] != 0){
 						k++;
 						cantidadFilas++;
-						rv = sheetV.getRow(l);
-						if(rv==null)
-							break;
-						cv = rv.getCell(k);
 					}
 				}
 				
@@ -999,7 +1044,7 @@ public class DataformGeneration{
 	
 	/**
 	 * Este metodo sirve para extraer los numero de una celda que venga en el formato de celdas en excel
-	 * por ejemplo si la celda es la AA345 este metodo retornará 345 en formato string
+	 * por ejemplo si la celda es la AA345 este metodo retornarï¿½ 345 en formato string
 	 * @param s string que contiene la celda a la cual le queremos extraer los numeros para saber la fila
 	 * @return un string con los numeros consecutivos del string por parametro
 	 */
@@ -1016,7 +1061,7 @@ public class DataformGeneration{
 	}
 	
 	/**
-	 * Este metodo sirve para calcular el tamaño en pixeles de un contenedor
+	 * Este metodo sirve para calcular el tamaï¿½o en pixeles de un contenedor
 	 * a traves de sus dimensiones de filas y columnas establecidas en el excel
 	 * @param inicio es la celda donde empieza el contendor. (esquina izquierda superior)
 	 * @param fin es la celda donde termina el contenedor. (esquina derecha inferior)
@@ -1143,4 +1188,20 @@ public class DataformGeneration{
 	     }
 		 return res;
 	}
+}
+
+class rangeComparator implements Comparator<CellRangeAddress>{
+	 @Override
+	 public int compare(CellRangeAddress o1, CellRangeAddress o2) {
+		 if(o1.getFirstRow() > o2.getFirstRow()){
+				return 1;
+		 }
+		 else if ( o1.getFirstRow() == o2.getFirstRow()){
+				if( o1.getFirstColumn() > o2.getFirstColumn())
+					return 1;
+				else if(o1.getFirstColumn() == o2.getFirstColumn())
+					return 0;
+		}
+		return -1;
+	 }
 }

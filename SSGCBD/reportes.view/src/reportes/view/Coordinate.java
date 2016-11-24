@@ -1,5 +1,13 @@
 package reportes.view;
 
+/**
+ * Clase que sirve para almacenar las dimenciones de 
+ * los componentes de la herramienta Dataform
+ * 
+ * @author Julio Cesar Garcia Sabogal
+ * @author Fabio Stiven Oquendo Soler
+ * @author Cristian Daniel Palechor Sepulveda
+ */
 class Coordinate implements Comparable<Coordinate> {
 	
 	//--------------------------------------------------------
@@ -9,12 +17,12 @@ class Coordinate implements Comparable<Coordinate> {
 	/**
 	 * Valor "x" de la coordenada
 	 */
-	private int x;
+     protected int x;
 	
 	/**
-	 * Valor "x" de la coordenada
+	 * Valor "y" de la coordenada
 	 */
-	private int y;
+	protected int y;
 	
 	
 	//--------------------------------------------------------

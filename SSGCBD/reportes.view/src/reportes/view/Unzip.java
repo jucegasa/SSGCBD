@@ -22,7 +22,6 @@ public class Unzip {
 	}
 
 	public String getDir(String url){
-
 		String res="";
 		for(int i=0;i<url.length()-5;i++){
 			res+= url.charAt(i);

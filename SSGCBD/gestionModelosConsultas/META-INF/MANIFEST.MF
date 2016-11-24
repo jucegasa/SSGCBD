@@ -101,6 +101,7 @@ Export-Package: gestionmodelosconsultas,
  org.apache.poi,
  org.apache.poi.openxml4j.exceptions,
  org.apache.poi.ss.usermodel,
+ org.apache.poi.ss.util,
  org.apache.poi.xssf.usermodel
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport

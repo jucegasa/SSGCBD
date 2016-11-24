@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore" xsi:schemaLocation="http:///tooldataform/formmodel/concreta.ecore http:///tooldataform.ecore#//concreta" xmi:id="_9xZ44LD1EeaIEL_YtVE5eg" type="Metamodelodataform" name="model.tooldataform_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_9xZ44bD1EeaIEL_YtVE5eg" type="2003">
+    <children xmi:type="notation:DecorationNode" xmi:id="_9xZ44rD1EeaIEL_YtVE5eg" type="5012"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_9xZ447D1EeaIEL_YtVE5eg" type="7001">
+    
+    
+      <children xmi:type="notation:Node" xmi:id="_GxYEkLD2EeaIEL_YtVE5eg" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_GxYElbD2EeaIEL_YtVE5eg" type="5003"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_GxYElrD2EeaIEL_YtVE5eg" type="7002">
+        
+        
+          <children xmi:type="notation:Node" xmi:id="_H4wjYLD2EeaIEL_YtVE5eg" type="3006">
+            <children xmi:type="notation:DecorationNode" xmi:id="_H4wjZbD2EeaIEL_YtVE5eg" type="5008"/>
+            <styles xmi:type="notation:DescriptionStyle" xmi:id="_H4wjYbD2EeaIEL_YtVE5eg"/>
+            <styles xmi:type="notation:FontStyle" xmi:id="_H4wjYrD2EeaIEL_YtVE5eg" fontName="Segoe UI"/>
+            <styles xmi:type="notation:FillStyle" xmi:id="_H4wjY7D2EeaIEL_YtVE5eg"/>
+            <element xmi:type="tooldataform.formmodel.concreta:LabelView" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0/@listIndividualElementDataForm.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_H4wjZLD2EeaIEL_YtVE5eg" x="59" y="31"/>
+          </children>
+          
+          
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_GxYEl7D2EeaIEL_YtVE5eg" type="7070" collapsed="true">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_GxYEmLD2EeaIEL_YtVE5eg"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_GxYEmbD2EeaIEL_YtVE5eg"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_GxYEmrD2EeaIEL_YtVE5eg" type="7071" collapsed="true">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_GxYEm7D2EeaIEL_YtVE5eg"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_GxYEnLD2EeaIEL_YtVE5eg"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_GxYEkbD2EeaIEL_YtVE5eg"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_GxYEkrD2EeaIEL_YtVE5eg" fontName="Segoe UI"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_GxYEk7D2EeaIEL_YtVE5eg"/>
+        <element xmi:type="tooldataform.formmodel.concreta:Container" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GxYElLD2EeaIEL_YtVE5eg" x="137" y="86" width="867"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_9xjqMLD1EeaIEL_YtVE5eg" type="7005" collapsed="true"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_9xjqMbD1EeaIEL_YtVE5eg" type="7006" collapsed="true"/>
+    <element xmi:type="tooldataform.formmodel.concreta:Interface" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9xjqMrD1EeaIEL_YtVE5eg" x="10" y="10" width="1480" height="860"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_9xjqM7D1EeaIEL_YtVE5eg"/>
+  <element xmi:type="tooldataform.formmodel.concreta:DataForm_Diagram" href="model.tooldataform#//@listProyecto.0/@listDiagram.0"/>
+</notation:Diagram>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooldataform:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tooldataform="http:///tooldataform.ecore" xmlns:tooldataform.core="http:///tooldataform/core.ecore" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore">
+  <listProyecto listDataFormDiagram="//@listProyecto.0/@listDiagram.0">
+    <listDiagram xsi:type="tooldataform.formmodel.concreta:DataForm_Diagram" name="model.tooldataform_diagram" theProject="//@listProyecto.0" itsDiagram="//@listProyecto.0/@listDiagram.1">
+      <theInterface positionX="10" positionY="10" width="341" height="471">
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Container2" positionX="48" positionY="33" width="214" height="174">
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="total" id="label@" positionX="20" positionY="10" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="" id="labelA" positionX="20" positionY="30" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="PALE ES GAY." positionX="26" positionY="80" width="115" height="-1"/>
+        </listGraphicalContainer>
+      </theInterface>
+      <listModelElementDataForm xsi:type="tooldataform.formmodel.concreta:Container" name="Container4" positionX="135" positionY="135" width="220" height="140">
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="RECAUDO BRUTO" id="label@" positionX="20" positionY="10" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="" id="labelA" positionX="100" positionY="10" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="RELEVO" id="labelB" positionX="20" positionY="30" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="0.0" id="labelC" positionX="100" positionY="30" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="TOTAL BRUTO" id="labelD" positionX="20" positionY="50" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="" id="labelE" positionX="100" positionY="50" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="TOTAL GASTOS" id="labelF" positionX="20" positionY="70" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="" id="labelG" positionX="100" positionY="70" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="RECAUDO NETO:" id="labelH" positionX="20" positionY="90" width="-1" height="-1"/>
+        <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="" id="labelI" positionX="100" positionY="90" width="-1" height="-1"/>
+      </listModelElementDataForm>
+    </listDiagram>
+    <listDiagram xsi:type="tooldataform.core:Domain_Diagram" theDF_DiagramAssociated="//@listProyecto.0/@listDiagram.0">
+      <listClase name="Domain"/>
+    </listDiagram>
+  </listProyecto>
+</tooldataform:ModelFactory>

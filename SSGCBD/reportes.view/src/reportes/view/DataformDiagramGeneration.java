@@ -9,6 +9,7 @@ import org.eclipse.gmf.runtime.notation.BasicCompartment;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.DecorationNode;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.FontStyle;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.ui.IWorkbenchPage;
@@ -156,6 +157,8 @@ public class DataformDiagramGeneration {
 		BasicCompartment bcContaiment = createBasicComparment("7001");
 		BasicCompartment bcAtributes = createBasicComparment("7005");
 		BasicCompartment bcMethods = createBasicComparment("7006");
+		bcAtributes.setCollapsed(true);
+		bcMethods.setCollapsed(true);
 		Bounds bounds = createBounds(x, y, width, height);
 		node.insertChild(decorationNode);
 		node.insertChild(bcContaiment);
@@ -278,9 +281,12 @@ public class DataformDiagramGeneration {
 		
 		Node node = createNode("3006");
 		DecorationNode decorationNode = createDecorationNode("5008");
+		FontStyle fontStyle = NotationFactory.eINSTANCE.createFontStyle();
+		fontStyle.setFontName("Segoe UI");
 		Bounds bounds = createBounds(x, y, width, height);
 		node.setLayoutConstraint(bounds);
 		node.insertChild(decorationNode);
+		node.getStyles().add(fontStyle);
 		return node;
 	}
 	
@@ -349,6 +355,7 @@ public class DataformDiagramGeneration {
 					graphicalContainer.getWidth(), graphicalContainer.getHeight());
 			node.setElement(graphicalContainer);
 			DecorationNode dnContaiment = (DecorationNode) node.getChildren().get(1);
+			
 			for (int i = 0; i < graphicalContainer.getListIndividualElementDataForm().size(); i++) {
 				
 				dnContaiment.insertChild(initIndividualElement(graphicalContainer.getListIndividualElementDataForm().get(i)));
@@ -382,19 +389,21 @@ public class DataformDiagramGeneration {
 				
 			node = createLabelView(graphicalIndividualEement.getPositionX(),graphicalIndividualEement.getPositionY(),
 								   graphicalIndividualEement.getWidth(),graphicalIndividualEement.getHeight());
+			node.setElement(graphicalIndividualEement);
 			
 		} else if(graphicalIndividualEement instanceof TextView) {
 			
 			node = createTextView(graphicalIndividualEement.getPositionX(),graphicalIndividualEement.getPositionY(),
 					   graphicalIndividualEement.getWidth(),graphicalIndividualEement.getHeight());
-			
+			node.setElement(graphicalIndividualEement);
 		} else if(graphicalIndividualEement instanceof ItemCombo) {
 			
 			node = createItemCombo();
-			
+			node.setElement(graphicalIndividualEement);
 		} else if(graphicalIndividualEement instanceof ColumView) {
 			
 			node = createColumView();
+			node.setElement(graphicalIndividualEement);
 		}
 		
 		return node;

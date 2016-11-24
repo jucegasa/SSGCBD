@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooldataform:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tooldataform="http:///tooldataform.ecore" xmlns:tooldataform.core="http:///tooldataform/core.ecore" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore">
+  <listProyecto listDataFormDiagram="//@listProyecto.0/@listDiagram.0">
+    <listDiagram xsi:type="tooldataform.formmodel.concreta:DataForm_Diagram" name="model.tooldataform_diagram" theProject="//@listProyecto.0" itsDiagram="//@listProyecto.0/@listDiagram.1">
+      <theInterface positionX="10" positionY="10" width="1480" height="860">
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" positionX="137" positionY="86" width="867" height="-1">
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="FABIOOOO" positionX="59" positionY="31" width="148" height="61"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="FABIIIIIO" positionX="236" positionY="41" width="118" height="80"/>
+        </listGraphicalContainer>
+      </theInterface>
+    </listDiagram>
+    <listDiagram xsi:type="tooldataform.core:Domain_Diagram" theDF_DiagramAssociated="//@listProyecto.0/@listDiagram.0">
+      <listClase name="Domain"/>
+    </listDiagram>
+  </listProyecto>
+</tooldataform:ModelFactory>
