@@ -30,7 +30,6 @@
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.DecorationNode"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Bounds"/>
 <fullyQualifiedTypeName name="reportes.view.DataformGeneration"/>
-<fullyQualifiedTypeName name="tooldataform.formmodel.containers.GraphicalContainer"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Container"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Interface"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TableView"/>
@@ -45,11 +44,13 @@
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.awt.font.NumericShaper.Range"/>
-<fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="reportes.view.rangeComparator"/>
 <fullyQualifiedTypeName name="org.apache.poi.ss.util.CellRangeAddress"/>
 <fullyQualifiedTypeName name="reportes.view.Coordinate"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.FontStyle"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.containers.GraphicalContainer"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
 </qualifiedTypeNameHistroy>
