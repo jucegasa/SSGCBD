@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gestionmodelosconsultas:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gestionmodelosconsultas="http:///gestionmodelosconsultas.ecore" xmlns:gestionmodelosconsultas.entitymodel="http:///gestionmodelosconsultas/entitymodel.ecore" xmlns:gestionmodelosconsultas.modeloconsultas.model="http:///gestionmodelosconsultas/modeloconsultas/model.ecore" xmlns:gestionmodelosconsultas.modeloconsultas.que="http:///gestionmodelosconsultas/modeloconsultas/que.ecore" xmlns:gestionmodelosconsultas.modeloconsultas.quien="http:///gestionmodelosconsultas/modeloconsultas/quien.ecore" xmlns:gestionmodelosconsultas.modeloconsultas.resultset.resultque="http:///gestionmodelosconsultas/modeloconsultas/resultset/resultque.ecore" xmlns:gestionmodelosconsultas.rules.factoryrules="http:///gestionmodelosconsultas/rules/factoryrules.ecore">
   <rulesFactory>
     <listRuleDiagramEntity name="actor_rol">
@@ -265,7 +265,11 @@
         </listElementoConsulta>
       </listEADiagram>
       <listEADiagram xsi:type="gestionmodelosconsultas.modeloconsultas.model:ViewModel">
+        <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.2" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.1"/>
+        <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.0" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.2"/>
         <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.que:Documento" order="1"/>
+        <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:UnidadOrganizacional"/>
+        <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:Contacto"/>
       </listEADiagram>
       <listResultado>
         <listResultElement xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Documento" key="7" tipo="Memorando"/>

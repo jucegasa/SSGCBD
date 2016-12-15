@@ -24,7 +24,6 @@
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.diagram.core.services.ViewService"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.NotationFactory"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Diagram"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.DataForm_Diagram"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.Node"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.DecorationNode"/>
@@ -32,7 +31,6 @@
 <fullyQualifiedTypeName name="reportes.view.DataformGeneration"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Container"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Interface"/>
-<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TableView"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ComboView"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.LabelView"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TextView"/>
@@ -45,12 +43,17 @@
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.awt.font.NumericShaper.Range"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="reportes.view.rangeComparator"/>
 <fullyQualifiedTypeName name="org.apache.poi.ss.util.CellRangeAddress"/>
-<fullyQualifiedTypeName name="reportes.view.Coordinate"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.FontStyle"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.containers.GraphicalContainer"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="reportes.view.Coordinate"/>
+<fullyQualifiedTypeName name="reportes.view.rangeComparator"/>
+<fullyQualifiedTypeName name="reportes.view.MergedRegions"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.ws.api.pipe.NextAction"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TableView"/>
+<fullyQualifiedTypeName name="reportes.view.MergedRegion"/>
 </qualifiedTypeNameHistroy>

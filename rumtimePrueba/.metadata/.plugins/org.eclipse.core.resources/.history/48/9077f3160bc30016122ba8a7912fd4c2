@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tooldataform:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tooldataform="http:///tooldataform.ecore" xmlns:tooldataform.core="http:///tooldataform/core.ecore" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore">
+  <listProyecto listDataFormDiagram="//@listProyecto.0/@listDiagram.0">
+    <listDiagram xsi:type="tooldataform.formmodel.concreta:DataForm_Diagram" name="model.tooldataform_diagram" theProject="//@listProyecto.0" itsDiagram="//@listProyecto.0/@listDiagram.1">
+      <theInterface positionX="10" positionY="10" width="2380" height="900">
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="CONTROL MENSUAL DE M&#xd3;VILES Y CONDUCTORES: Consolidado General" positionX="1780" positionY="260">
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Informaci&#xf3;n de Contexto">
+            <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Informaci&#xf3;n de Contexto">
+              <listColumView name="Dias Laborados"/>
+              <listColumView name="Prom. M&#xf3;viles Laboraron"/>
+              <listColumView name="Total Vueltas"/>
+              <listColumView name="Prom.Vueltas Realizadas x D&#xed;a"/>
+            </listGraphicalContainer>
+          </listGraphicalContainer>
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Total Registro de Pasajeros">
+            <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Total Registro de Pasajeros">
+              <listColumView name="T. Pasajeros Plena"/>
+              <listColumView name="T. Pasajeros Especial"/>
+              <listColumView name="Total Pasajeros"/>
+              <listColumView name="Promedio Pasajeros x Vuelta"/>
+            </listGraphicalContainer>
+          </listGraphicalContainer>
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Total Recaudo de Dinero">
+            <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Total Recaudo de Dinero">
+              <listColumView name="T. Recaudo Plena"/>
+              <listColumView name="T. Recaudo Especial"/>
+              <listColumView name="Total Recaudo"/>
+              <listColumView name="Promedio Recaudo x Vuelta"/>
+            </listGraphicalContainer>
+          </listGraphicalContainer>
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Resultado General">
+            <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Resultado General">
+              <listColumView name="Prom. Pasajeros x M&#xf3;vil"/>
+              <listColumView name="Prom. Recaudo x M&#xf3;vil"/>
+              <listColumView name="Nivel de Ocupaci&#xf3;n"/>
+              <listColumView name="M&#xf3;viles por Debajo del Nivel Producci&#xf3;n"/>
+              <listColumView name="M&#xf3;viles por Encima del Nivel Producci&#xf3;n"/>
+            </listGraphicalContainer>
+          </listGraphicalContainer>
+        </listGraphicalContainer>
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Informaci&#xf3;n de Contexto">
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Informaci&#xf3;n de Contexto">
+            <listColumView name="Fecha de Recaudo"/>
+          </listGraphicalContainer>
+        </listGraphicalContainer>
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Container1" positionX="0" positionY="0" width="420" height="60">
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="% Especial" id="label@" positionX="20" positionY="10" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="Prom. Recaudo Plena x Vuelta" id="labelA" positionX="100" positionY="10" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="Prom. Recaudo Especial x Vuelta" id="labelB" positionX="180" positionY="10" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="Total Prom. Recaudo x Vuelta" id="labelC" positionX="260" positionY="10" width="-1" height="-1"/>
+        </listGraphicalContainer>
+      </theInterface>
+    </listDiagram>
+    <listDiagram xsi:type="tooldataform.core:Domain_Diagram" theDF_DiagramAssociated="//@listProyecto.0/@listDiagram.0">
+      <listClase name="Domain"/>
+    </listDiagram>
+  </listProyecto>
+</tooldataform:ModelFactory>

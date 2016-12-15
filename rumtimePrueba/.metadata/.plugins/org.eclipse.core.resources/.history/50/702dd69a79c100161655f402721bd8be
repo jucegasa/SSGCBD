@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tooldataform:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tooldataform="http:///tooldataform.ecore" xmlns:tooldataform.core="http:///tooldataform/core.ecore" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore">
+  <listProyecto listDataFormDiagram="//@listProyecto.0/@listDiagram.0">
+    <listDiagram xsi:type="tooldataform.formmodel.concreta:DataForm_Diagram" name="model.tooldataform_diagram" theProject="//@listProyecto.0" itsDiagram="//@listProyecto.0/@listDiagram.1">
+      <theInterface positionX="10" positionY="10" width="680" height="320">
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" positionX="40" positionY="25"/>
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Container1" positionX="0" positionY="0" width="620" height="80">
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="Reporte super wow" id="label@" positionX="20" positionY="10" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="El monterey" id="labelA" positionX="20" positionY="30" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="el cruz azul" id="labelB" positionX="100" positionY="30" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="los pummas" id="labelC" positionX="180" positionY="30" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="america" id="labelD" positionX="260" positionY="30" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="necaxa" id="labelE" positionX="340" positionY="30" width="-1" height="-1"/>
+          <listIndividualElementDataForm xsi:type="tooldataform.formmodel.concreta:LabelView" name="tiburones" id="labelF" positionX="420" positionY="30" width="-1" height="-1"/>
+        </listGraphicalContainer>
+      </theInterface>
+    </listDiagram>
+    <listDiagram xsi:type="tooldataform.core:Domain_Diagram" theDF_DiagramAssociated="//@listProyecto.0/@listDiagram.0">
+      <listClase name="Domain"/>
+    </listDiagram>
+  </listProyecto>
+</tooldataform:ModelFactory>

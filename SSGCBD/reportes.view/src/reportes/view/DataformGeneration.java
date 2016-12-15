@@ -161,7 +161,7 @@ public class DataformGeneration{
 	 /**
 	  * Con tiene las regiones combinadas que existen en cada fila
 	  */
-	 protected ArrayList<Coordinate> mergedRegions[];
+	 protected ArrayList<MergedRegion> mergedRegions[];
 	 
 	 /**
 	  * Con tiene la lista de contenedores graficos que represetan
@@ -180,15 +180,29 @@ public class DataformGeneration{
 	  */
 	 protected Workbook libro;
 	 
+	/**
+	 * Lista que contiene las coordenadas de inicio de cada contenedor
+	 */
+	protected ArrayList<Coordinate> coordenadasInicioContenedores;
+	
+	 
 	//--------------------------------------------------------
 	//Constructor
 	//--------------------------------------------------------
 	
-	 public DataformGeneration(String ruta,String as){
+	 public DataformGeneration(String ruta,String as) {
 		 this.path = ruta+"/xl/";
 		 this.absolutePath = as;
+		 
+		 /*Inicializacion de las listas para evitar 
+		  *NullPointer Exception
+		  */
+		 listTables = new ArrayList<String>();
+		 listComboBox = new ArrayList<String>();
+		 tablas = new ArrayList<GraphicalContainer>();
+		 coordenadasInicioContenedores = new ArrayList<Coordinate>();
 	 }
-	
+	 
 	//--------------------------------------------------------
 	//Metodos
 	//--------------------------------------------------------
@@ -207,6 +221,19 @@ public class DataformGeneration{
 		//Incializa la model factory y el diagrama para agregar elementos en el
 		Init();
 		
+		//Se carga el excel a analizar
+		InputStream is = new FileInputStream(absolutePath);
+	    libro = WorkbookFactory.create(is);
+	    sheet = libro.getSheetAt(0);
+	        
+        identifyMergedRegions();
+        
+        for(int i=0;i<visit.length;i++){
+        		for(int j=0;j<visit[0].length;j++)
+        				System.out.print(visit[i][j]+" ");
+        		System.out.println();
+        }
+        
 		//Identifica las tablas en el XML y obtiene sus dimenciones
 		getTables();
 		
@@ -242,15 +269,15 @@ public class DataformGeneration{
 	 * @param c relacion de contaiment a la cual se le setearean los atributos
 	 * @param i i dentificador de la tabla que es due�a de la relacion
 	 */
-	public void setAtributesContaimentRelation(tooldataform.formmodel.concreta.Containment c, int i){
+	public void setAtributesContaimentRelation(tooldataform.formmodel.concreta.Containment c, String  name){
 		c.setAMultiplicidad(tooldataform.pmoo.Cardinalidad.N);
 		c.setBMultiplicidad(tooldataform.pmoo.Cardinalidad.N);
 		c.setANavegable(Valores.SI);
 		c.setBNavegable(Valores.SI);
 		c.setBinding(Valores.SI);
-		c.setARol("ownedByTable"+i);
-		c.setBRol("listTable"+i);
-		c.setName("name"+i);
+		c.setARol("ownedByTable"+name);
+		c.setBRol("listTable"+name);
+		c.setName("name"+name);
 	}
 	
 	/**
@@ -272,8 +299,8 @@ public class DataformGeneration{
 		
 		//Se obtienen las dimensiones de la matriz de visitados
 		int w = toInt(stractColumn(fin)); int h = ( Integer.parseInt(capturarNumeros(fin)));
-		visit = new int[h + 1][w +1 ];
-		
+		visit = new int[ h + 1][w +1 ];
+		nContainers = 1;
 		//Se obtienen las coordenandas relativas
 		Coordinate coordinate = getCoordinates(inicio);
 		nx = coordinate.getX();   ny = coordinate.getY();
@@ -292,8 +319,6 @@ public class DataformGeneration{
 		
 		//Se dan las dimensiones y ubicacion de la interfaz
 		setBoundsGraphicalContainer(interface1, 10, 10 ,size.getX()  + 80, size.getY() + 60);	
-		//TODO Syso que se debe eliminar
-		System.out.println( (size.getX() + 80) + " " + (size.getY() +60));
 		
 		/*Se relacionan adecuadamente los objetos incializados anteriormente
 		 *Para generar un dataform sin errores
@@ -311,14 +336,6 @@ public class DataformGeneration{
 		project.getListDataFormDiagram().add(dataformDiagram);
 		project.setTheModelFactory(modelFactory);
 		modelFactory.getListProyecto().add(project);
-		
-		/*Inicializacion de las listas para evitar 
-		 *NullPointer Exception
-		 */
-		listTables = new ArrayList<String>();
-		listComboBox = new ArrayList<String>();
-		tablas = new ArrayList<GraphicalContainer>();
-	
 	}
 	
 	/**
@@ -382,15 +399,8 @@ public class DataformGeneration{
 	 * @throws InvalidFormatException
 	 * @throws IOException
 	 */
-	public void getExtraInformation() throws EncryptedDocumentException, InvalidFormatException, IOException{
-		
-		//Se carga el excel a analizar
-		InputStream is = new FileInputStream(absolutePath);
-        libro = WorkbookFactory.create(is);
-        sheet = libro.getSheetAt(0);
-        
-        identifyMergedRegions();
-        
+	public void getExtraInformation() throws IOException{
+	
         //Se obtienen los combobox
         getOrderViewModel();
         
@@ -408,7 +418,7 @@ public class DataformGeneration{
 			
 		//Obtiene la lista de merged regions de la hoja
 		List<CellRangeAddress> sortedRegions = sheet.getMergedRegions();
-		
+	
 		//Ordenamos de mayor a menor las regiones con respecto a las filas
 		Collections.sort(sortedRegions, new rangeComparator());
 		
@@ -418,71 +428,202 @@ public class DataformGeneration{
 		
 		//Se expoloran todas las regiones de la hoja
 		for(int i=0;i<sortedRegions.size();i++){
-			CellRangeAddress range = sortedRegions.get(i);
+			CellRangeAddress range = sortedRegions.get(i);  
 			
-			int  j = range.getFirstRow();
-			int  l = range.getFirstColumn(); 
-			int  h = range.getLastColumn();
+			if(visit[range.getFirstRow()][range.getFirstColumn()] == 0){
 			
-			if(visit[j][l] == 0){
+				String textRange = sheet.getRow(range.getFirstRow()).getCell(range.getFirstColumn()).getStringCellValue();
+				MergedRegion mergeRegion = new MergedRegion(textRange, range.getFirstColumn(), range.getLastColumn(), 
+						range.getFirstRow(), range.getLastRow());
+				GraphicalContainer container = exploreMergedRegios(mergeRegion);
+				interface1.getListGraphicalContainer().add(container);
+				visitRegion(mergeRegion);
 				nContainers++;
-				exploreMergedRegios(j,l,h);
-				
 			}	
 		}
 	}
 	
+	public boolean searchMergeRegion(MergedRegion range, int nextRow) {
+		
+		for(int j=0; j<mergedRegions[nextRow].size(); j++){
+			
+			MergedRegion nextMergeRegion = mergedRegions[nextRow].get(j);
+			
+			if(nextMergeRegion.getFirstColumn() >= range.getFirstColumn() 
+					&& nextMergeRegion.getFirstColumn() <= range.getLastColumn()) {
+				
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
-	public GraphicalContainer exploreMergedRegios(int i,int l,int h){
+	public GraphicalContainer exploreMergedRegios(MergedRegion range){
 				
 		GraphicalContainer container =  ConcretaFactory.eINSTANCE.createContainer();
+		container.setName(range.getText());
+		int firstRow = range.getFirstRow(), lastRow = range.getLastRow();
+		int firstColumn = range.getFirstColumn(), lastColumn = range.getLastColumn();
 		
-		for(int j=0;j<mergedRegions[i+1].size();j++){
+		int nextRow = firstRow + (lastRow - firstRow+ 1);
+		
+		if(mergedRegions[nextRow].size() == 0 || !searchMergeRegion(range, nextRow)) {
 			
-			if( mergedRegions[i+1].get(j).getX()>=l &&  mergedRegions[i+1].get(j).getY()<=h ){
+			TableView table = createTable(range, getTableColumns(range, nextRow));
+			container.getListGraphicalContainer().add(table);
+			visitTable(range);
+			tooldataform.formmodel.concreta.Containment c = ConcretaFactory.eINSTANCE.createContainment();
+			setAtributesContaimentRelation(c,"");
+			
+			//Se agrega el source y target de la relacion
+			c.getSource().add(container);
+			c.getTarget().add(table);
+			
+			return container;
+		}
+		
+		for(int i=0;i<mergedRegions[nextRow].size();i++) {
+			
+			MergedRegion nextMergeRegin = mergedRegions[nextRow].get(i);
+			
+			if(nextMergeRegin.getFirstColumn()>=firstColumn && nextMergeRegin.getLastColumn()<=lastColumn){
 				
-				if( isCellRange(i+1,l) && visit[i+1][mergedRegions[i+1].get(j).getX()] == 0){ 
+				if(!isTableColumn(nextMergeRegin)){ 
 					//sevisita
-					visitRegion(i+1, mergedRegions[i+1].get(j).getX() ,  mergedRegions[i+1].get(j).getY());
-					
-					GraphicalContainer subContainer = exploreMergedRegios(i+1, mergedRegions[i+1].get(j).getX(), 
-							mergedRegions[i+1].get(j).getY());
-					
+					visitRegion(nextMergeRegin);
+					GraphicalContainer subContainer = exploreMergedRegios(nextMergeRegin);
 					container.getListGraphicalContainer().add(subContainer);
-					container.setPositionX(l*100);
-					container.setPositionY(j*40);
-					container.setWidth((h-l)*100);
-					container.setHeight(500);
-				}else {
 					
-					if(visit[i+1][mergedRegions[i+1].get(j).getX()] == 0){
-						if(isTable(i+1, l))
-							container =  tablas.get( visit[i+1][l] -1 );
-						else
-							container = createContainer(i+1, l);
-					}
+				} else {
 					
-					container.setPositionX(l*100);
-					container.setPositionY(j*40);
-					container.setWidth((h-l)*100);
-					container.setHeight(500);
+								
+					TableView table = createTable(range, getTableColumns(range, nextRow));
+					container.getListGraphicalContainer().add(table);
+					visitTable(range);
+					tooldataform.formmodel.concreta.Containment c = ConcretaFactory.eINSTANCE.createContainment();
+					setAtributesContaimentRelation(c,"");
+					
+					//Se agrega el source y target de la relacion
+					c.getSource().add(container);
+					c.getTarget().add(table);
+					break;
+					//Se construye la tabla
+					//Se visita las tuplas de la tabla y los encabezaos
+					//Se agrega al contenedor y se retorna
 				}
 			}
 		}
 		
+		
+		
 		return container;
 	}
 	
+	public void visitTable(MergedRegion region){
+		
+		int fila=  region.getFirstRow();
+		Row r = sheet.getRow(fila);
+		
+		int columa = region.getFirstColumn();
+		Cell c;
+		while(r!=null){
+			c = r.getCell(columa);
+			if(c==null)
+				break;
+			
+			for(int i=columa;i<= region.getLastColumn();i++){
+				visit[fila][i] = nContainers;
+			}
+			r = sheet.getRow(++fila);
+		}
+	}
+	public ArrayList<String> getTableColumns(MergedRegion region, int nextRow) {
+		
+		ArrayList<String> columns = new ArrayList<String>();
+		String column;
+		
+		int i = region.getFirstColumn();
+		while (i <= region.getLastColumn()) {
+			
+			column = sheet.getRow(nextRow).getCell(i).getStringCellValue();
+			columns.add(column);
+			
+			if(isCellRange(nextRow, i)) {
+				
+				for(int j=0; j<mergedRegions[nextRow].size(); j++){
+					
+					MergedRegion nextMergeRegion = mergedRegions[nextRow].get(j);
+					
+					if(nextMergeRegion.getFirstColumn()==i){
+						
+						if(nextMergeRegion.getFirstColumn() == nextMergeRegion.getLastColumn()) {
+							
+							i++;
+							break;
+						}	
+						
+						i += nextMergeRegion.getLastColumn() - i + 1;
+						break;
+					}
+				}
+				
+			} else {
+				
+				i++;
+			}
+		}
+		
+		return columns;
+	}
 	
+	public TableView createTable(MergedRegion region, ArrayList<String> columns){
+		
+		//Se crea  la instancia de la tabla
+		TableView table = ConcretaFactory.eINSTANCE.createTableView();
+		table.setName(region.getText());
+		
+		//Se agregan las colummnas a la tabla
+		for(int j=0;j<columns.size();j++){
+			ColumView c= ConcretaFactory.eINSTANCE.createColumView();
+			c.setName(columns.get(j));
+			table.getListColumView().add(c);
+		}
+		
+		return table;
+	}
+	
+	public boolean isTableColumn(MergedRegion mergeRegion) {
+		
+		int firstRow = mergeRegion.getFirstRow(), lastRow = mergeRegion.getLastRow();
+		int firstColumn = mergeRegion.getFirstColumn(), lastColumn = mergeRegion.getLastColumn();
+		int nextRow = firstRow + (lastRow - firstRow + 1);
+	
+		for(int i=0;i<mergedRegions[nextRow].size();i++){
+			
+			MergedRegion nextMergeRegin = mergedRegions[nextRow].get(i);
+			if(nextMergeRegin.getFirstColumn()==firstColumn &&  nextMergeRegin.getLastColumn()==lastColumn){
+				
+				return true;
+			}
+		}
+		
+		if(firstColumn == lastColumn) return true;
+		
+		return false;
+	}
 	public boolean isTable(int i, int j){
 		if(visit[i][j]>=1 && visit[i][j]<=nTables)
 			return true;
 		return false;
 	}
 
-	public void visitRegion(int i, int l, int h){
-		for(int j=l;j<=h;j++)
-			visit[i][j]=nContainers;
+	public void visitRegion(MergedRegion mergeRegion){
+		
+		for(int i = mergeRegion.getFirstRow(); i <= mergeRegion.getLastRow(); i++)
+			for(int j = mergeRegion.getFirstColumn(); j <= mergeRegion.getLastColumn(); j++)
+				visit[i][j] = nContainers;
+			
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -490,18 +631,19 @@ public class DataformGeneration{
 		
 		if(sortedRegions.size()==0)
 			return;
-		mergedRegions = new ArrayList [sortedRegions.get(sortedRegions.size()-1).getLastRow()+2]; 
+		mergedRegions = new ArrayList [sortedRegions.get(sortedRegions.size()-1).getLastRow()+10]; 
 		
 		for(int i =0 ; i< mergedRegions.length;i++){
-			mergedRegions[i] = new ArrayList<Coordinate>();
+			mergedRegions[i] = new ArrayList<MergedRegion>();
 		}
-		
-		//TODO Syso que se debe eliminar
-		System.out.println("Merged Regions");
 		
 		for(int i=0;i< sortedRegions.size();i++){
 			CellRangeAddress range = sortedRegions.get(i);
-			mergedRegions[range.getFirstRow() ].add(new Coordinate(range.getFirstColumn(), range.getLastColumn()));
+			
+			//TODO No se si la variable i represente la ROW de la MergeRegion
+			String text = sheet.getRow(range.getFirstRow()).getCell(range.getFirstColumn()).getStringCellValue();
+			mergedRegions[range.getFirstRow()].add(new MergedRegion(text, range.getFirstColumn(), range.getLastColumn(), 
+					range.getFirstRow(), range.getLastRow()));
 		}	
 	}
 	
@@ -509,7 +651,7 @@ public class DataformGeneration{
 		
 		if(mergedRegions[i].size()!=0){
 			for(int j=0;j<mergedRegions[i].size();j++){
-				if(mergedRegions[i].get(j).getX()<= l && mergedRegions[i].get(j).getY() >= l )
+				if(mergedRegions[i].get(j).getFirstColumn()<= l && mergedRegions[i].get(j).getLastColumn() >= l )
 					return true;
 			}
 		}
@@ -577,7 +719,7 @@ public class DataformGeneration{
 		
 		//Obtiene el numero de tablas a agregar al dataform
 		int n = getNumberTables();
-		nContainers = n;
+		nContainers = n+1;
 		nTables =n;
 		//Documento xml del excel
 		Document doc;
@@ -603,10 +745,12 @@ public class DataformGeneration{
 			//Se extrae la dimencion de la tabla
 			String inicio = s.split(":")[0];
 			String fin = 	s.split(":")[1];
-				
+			
+		
 			//Se obtienen las coordenandas y el size de la tabla
 			Coordinate coordinates= getCoordinates(inicio);
 			Coordinate size = getSizes(inicio, fin);
+			coordenadasInicioContenedores.add(coordinates);
 			
 			//Se obtienen las columnas
 			NodeList nList = doc.getElementsByTagName("tableColumn");
@@ -634,15 +778,14 @@ public class DataformGeneration{
 			setBoundsGraphicalContainer(tb, 15, 15, size.getX()+10, size.getY());
 			
 			//Se setean las dimensiones y posicion del contenedor
-			setBoundsGraphicalContainer(containerTablas,coordinates.getX() - nx + 40, coordinates.getY() - ny + 25,
-					size.getX() + 40, size.getY() + 40);
+			setBoundsGraphicalContainer(containerTablas,coordinates.getX() - nx , coordinates.getY() - ny ,size.getX() + 40, size.getY() + 40);
 			
 			//Se agrega la tabla al contenedor
 			containerTablas.getListGraphicalContainer().add(tb);
 			
 			//Se crea la relacion de contaiment para que la tabla se pueda visualizar
 			tooldataform.formmodel.concreta.Containment c = ConcretaFactory.eINSTANCE.createContainment();
-			setAtributesContaimentRelation(c, i);
+			setAtributesContaimentRelation(c,"" + i);
 			
 			//Se agrega el source y target de la relacion
 			c.getSource().add(containerTablas);
@@ -651,17 +794,9 @@ public class DataformGeneration{
 			//Se agrega la relacion  al diagrama
 			dataformDiagram.getListarelacion().add(c);
 			
-			//TODO
-			/*
-			 * Salia un error cuando generaba el diagrama y era que los conteiner
-			 * que almacenaban las tablas no se estaban agregando a la interface;
-			 * Hice esto no se si sea la mejor manera.
-			 */
-			dataformDiagram.getTheInterface().getListGraphicalContainer().add(containerTablas);
-			
 			tablas.add(containerTablas);
 			//Se agrega el contendor a la interfaz 
-			//interface1.getListGraphicalContainer().add(containerTablas);
+			interface1.getListGraphicalContainer().add(containerTablas);
 		}	
 	}
 	
@@ -729,6 +864,7 @@ public class DataformGeneration{
         }
 	}
 	
+	
 	/**
 	 * Metodo que sirve para reorganizar las posiciones X y Y de los contenedores de las tablas
 	 * leyendo el archivo de visitados y contando cuantos contenedores tiene por encima y por debajo
@@ -736,48 +872,29 @@ public class DataformGeneration{
 	 */
 	public void reOrganizarTablas(){
 		
-		for(int i=0;i<listTables.size();i++){
+		for(int i=0;i<coordenadasInicioContenedores.size();i++){
 			
-			//Se obtiene la dimension de la tabla que viene en formato "CeldaInicio:CeldaFinal" ejemplo: C1:P44
-			String inicio = listTables.get(i).split(":")[0], fin = listTables.get(i).split(":")[1];
-			//TODO no se esta utilizando esta variable
-			//String fins = dimens.split(":")[1];
+			int x = coordenadasInicioContenedores.get(i).getX();
+			int y = coordenadasInicioContenedores.get(i).getY();
 			
-			//Se obtiene la ubicacion de la fila del inicio del contenedor
-			int j = Integer.parseInt(capturarNumeros(inicio))-1;
+			int h = getAmountContainersH(y);
+			int v = getAmountContainersV(x);
+			int contenedor = visit[x][y] -1;
 			
-			//Se obtiene la ubicacion de la fila del final del contendor
-			int filaFinalContenedorTabla = Integer.parseInt(capturarNumeros(fin))-1;
+			int xs= h*100 + 40;
 			
-			//Se extrae la columna de incio del contendor
-			int finj = toInt(stractColumn(inicio))-1;
+			if(h>0)
+			 xs+=( (y-h-ny))*40 + 40;
 			
-			//Se extrae la ultima columna NO nula del excel
-			int fini = visit[0].length;
-
-			//Se calculan las coordenadas iniciales del contendor
-			Coordinate coordinates  = getCoordinates(inicio);
+			int ys = (v*20)+ 25;
 			
-			//Se calculan la cantidad de contenedores que tiene por encima
-			int containersV = getAmountContainersV (j, 0 , fini);
-       	
-			//Se obtiene el Y actual del contenedor
-			int YO = interface1.getListGraphicalContainer().get(i).getPositionY();
+			int s  = (x-v-nx);
 			
-			//Se obtiene la cantidad de contendores que tiene a la izquierda el contenedor
-			//Y cuantas columnas se estan utilizando
-			Coordinate containersH = getAmountContainersH(j,finj, filaFinalContenedorTabla);
+			if(v>0)
+			 ys+= (s*40)+(s*35);
 			
-			int xs=0;
-			if(containersH.getX() == 0){ //Si no hay contendores se ubica en la posicion acual
-				xs = coordinates.getX() - nx + 40;
-			}else{ //De lo contrario se modifica el x en la posicion deseada
-				xs=  (containersH.getX()*40) + (coordinates.getX() - nx ) + 40;
-			}
-			
-			//Se modifican las posisiones del contenedor 
-			interface1.getListGraphicalContainer().get(i).setPositionX( xs );
-			interface1.getListGraphicalContainer().get(i).setPositionY(YO + (40*containersV));
+			interface1.getListGraphicalContainer().get(contenedor).setPositionX(xs);
+			interface1.getListGraphicalContainer().get(contenedor).setPositionY(ys);
 		}
 	}
 	
@@ -830,7 +947,6 @@ public class DataformGeneration{
 		ArrayList<Coordinate> res = new ArrayList<Coordinate>();
  		
 		//Se prepara la fila y columna en el excel de visitados
-		nContainers++;
 		visit[i][j] = nContainers;
 	
 		
@@ -885,6 +1001,7 @@ public class DataformGeneration{
 				}
 			}
 		}
+		nContainers++;
 		return res;
 	}
 
@@ -922,6 +1039,7 @@ public class DataformGeneration{
 	            		continue;
 	            	
 	            	Container containerTablas = createContainer(i, j);
+	            	coordenadasInicioContenedores.add(new Coordinate(i, j));
 	         		interface1.getListGraphicalContainer().add(containerTablas);
 	            }
 	        }
@@ -936,7 +1054,7 @@ public class DataformGeneration{
 		
 		//Se crea la instancia del contendor a agregar
         Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
-	    containerTablas.setName("Container"+ (nContainers++));
+	    containerTablas.setName("Container"+ (nContainers));
 	    
 		//Se ejecuta el BFS con el fin de buscar 
     	//Mas celdas no nulas 
@@ -948,39 +1066,16 @@ public class DataformGeneration{
     	
     	int m = res.size(); 	
     	
-		int finy = visit[0].length;
-    	int fini = res.get(m-1).getX();
-    	
-    	//Se calcula cuantos contendores existen por encima de este contendor
-    	int containersV = getAmountContainersV(i, 0, finy);
-    	
-    	//Se calcula cuantos contenedores existen a la izquierda de este contendor
-    	Coordinate containersH = getAmountContainersH(i, j, fini);
-    	
-    
     	//Se extraen las dimenciones del contenedor que contendra a las celdas encontradas
     	String key =res.get(0).getX() +"-"+ res.get(0).getY() +":" + res.get(m-1).getX() +"-" + res.get(m-1).getY();
     	    
     	//Se delimita el inicio y el final del conentendor
     	String inicio = key.split(":")[0]; String fin  = key.split(":")[1];
     		
-    	//Se establece las coordenadas y la dimension
- 		Coordinate coordinates=getCoordinates2(inicio);
  		Coordinate size = getSizes2(inicio, fin);
  			
- 		//Se ajustan sus posciones en x 
-		int xs=0;
-		
-		if(containersH.getX()==0){
-			xs = coordinates.getX() - nx + 40;
-		}else{
-			//TODO
-			xs= (containersH.getY()*100 + 40*containersH.getX()) + (40*containersH.getX())  + 40;
-		}
-			
-		//Se setean los bounds al contenedor
-		setBoundsGraphicalContainer(containerTablas, xs,coordinates.getY() -ny + (40*containersV)  + 25,
-				                    size.getX() + 20, size.getY() + 40);
+		//Se setean los bounds al contenedor se deja en la posicion 0 0
+		setBoundsGraphicalContainer(containerTablas,0 , 0,  size.getX() + 20, size.getY() + 40);
 			
 		//Posiciones relativas para el contenido del contenedor
  		Coordinate relativo = getCoordinates2(res.get(0).getX() +"-" +res.get(0).getY());
@@ -988,6 +1083,7 @@ public class DataformGeneration{
  		int relativey = relativo.getY();
  			
  		for(int k=0;k<m;k++){
+ 			
  			//Se obtiene el X y el Y del componente 
  			int x = res.get(k).getX();    int y = res.get(k).getY();
  				
@@ -1027,23 +1123,15 @@ public class DataformGeneration{
 	 * @return la cantidad de conta iner que hay por encima del contenedor 
 	 * 		   que se encuentra en la posicion (i, j) del excel
 	 */
-	public int getAmountContainersV(int i, int j,int finY){
-		
-		int res =0;
-		int max = -1;
-		for(int l=j ; l <finY; l++){
-			res=0;
-			for(int k=0;k<i;k++){
-				if(visit[k][l] != 0){
+	public int getAmountContainersV(int y){
+		int res=0;
+		for(int i=y-1;i>=0;i--)
+			for(int j =0;j<visit[0].length;j++)
+				if(visit[i][j]!=0){
 					res++;
-					while(visit[k][l] != 0){
-						k++;
-					}
+					break;
 				}
-			}	
-			max = Math.max(max, res);
-		}
-		return max;
+		return res;
 	}
 	
 	/**
@@ -1058,45 +1146,14 @@ public class DataformGeneration{
 	 * @return la cantidad de containers que hay a la izquierda del contenedor 
 	 * 		   que se encuentra en la posicion (i, j) del excel
 	 */
-	public Coordinate getAmountContainersH(int i, int j, int fini){	
-
-		int res =0;
-		int cantidadFilas=0;
-		int max = -1;
-		int maxF = -1;
-		for(int l = i ; l<= fini ;l++){
-			res=0;
-			cantidadFilas=0;
-			for(int k=0;k<j;k++){
-				if(visit[l][k] != 0){
+	public int getAmountContainersH(int x){	
+		int res=0;	
+		for(int i =x-1;i>=0;i--)
+			for(int j=0;j<visit.length;j++)
+				if(visit[j][i]!=0){
 					res++;
-					while(visit[l][k] != 0){
-						k++;
-						cantidadFilas++;
-					}
-				}
-				
-			}	
-			if(res>max){
-				max = res;
-				maxF = cantidadFilas;
+					break;
 			}
-		}
-		Coordinate x = new Coordinate(max, maxF);
-		return x;
-	}
-	
-	/**
-	 * Este metodo sirve para obtener las coordenadas x,y de una celda dada del excel
-	 * @param inicio variable string que viene en formato "L*N*" ejemplo de esta expresion regular: AA123
-	 * @return un objeto de tipo Coordinate con las coordenadas (x,y)
-	 */
-	public Coordinate getCoordinates(String inicio){
-		Coordinate res;
-		int wi = toInt(stractColumn(inicio))-1;
-		int w = (wi) *80;
-		int h = ( Integer.parseInt(capturarNumeros(inicio))-1)*20;
-		res = new Coordinate(w, h);
 		return res;
 	}
 	
@@ -1119,6 +1176,17 @@ public class DataformGeneration{
 	}
 	
 	/**
+	 * Este metodo sirve para obtener las coordenadas x,y de una celda dada del excel
+	 * @param inicio variable string que viene en formato "L*N*" ejemplo de esta expresion regular: AA123
+	 * @return un objeto de tipo Coordinate con las coordenadas (x,y)
+	 */
+	public Coordinate getCoordinates(String inicio){
+		int w = toInt(stractColumn(inicio))-1;
+		int h = ( Integer.parseInt(capturarNumeros(inicio))-1);
+		return new Coordinate (h,w);
+	}
+	
+	/**
 	 * Este metodo sirve para calcular el tama�o en pixeles de un contenedor
 	 * a traves de sus dimensiones de filas y columnas establecidas en el excel
 	 * @param inicio es la celda donde empieza el contendor. (esquina izquierda superior)
@@ -1126,13 +1194,11 @@ public class DataformGeneration{
 	 * @return una Coordinate con las dimensiones de ancho y largo en pixeles del contenedor
 	 */
 	public Coordinate getSizes(String inicio,String fin){
-		Coordinate res;
 		int wf= toInt(stractColumn(fin))-1;
 		int wi = toInt(stractColumn(inicio))-1;
 		int w = ( wf - wi + 1)*100;
 		int h = ( Integer.parseInt(capturarNumeros(fin)) - Integer.parseInt(capturarNumeros(inicio)) + 1)*20;  
-		res = new Coordinate(w, h);
-		return res;
+		return new Coordinate(w,h);
 	}
 	
 	/**
@@ -1164,16 +1230,11 @@ public class DataformGeneration{
 	 * @return un Coordinate con las dimensiones en pixeles del contenedor encontrado
 	 */
 	public  Coordinate getSizes2(String inicio,String fin){
-		Coordinate res;
-	
-		String ws1 = inicio.split("-")[1];
-		String hs1 = inicio.split("-")[0];
-		String ws2 = fin.split("-")[1];
-		String hs2 = fin.split("-")[0];
+		String ws1 = inicio.split("-")[1];  String hs1 = inicio.split("-")[0];
+		String ws2 = fin.split("-")[1];     String hs2 = fin.split("-")[0];
 		int w = ( (Integer.parseInt(ws2))  -  (Integer.parseInt(ws1)) + 1 )*100;
 		int h = ( Integer.parseInt(hs2) - Integer.parseInt((hs1)) + 1)*20 ;  
-		res = new Coordinate(w, h);
-		return res;
+		return new Coordinate(w, h);
 	}
 	
 	/**
@@ -1183,13 +1244,11 @@ public class DataformGeneration{
 	 * @return un Coordinate con las coordenadas "x" y "y" del contenedor
 	 */
 	public  Coordinate getCoordinates2(String inicio){
-		Coordinate res;
 		String ws = inicio.split("-")[1];
 		String hs = inicio.split("-")[0];
-		int w = Integer.parseInt(ws) *80;
-		int h = Integer.parseInt(hs) *20;
-		res = new Coordinate(w, h);
-		return res;
+		int w = Integer.parseInt(ws)*80;
+		int h = Integer.parseInt(hs)*20;
+		return new Coordinate(w, h);
 	}
 	
 	/**

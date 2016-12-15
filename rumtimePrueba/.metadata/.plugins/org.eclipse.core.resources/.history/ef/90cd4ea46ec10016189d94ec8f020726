@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gestionmodelosconsultas.modeloconsultas.model="http:///gestionmodelosconsultas/modeloconsultas/model.ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http:///gestionmodelosconsultas/modeloconsultas/model.ecore http:///gestionmodelosconsultas.ecore#//modeloconsultas/model" xmi:id="_NHt70MFuEeauxshYjYZsCA" type="GestionModelosConsultas_VIEWMODEL" measurementUnit="Pixel">
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_NHt70cFuEeauxshYjYZsCA"/>
+  <element xmi:type="gestionmodelosconsultas.modeloconsultas.model:ViewModel" href="produccion.gestionmodelosconsultas#//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1"/>
+</notation:Diagram>
