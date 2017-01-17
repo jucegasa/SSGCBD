@@ -593,6 +593,7 @@ public class CompiladorProyeccion {
 		ArrayList<String[]> atributosSeleccion = new ArrayList<String[]>();
 				
 		for(int i=0; i<proyeccion.getListElementoConsulta().size();i++){
+		
 			
 			String nameElement=proyeccion.getListElementoConsulta().get(i).getClass().getSimpleName().toLowerCase().substring(0, proyeccion.getListElementoConsulta().get(i).getClass().getSimpleName().length()-4);
 			for(int j=0; j<modelFactory.getDiagramEntity().getListEntity().size();j++){
@@ -601,11 +602,11 @@ public class CompiladorProyeccion {
 					
 					for(int k=0; k<proyeccion.getListElementoConsulta().get(i).getListCampos().size();k++){
 						
-						if(proyeccion.getListElementoConsulta().get(i).getListCampos().get(k).isSeleccion()){
+						//if(proyeccion.getListElementoConsulta().get(i).getListCampos().get(k).isSeleccion()){
 							String[] atributo = {nameElement,proyeccion.getListElementoConsulta().get(i).getListCampos().get(k).getNombreCampo().getName()};
 							atributosSeleccion.add(atributo);
 							
-						}
+						//}
 						
 					}
 					break;
@@ -671,10 +672,7 @@ public class CompiladorProyeccion {
 					break;
 				}
 			}
-		}
-		
+		}	
 		return entidades;
-	}
-
-	
+	}	
 }

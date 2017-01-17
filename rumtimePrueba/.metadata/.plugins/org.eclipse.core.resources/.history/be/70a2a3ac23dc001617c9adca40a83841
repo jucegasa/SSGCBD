@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore" xsi:schemaLocation="http:///tooldataform/formmodel/concreta.ecore http:///tooldataform.ecore#//concreta" xmi:id="_NL4fYNwjEeaNtK9bxW_Cmg" type="Metamodelodataform" name="model.tooldataform_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_NL4fYdwjEeaNtK9bxW_Cmg" type="2003">
+    <children xmi:type="notation:DecorationNode" xmi:id="_NL4fYtwjEeaNtK9bxW_Cmg" type="5012"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fY9wjEeaNtK9bxW_Cmg" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_NL4fZNwjEeaNtK9bxW_Cmg" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_NL4fZdwjEeaNtK9bxW_Cmg" type="5003"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_NL4fZtwjEeaNtK9bxW_Cmg" type="7002">
+          <children xmi:type="notation:Node" xmi:id="_NL4fZ9wjEeaNtK9bxW_Cmg" type="3005">
+            <children xmi:type="notation:DecorationNode" xmi:id="_NL4faNwjEeaNtK9bxW_Cmg" type="5007"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_NL4fadwjEeaNtK9bxW_Cmg" type="7007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fatwjEeaNtK9bxW_Cmg" type="7048" collapsed="true"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fa9wjEeaNtK9bxW_Cmg" type="7049" collapsed="true"/>
+            <element xmi:type="tooldataform.formmodel.concreta:TableView" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0/@listGraphicalContainer.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NL4fbNwjEeaNtK9bxW_Cmg" x="15" y="15" width="610" height="460"/>
+          </children>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fbdwjEeaNtK9bxW_Cmg" type="7070" collapsed="true"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fbtwjEeaNtK9bxW_Cmg" type="7071" collapsed="true"/>
+        <element xmi:type="tooldataform.formmodel.concreta:Container" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NL4fb9wjEeaNtK9bxW_Cmg" x="40" y="25" width="640" height="500"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_NL4fcNwjEeaNtK9bxW_Cmg" type="3001">
+        <children xmi:type="notation:DecorationNode" xmi:id="_NL4fcdwjEeaNtK9bxW_Cmg" type="5003"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_NL4fctwjEeaNtK9bxW_Cmg" type="7002">
+          <children xmi:type="notation:Node" xmi:id="_NL4fc9wjEeaNtK9bxW_Cmg" type="3005">
+            <children xmi:type="notation:DecorationNode" xmi:id="_NL4fdNwjEeaNtK9bxW_Cmg" type="5007"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_NL4fddwjEeaNtK9bxW_Cmg" type="7007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fdtwjEeaNtK9bxW_Cmg" type="7048" collapsed="true"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fd9wjEeaNtK9bxW_Cmg" type="7049" collapsed="true"/>
+            <element xmi:type="tooldataform.formmodel.concreta:TableView" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.1/@listGraphicalContainer.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NL4feNwjEeaNtK9bxW_Cmg" x="15" y="15" width="410" height="220"/>
+          </children>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fedwjEeaNtK9bxW_Cmg" type="7070" collapsed="true"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_NL4fetwjEeaNtK9bxW_Cmg" type="7071" collapsed="true"/>
+        <element xmi:type="tooldataform.formmodel.concreta:Container" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NL4fe9wjEeaNtK9bxW_Cmg" x="720" y="165" width="440" height="260"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_NL4ffNwjEeaNtK9bxW_Cmg" type="7005" collapsed="true"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_NL4ffdwjEeaNtK9bxW_Cmg" type="7006" collapsed="true"/>
+    <element xmi:type="tooldataform.formmodel.concreta:Interface" href="model.tooldataform#//@listProyecto.0/@listDiagram.0/@theInterface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NL4fftwjEeaNtK9bxW_Cmg" x="10" y="10" width="1180" height="520"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_NL4ff9wjEeaNtK9bxW_Cmg"/>
+  <element xmi:type="tooldataform.formmodel.concreta:DataForm_Diagram" href="model.tooldataform#//@listProyecto.0/@listDiagram.0"/>
+</notation:Diagram>

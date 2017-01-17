@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooldataform:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tooldataform="http:///tooldataform.ecore" xmlns:tooldataform.core="http:///tooldataform/core.ecore">
+  <listProyecto>
+    <listDiagram xsi:type="tooldataform.core:Domain_Diagram">
+      <listClase name="Domain"/>
+    </listDiagram>
+  </listProyecto>
+</tooldataform:ModelFactory>

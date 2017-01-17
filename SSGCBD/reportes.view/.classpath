@@ -5,5 +5,13 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="E:/Eclipse SSGCBD/plugins/tooldataform_1.0.0.jar"/>
 	<classpathentry kind="lib" path="E:/Eclipse SSGCBD/plugins/tool.model_1.0.0.201606211209.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/curvesapi-1.03.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/poi-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/poi-examples-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/poi-excelant-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/poi-ooxml-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/poi-ooxml-schemas-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/poi-scratchpad-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/poi-3.14/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

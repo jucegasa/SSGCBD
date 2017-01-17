@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tooldataform:ModelFactory xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tooldataform="http:///tooldataform.ecore" xmlns:tooldataform.core="http:///tooldataform/core.ecore" xmlns:tooldataform.formmodel.concreta="http:///tooldataform/formmodel/concreta.ecore">
+  <listProyecto listDataFormDiagram="//@listProyecto.0/@listDiagram.0">
+    <listDiagram xsi:type="tooldataform.formmodel.concreta:DataForm_Diagram" name="model.tooldataform_diagram" theProject="//@listProyecto.0" itsDiagram="//@listProyecto.0/@listDiagram.1">
+      <listarelacion xsi:type="tooldataform.formmodel.concreta:Containment" name="name1" aRol="ownedByTable1" bRol="listTable1" binding="si" source="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0" target="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.0/@listGraphicalContainer.0"/>
+      <listarelacion xsi:type="tooldataform.formmodel.concreta:Containment" name="name2" aRol="ownedByTable2" bRol="listTable2" binding="si" source="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.1" target="//@listProyecto.0/@listDiagram.0/@theInterface/@listGraphicalContainer.1/@listGraphicalContainer.0"/>
+      <theInterface positionX="10" positionY="10" width="1180" height="520">
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Table1" positionX="40" positionY="25" width="640" height="500">
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Table1" positionX="15" positionY="15" width="610" height="460">
+            <listColumView name="Columna1"/>
+            <listColumView name="Columna2"/>
+            <listColumView name="Columna3"/>
+            <listColumView name="Columna4"/>
+            <listColumView name="Columna5"/>
+            <listColumView name="Columna6"/>
+          </listGraphicalContainer>
+        </listGraphicalContainer>
+        <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:Container" name="Table2" positionX="720" positionY="165" width="440" height="260">
+          <listGraphicalContainer xsi:type="tooldataform.formmodel.concreta:TableView" name="Table2" positionX="15" positionY="15" width="410" height="220">
+            <listColumView name="Columna1"/>
+            <listColumView name="Columna2"/>
+            <listColumView name="Columna3"/>
+            <listColumView name="Columna4"/>
+          </listGraphicalContainer>
+        </listGraphicalContainer>
+      </theInterface>
+    </listDiagram>
+    <listDiagram xsi:type="tooldataform.core:Domain_Diagram" theDF_DiagramAssociated="//@listProyecto.0/@listDiagram.0">
+      <listClase name="Domain"/>
+    </listDiagram>
+  </listProyecto>
+</tooldataform:ModelFactory>

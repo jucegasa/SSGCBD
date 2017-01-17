@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformVisualIDRegistry"/>
-<fullyQualifiedTypeName name="tooldataform.diagram.edit.parts.DataForm_DiagramEditPart"/>
-<fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformDiagramEditorPlugin"/>
-<fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformDiagramEditorUtil"/>
-<fullyQualifiedTypeName name="org.eclipse.emf.common.util.EList"/>
-<fullyQualifiedTypeName name="org.eclipse.emf.ecore.EObject"/>
-<fullyQualifiedTypeName name="java.net.URI"/>
-<fullyQualifiedTypeName name="org.eclipse.emf.ecore.util.EcoreUtil"/>
-<fullyQualifiedTypeName name="org.eclipse.ui.IWorkbenchPage"/>
-<fullyQualifiedTypeName name="org.eclipse.ui.PlatformUI"/>
-<fullyQualifiedTypeName name="tooldataform.diagram.part.MetamodelodataformDiagramEditor"/>
 <fullyQualifiedTypeName name="org.eclipse.emf.common.ui.URIEditorInput"/>
 <fullyQualifiedTypeName name="org.eclipse.ui.PartInitException"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Diagram"/>
@@ -31,10 +20,8 @@
 <fullyQualifiedTypeName name="reportes.view.DataformGeneration"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Container"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.Interface"/>
-<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ComboView"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.LabelView"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TextView"/>
-<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ItemCombo"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ColumView"/>
 <fullyQualifiedTypeName name="reportes.view.DataformDiagramGeneration"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.BasicCompartment"/>
@@ -43,17 +30,34 @@
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.awt.font.NumericShaper.Range"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="org.apache.poi.ss.util.CellRangeAddress"/>
 <fullyQualifiedTypeName name="org.eclipse.gmf.runtime.notation.FontStyle"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.containers.GraphicalContainer"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
-<fullyQualifiedTypeName name="reportes.view.Coordinate"/>
 <fullyQualifiedTypeName name="reportes.view.rangeComparator"/>
 <fullyQualifiedTypeName name="reportes.view.MergedRegions"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.ws.api.pipe.NextAction"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="tooldataform.formmodel.concreta.TableView"/>
 <fullyQualifiedTypeName name="reportes.view.MergedRegion"/>
+<fullyQualifiedTypeName name="org.apache.poi.hssf.util.CellReference"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Sheet"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Row"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Cell"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFDataValidationHelper"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFDataValidationConstraint"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.util.CellRangeAddressList"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFDataValidation"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Name"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.DataValidationHelper"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.DataValidationConstraint"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.DataValidation"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFWorkbook"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.util.CellRangeAddress"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ComboView"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ItemCombo"/>
+<fullyQualifiedTypeName name="tooldataform.formmodel.concreta.ConcretaFactory"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="reportes.view.ExcelGenerator"/>
+<fullyQualifiedTypeName name="reportes.view.Coordinate"/>
 </qualifiedTypeNameHistroy>

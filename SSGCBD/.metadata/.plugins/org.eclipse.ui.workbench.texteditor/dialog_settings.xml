@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="System" key="selection"/>
+		<item value="shee" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="shee"/>
+			<item value="get"/>
+			<item value="static"/>
+			<item value="// Se obtienen las sheet necesarias para el proceso"/>
 			<item value="system"/>
 			<item value="modelfactory"/>
 			<item value="table"/>
 			<item value="x"/>
-			<item value="nodo"/>
-			<item value="Nodo"/>
-			<item value="Coordinate"/>
-			<item value="Interfaces"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="y"/>
 			<item value="Coordinate"/>
 		</list>

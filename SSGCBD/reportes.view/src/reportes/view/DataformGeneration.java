@@ -5,10 +5,12 @@ import tooldataform.core.CoreFactory;
 import tooldataform.core.Domain_Diagram;
 import tooldataform.core.Project;
 import tooldataform.formmodel.concreta.ColumView;
+import tooldataform.formmodel.concreta.ComboView;
 import tooldataform.formmodel.concreta.ConcretaFactory;
 import tooldataform.formmodel.concreta.Container;
 import tooldataform.formmodel.concreta.DataForm_Diagram;
 import tooldataform.formmodel.concreta.Interface;
+import tooldataform.formmodel.concreta.ItemCombo;
 import tooldataform.formmodel.concreta.LabelView;
 import tooldataform.formmodel.concreta.TableView;
 import tooldataform.formmodel.containers.GraphicalContainer;
@@ -113,6 +115,12 @@ public class DataformGeneration{
 	 protected ArrayList<String> listComboBox;
 	 
 	 /**
+	  * Contiene el conjunto de cordenadas de los
+	  * combobox identificados en el excel
+	  */
+	 protected ArrayList<Coordinate> listComboCordinate;
+	 
+	 /**
 	  * Contiene la dimension del excel 
 	  */
 	 protected String dimens;
@@ -185,6 +193,12 @@ public class DataformGeneration{
 	 */
 	protected ArrayList<Coordinate> coordenadasInicioContenedores;
 	
+	protected ArrayList<Coordinate> coordenadasFinContenedores;
+	
+	protected int posRowIniData;
+	
+	protected int posCellIniData;
+	
 	 
 	//--------------------------------------------------------
 	//Constructor
@@ -199,14 +213,48 @@ public class DataformGeneration{
 		  */
 		 listTables = new ArrayList<String>();
 		 listComboBox = new ArrayList<String>();
+		 listComboCordinate = new ArrayList<Coordinate>();
 		 tablas = new ArrayList<GraphicalContainer>();
 		 coordenadasInicioContenedores = new ArrayList<Coordinate>();
+		 coordenadasFinContenedores  = new ArrayList<Coordinate>();
 	 }
 	 
 	//--------------------------------------------------------
 	//Metodos
 	//--------------------------------------------------------
 	 
+	public ArrayList<String> getListComboBox() {
+		return listComboBox;
+	}
+
+	public void setListComboBox(ArrayList<String> listComboBox) {
+		this.listComboBox = listComboBox;
+	}
+
+	public ArrayList<Coordinate> getListComboCordinate() {
+		return listComboCordinate;
+	}
+
+	public void setListComboCordinate(ArrayList<Coordinate> listComboCordinate) {
+		this.listComboCordinate = listComboCordinate;
+	}
+	 
+	public int getPosRowIniData() {
+		return posRowIniData;
+	}
+
+	public void setPosRowIniData(int posRowIniData) {
+		this.posRowIniData = posRowIniData;
+	}
+
+	public int getPosCellIniData() {
+		return posCellIniData;
+	}
+
+	public void setPosCellIniData(int posCellIniData) {
+		this.posCellIniData = posCellIniData;
+	}
+
 	/**
 	 * Metodo que hace los llamados necesarios a los otros metodos
 	 * para generar la produccion del Dataform
@@ -226,14 +274,11 @@ public class DataformGeneration{
 	    libro = WorkbookFactory.create(is);
 	    sheet = libro.getSheetAt(0);
 	        
-        identifyMergedRegions();
-        
-        for(int i=0;i<visit.length;i++){
-        		for(int j=0;j<visit[0].length;j++)
-        				System.out.print(visit[i][j]+" ");
-        		System.out.println();
-        }
-        
+	    getOrderViewModel();
+	    
+        //Se realiza identifican y se agregan las mergedRegions
+	    identifyMergedRegions();
+          
 		//Identifica las tablas en el XML y obtiene sus dimenciones
 		getTables();
 		
@@ -245,10 +290,28 @@ public class DataformGeneration{
 		//Ya sea contenedores, labels, combobox etc
 		getExtraInformation();
 		
+		searchBegin();
+		
 		//Se salva la produccion  del dataform
 		salvarDF();
 	}
-	
+
+	private void searchBegin() {
+		// TODO Auto-generated method stub
+		Row r;
+		Cell c;
+		for(int i = 0; i < visit.length; i++) {
+			r = sheet.getRow(i);
+			for(int j = 0; j < visit[0].length; j++) {
+				c = r.getCell(j);
+				if(c.getStringCellValue().equals(".")) {
+					posRowIniData = i;
+					posCellIniData = j;
+				}
+			}
+		}
+	}
+
 	/**
 	 * Metodo que sirve para setear los bounds de un contenedor en el dataform
 	 * @param graphicalContainer contenedor al cual se le quiere setear los bounds
@@ -349,46 +412,34 @@ public class DataformGeneration{
 		 */
 		int nmax = sheet.getLastRowNum()+1;
 		
-		//Ubicacion en X del primer Combo
-		int primerComboX=0;
-		
-		//Ubicacion en Y del segundo Combo
-		int primerComboY=0;
-		
 		//Objeto necesario para obtener una celda en el excel
 		Cell c;
 		//Obejto necesario para obtener una fila en el excel
 		Row r = null;
 		
 		//Recorre la hoja hasta encontrar el primer Combo
-		iteradorI: for (int i = 0; i <nmax; i++) {
+		for (int i = 0; i <nmax; i++) {
 			r =  sheet.getRow(i);
         	if(r == null) continue;
         	for (int j = 0; j <r.getLastCellNum(); j++) {
 	    		c = r.getCell(j);
 	            if(c != null && getCellValue(c).equals("*") ) { 
-	            	//Es combo
-	            	primerComboX=i;
-	            	primerComboY=j-1;
-	            	break iteradorI;
+	            	//Es combo          	
+	            	listComboBox.add(getCellValue(c));
+	    			listComboCordinate.add(new Coordinate(i, j-1));
+	    			visit[i][j] = visit[i][j-1]= ++nContainers;
+	    			c = r.getCell(j-1);
+	    			
+	    			ComboView combo =  ConcretaFactory.eINSTANCE.createComboView();
+	    			combo.setName(getCellValue(c));
+	    			setBoundsGraphicalContainer(combo, 0 , 0, 200, 50);
+	    			ItemCombo item = ConcretaFactory.eINSTANCE.createItemCombo();
+	    			item.setName("nombre");
+	    			combo.getListIndividualElementDataForm().add(item);
+	    			interface1.getListGraphicalContainer().add(combo);
 	            }
 	        }
-	    }
-		
-		/* Se recorre verticalmente de arriba hacia abajo
-		 * para encontrar las profundidades del viewModel
-		 * y se agregan los nombres de los combo a la 
-		 * lista de combox
-		*/
- 		c = r.getCell(primerComboY);
-		while(c!=null &&  c.getCellType()!=Cell.CELL_TYPE_BLANK){
-			listComboBox.add(getCellValue(c));
-			primerComboX++;
-			r =  sheet.getRow(primerComboX);
-			if(r==null)
-				break;
-			c = r.getCell(primerComboY);
-		}	
+	    }	
 	}	 
 	
 	/**
@@ -400,9 +451,6 @@ public class DataformGeneration{
 	 * @throws IOException
 	 */
 	public void getExtraInformation() throws IOException{
-	
-        //Se obtienen los combobox
-        getOrderViewModel();
         
         //Se recorre la hoja para extraer la futura 
         recorrerHoja();
@@ -751,6 +799,7 @@ public class DataformGeneration{
 			Coordinate coordinates= getCoordinates(inicio);
 			Coordinate size = getSizes(inicio, fin);
 			coordenadasInicioContenedores.add(coordinates);
+			coordenadasFinContenedores.add( getCoordinates(fin));
 			
 			//Se obtienen las columnas
 			NodeList nList = doc.getElementsByTagName("tableColumn");
@@ -877,21 +926,26 @@ public class DataformGeneration{
 			int x = coordenadasInicioContenedores.get(i).getX();
 			int y = coordenadasInicioContenedores.get(i).getY();
 			
+			int y2 = coordenadasFinContenedores.get(i).getY();
+			
 			int h = getAmountContainersH(y);
 			int v = getAmountContainersV(x);
+			
+			int sp = getSpacesV(x, y, y2) - nx;
+			
 			int contenedor = visit[x][y] -1;
 			
 			int xs= h*100 + 40;
 			
 			if(h>0)
-			 xs+=( (y-h-ny))*40 + 40;
+			 xs+= ( (y-h-ny) )*40 + 40;
 			
 			int ys = (v*20)+ 25;
 			
-			int s  = (x-v-nx);
+			int s  = (x-v-nx) ;
 			
 			if(v>0)
-			 ys+= (s*40)+(s*35);
+			 ys+= (s*20) + (sp*20) ;
 			
 			interface1.getListGraphicalContainer().get(contenedor).setPositionX(xs);
 			interface1.getListGraphicalContainer().get(contenedor).setPositionY(ys);
@@ -1039,7 +1093,7 @@ public class DataformGeneration{
 	            		continue;
 	            	
 	            	Container containerTablas = createContainer(i, j);
-	            	coordenadasInicioContenedores.add(new Coordinate(i, j));
+	            	
 	         		interface1.getListGraphicalContainer().add(containerTablas);
 	            }
 	        }
@@ -1064,7 +1118,10 @@ public class DataformGeneration{
     	//Se ordenan las celdas encontradas
     	Collections.sort(res);
     	
+    	
     	int m = res.size(); 	
+    	coordenadasInicioContenedores.add(res.get(0));
+    	coordenadasFinContenedores.add(res.get(m-1));
     	
     	//Se extraen las dimenciones del contenedor que contendra a las celdas encontradas
     	String key =res.get(0).getX() +"-"+ res.get(0).getY() +":" + res.get(m-1).getX() +"-" + res.get(m-1).getY();
@@ -1134,6 +1191,21 @@ public class DataformGeneration{
 		return res;
 	}
 	
+	
+	public int getSpacesV(int y, int x1 , int x2){
+		int res=0;
+		for(int i=y-1;i>=0;i--){
+			boolean f = true;
+			for(int j =x1;j<=x2;j++){
+				if(visit[i][j]!=0){
+					f=false;
+					break;
+				}
+			}
+			if(f) res++;
+		}
+		return res;
+	}
 	/**
 	 * Este metodo sirve para contar cuantos
 	 * Contenedores existen desde 0 hasta la columna j
@@ -1153,7 +1225,7 @@ public class DataformGeneration{
 				if(visit[j][i]!=0){
 					res++;
 					break;
-			}
+			    }
 		return res;
 	}
 	

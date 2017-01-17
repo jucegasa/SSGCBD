@@ -75,7 +75,7 @@ public class Reportes extends ViewPart {
 				}
 			}
 		});
-		btnGenerarReporte.setBounds(30, 30, 120, 25);
+		btnGenerarReporte.setBounds(30, 132, 120, 25);
 		
 		Button btnGenerardataform = new Button(container, SWT.NONE);
 		btnGenerardataform.addSelectionListener(new SelectionAdapter() {
@@ -110,7 +110,7 @@ public class Reportes extends ViewPart {
 				}
 			}
 		});
-		btnGenerardataform.setBounds(180, 30, 120, 25);
+		btnGenerardataform.setBounds(30, 30, 120, 25);
 		toolkit.adapt(btnGenerardataform, true, true);
 		btnGenerardataform.setText("GenerarDataform");
 		
@@ -123,9 +123,31 @@ public class Reportes extends ViewPart {
 				dfDG.generateDiagram();
 			}
 		});
-		btnGenerarDiagrama.setBounds(330, 30, 107, 25);
+		btnGenerarDiagrama.setBounds(175, 30, 107, 25);
 		toolkit.adapt(btnGenerarDiagrama, true, true);
 		btnGenerarDiagrama.setText("Generar Diagrama");
+		
+		Button btnGenetarExcel = new Button(container, SWT.NONE);
+		btnGenetarExcel.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				JFileChooser file=new JFileChooser();
+				file.showOpenDialog(null);
+				String s = file.getSelectedFile().getName();
+				String root = file.getSelectedFile().getAbsolutePath();
+				try {
+					ExcelGenerator eG = new ExcelGenerator(root, g.getListComboBox(), g.getListComboCordinate(), 
+							g.getPosRowIniData(), g.getPosCellIniData());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnGenetarExcel.setBounds(310, 30, 101, 25);
+		toolkit.adapt(btnGenetarExcel, true, true);
+		btnGenetarExcel.setText("Genetar Excel");
 		createActions();
 		initializeToolBar();
 		initializeMenu();

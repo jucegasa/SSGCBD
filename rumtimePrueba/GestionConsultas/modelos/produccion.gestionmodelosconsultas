@@ -215,114 +215,120 @@
   <factoryModeloConsultas>
     <listModeloConsulta>
       <realizacionDiagramEntity>
-        <listElementoRealizacionDiagramEntity nombreModelElementEntity="actor" modelElementEntity="//@diagramEntity/@listEntity.2"/>
-        <listElementoRealizacionDiagramEntity nombreModelElementEntity="unidadorganizacional" modelElementEntity="//@diagramEntity/@listEntity.6">
-          <listElementoRealizacionAttribute nombre="0" valueAttribute="//@diagramEntity/@listEntity.6/@listAttributes.1" values="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listValues.0"/>
-        </listElementoRealizacionDiagramEntity>
-        <listElementoRealizacionDiagramEntity nombreModelElementEntity="documento" modelElementEntity="//@diagramEntity/@listEntity.10">
-          <listElementoRealizacionAttribute nombre="2" valueAttribute="//@diagramEntity/@listEntity.10/@listAttributes.12" values="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listValues.2"/>
-        </listElementoRealizacionDiagramEntity>
-        <listElementoRealizacionDiagramEntity nombreModelElementEntity="contacto" modelElementEntity="//@diagramEntity/@listEntity.12">
-          <listElementoRealizacionAttribute nombre="1" valueAttribute="//@diagramEntity/@listEntity.12/@listAttributes.6" values="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listValues.1"/>
-        </listElementoRealizacionDiagramEntity>
+        <listElementoRealizacionDiagramEntity nombreModelElementEntity="unidadorganizacional" modelElementEntity="//@diagramEntity/@listEntity.6"/>
+        <listElementoRealizacionDiagramEntity nombreModelElementEntity="documento" modelElementEntity="//@diagramEntity/@listEntity.10"/>
+        <listElementoRealizacionDiagramEntity nombreModelElementEntity="contacto" modelElementEntity="//@diagramEntity/@listEntity.12"/>
         <listElementoRealizacionDiagramEntity nombreModelElementEntity="comunicacion" modelElementEntity="//@diagramEntity/@listEntity.13"/>
         <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="comunicacion_contacto" modelElementEntity="//@diagramEntity/@listEntityRelation.15"/>
         <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="comunicacion_documento" modelElementEntity="//@diagramEntity/@listEntityRelation.18"/>
-        <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="actor_quien" modelElementEntity="//@diagramEntity/@listEntityRelation.1"/>
-        <listElementoRealizacionDiagramEntity nombreModelElementEntity="quien" modelElementEntity="//@diagramEntity/@listEntity.0"/>
-        <listElementoRealizacionDiagramEntity nombreModelElementEntity="contactoquien" modelElementEntity="//@diagramEntity/@listEntity.4"/>
-        <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="contactoquien_quien" modelElementEntity="//@diagramEntity/@listEntityRelation.0"/>
-        <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="contactoquien_contacto" modelElementEntity="//@diagramEntity/@listEntityRelation.12"/>
         <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="rol_unidadorganizacional" modelElementEntity="//@diagramEntity/@listEntityRelation.4"/>
         <listElementoRealizacionDiagramEntity nombreModelElementEntity="rol" modelElementEntity="//@diagramEntity/@listEntity.1"/>
         <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="actorrol_rol" modelElementEntity="//@diagramEntity/@listEntityRelation.5"/>
         <listElementoRealizacionDiagramEntity nombreModelElementEntity="actorrol" modelElementEntity="//@diagramEntity/@listEntity.3"/>
         <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="actorrol_actor" modelElementEntity="//@diagramEntity/@listEntityRelation.6"/>
-        <realizacionVisibleAttribute nombre="Seleccion" visibleAttribute="//@diagramEntity/@listEntity.6/@listAttributes.1 //@diagramEntity/@listEntity.12/@listAttributes.6 //@diagramEntity/@listEntity.12/@listAttributes.7 //@diagramEntity/@listEntity.12/@listAttributes.1 //@diagramEntity/@listEntity.10/@listAttributes.12"/>
-        <listValues value="Grupo de investigacion SINFOCI" ElementoRealizacionValueAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.1/@listElementoRealizacionAttribute.0"/>
-        <listValues value="wjgiraldo" ElementoRealizacionValueAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.3/@listElementoRealizacionAttribute.0"/>
-        <listValues value="Memorando" ElementoRealizacionValueAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.2/@listElementoRealizacionAttribute.0"/>
+        <listElementoRealizacionDiagramEntity nombreModelElementEntity="actor" modelElementEntity="//@diagramEntity/@listEntity.2"/>
+        <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="actor_quien" modelElementEntity="//@diagramEntity/@listEntityRelation.1"/>
+        <listElementoRealizacionDiagramEntity nombreModelElementEntity="quien" modelElementEntity="//@diagramEntity/@listEntity.0"/>
+        <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="contactoquien_quien" modelElementEntity="//@diagramEntity/@listEntityRelation.0"/>
+        <listElementoRealizacionDiagramEntity nombreModelElementEntity="contactoquien" modelElementEntity="//@diagramEntity/@listEntity.4"/>
+        <listElementoRealizacionDiagramEntity tipo="relation" nombreModelElementEntity="contactoquien_contacto" modelElementEntity="//@diagramEntity/@listEntityRelation.12"/>
+        <realizacionVisibleAttribute nombre="Seleccion" visibleAttribute="//@diagramEntity/@listEntity.6/@listAttributes.1 //@diagramEntity/@listEntity.12/@listAttributes.6 //@diagramEntity/@listEntity.12/@listAttributes.7 //@diagramEntity/@listEntity.12/@listAttributes.1 //@diagramEntity/@listEntity.10/@listAttributes.12 //@diagramEntity/@listEntity.10/@listAttributes.0 //@diagramEntity/@listEntity.10/@listAttributes.10 //@diagramEntity/@listEntity.13/@listAttributes.0 //@diagramEntity/@listEntity.13/@listAttributes.1"/>
       </realizacionDiagramEntity>
       <listEADiagram xsi:type="gestionmodelosconsultas.modeloconsultas.model:Proyeccion">
         <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.1" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.0"/>
         <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.3" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.1"/>
         <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.2" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.3"/>
-        <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.4" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.0/@listElementoConsulta.1"/>
         <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:UnidadOrganizacional">
-          <listCampos nombreCampo="nombre" criterio="Grupo de investigacion SINFOCI" seleccion="true"/>
+          <listCampos nombreCampo="nombre" criterio=""/>
         </listElementoConsulta>
         <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:Contacto">
-          <listCampos nombreCampo="username" criterio="wjgiraldo" seleccion="true"/>
+          <listCampos nombreCampo="username" criterio=""/>
           <listCampos nombreCampo="password" seleccion="true"/>
           <listCampos nombreCampo="nombre" seleccion="true"/>
         </listElementoConsulta>
         <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.que:Documento">
-          <listCampos nombreCampo="tipo" criterio="Memorando" seleccion="true"/>
+          <listCampos nombreCampo="tipo" criterio=""/>
           <listCampos nombreCampo="idDocumento"/>
+          <listCampos nombreCampo="fechaCreacion"/>
         </listElementoConsulta>
         <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.que:Comunicacion">
           <listCampos nombreCampo="idComunicacion"/>
           <listCampos nombreCampo="asunto"/>
         </listElementoConsulta>
-        <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:Actor">
-          <listCampos nombreCampo="nombre"/>
-          <listCampos nombreCampo="apellido"/>
-          <listCampos nombreCampo="email"/>
-        </listElementoConsulta>
       </listEADiagram>
       <listEADiagram xsi:type="gestionmodelosconsultas.modeloconsultas.model:ViewModel">
+        <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.1" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.0"/>
         <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.2" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.1"/>
-        <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.0" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.2"/>
-        <listRelacion target="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.3" source="//@factoryModeloConsultas/@listModeloConsulta.0/@listEADiagram.1/@listElementoConsulta.2"/>
-        <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.que:Documento" order="3"/>
         <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:UnidadOrganizacional" nombre="" order="1"/>
         <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:Contacto" order="2"/>
-        <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.quien:Actor" order="3"/>
+        <listElementoConsulta xsi:type="gestionmodelosconsultas.modeloconsultas.que:Comunicacion" order="3"/>
       </listEADiagram>
       <listResultado>
         <listResultElement xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:UnidadOrganizacional" key="22" nombre="Grupo de investigacion SINFOCI">
+          <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Contacto" key="6" username="jucegasa" password="950128" nombre="Julio Cesar Garcia Sabogal">
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="1" asunto="Trabajo de grado"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="10" asunto="Reunion Trabajo de Grado">
+              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="10" asunto="Reunion Trabajo de Grado"/>
+            </listElementoModeloResultado>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="2" asunto="Citacion trabajo de grado"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="8" asunto="Trabajo de grado"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="9" asunto="Herramienta funcionando"/>
+          </listElementoModeloResultado>
           <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Contacto" key="4" username="wjgiraldo" password="16786435" nombre="William Joseph Giraldo Orozco">
-            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Documento" key="4" tipo="Memorando">
-              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Actor" key="16786435"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="3" asunto="Trabajo de grado"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="4" asunto="Firma del anteproyecto"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="5" asunto="Revision Trabajo de Grado"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="6" asunto="Reuni&#xc3;&#xb3;n Trabajo de Grado"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="7" asunto="Horarios Trabajo de Grado"/>
+          </listElementoModeloResultado>
+        </listResultElement>
+        <listResultElement xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:UnidadOrganizacional" key="16" nombre="Ingenieria Civil">
+          <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Contacto" key="24" username="cacivil_uq" password="cacivil_uq" nombre="Carlos Arturo Garcia Ocampo">
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="11" asunto="Acreditacion"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="12" asunto="Acreditacion"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="13" asunto="Acreditacion"/>
+          </listElementoModeloResultado>
+          <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:UnidadOrganizacional" key="16" nombre="Ingenieria Civil">
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Contacto" key="24" username="cacivil_uq" password="cacivil_uq" nombre="Carlos Arturo Garcia Ocampo">
+              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="11" asunto="Acreditacion"/>
+              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="12" asunto="Acreditacion"/>
+              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="13" asunto="Acreditacion"/>
             </listElementoModeloResultado>
-            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Documento" key="5" tipo="Memorando">
-              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Actor" key="16786435"/>
-            </listElementoModeloResultado>
-            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Documento" key="6" tipo="Memorando">
-              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Actor" key="16786435"/>
-            </listElementoModeloResultado>
-            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Documento" key="7" tipo="Memorando">
-              <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Actor" key="16786435"/>
-            </listElementoModeloResultado>
+          </listElementoModeloResultado>
+        </listResultElement>
+        <listResultElement xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:UnidadOrganizacional" key="17" nombre="Ingenieria Electronica">
+          <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultquien:Contacto" key="23" username="jorgemarin" password="jorgemarin" nombre="Jorge Ivan Marin Hurtado">
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="14" asunto="Reunion Concejo Curricular"/>
+            <listElementoModeloResultado xsi:type="gestionmodelosconsultas.modeloconsultas.resultset.resultque:Comunicacion" key="15" asunto="Acuerdo Reunion "/>
           </listElementoModeloResultado>
         </listResultElement>
       </listResultado>
     </listModeloConsulta>
   </factoryModeloConsultas>
   <diagramEntity>
-    <listEntity name="quien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.8">
+    <listEntity name="quien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.13">
       <listAttributes name="idQuien" attributeType="primaryKey"/>
       <listAttributes name="tipo"/>
     </listEntity>
-    <listEntity name="rol" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.13">
+    <listEntity name="rol" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.7">
       <listAttributes name="idRol" attributeType="primaryKey"/>
       <listAttributes name="nombre"/>
       <listAttributes name="descripcion"/>
       <listAttributes name="unidadOrganizacional"/>
     </listEntity>
-    <listEntity name="actor" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.0">
+    <listEntity name="actor" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.11">
       <listAttributes name="idActor" value="" attributeType="primaryKey"/>
       <listAttributes name="nombre"/>
       <listAttributes name="apellido"/>
       <listAttributes name="email"/>
       <listAttributes name="descripcion"/>
     </listEntity>
-    <listEntity xsi:type="gestionmodelosconsultas.entitymodel:AssociativeEntity" name="actorrol" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.15">
+    <listEntity xsi:type="gestionmodelosconsultas.entitymodel:AssociativeEntity" name="actorrol" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.9">
       <listAttributes name="idRolActor" attributeType="primaryKey"/>
       <listAttributes name="actor"/>
       <listAttributes name="rol"/>
     </listEntity>
-    <listEntity xsi:type="gestionmodelosconsultas.entitymodel:AssociativeEntity" name="contactoquien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.9">
+    <listEntity xsi:type="gestionmodelosconsultas.entitymodel:AssociativeEntity" name="contactoquien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.15">
       <listAttributes name="idContactoQuien" attributeType="primaryKey"/>
       <listAttributes name="contacto"/>
       <listAttributes name="quien"/>
@@ -332,9 +338,9 @@
       <listAttributes name="actor"/>
       <listAttributes name="actividadProceso"/>
     </listEntity>
-    <listEntity name="unidadorganizacional" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.1">
+    <listEntity name="unidadorganizacional" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.0">
       <listAttributes name="idUnidadOrganizacional" attributeType="primaryKey"/>
-      <listAttributes name="nombre" ElementoRealizacionValueAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.1/@listElementoRealizacionAttribute.0" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
+      <listAttributes name="nombre" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="descripcion"/>
       <listAttributes name="edificio"/>
       <listAttributes name="unidadOrganizacional"/>
@@ -360,8 +366,8 @@
       <listAttributes name="actividadProceso"/>
       <listAttributes name="documento"/>
     </listEntity>
-    <listEntity name="documento" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.2">
-      <listAttributes name="idDocumento" attributeType="primaryKey"/>
+    <listEntity name="documento" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.1">
+      <listAttributes name="idDocumento" attributeType="primaryKey" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="titulo"/>
       <listAttributes name="descripcion"/>
       <listAttributes name="edicion"/>
@@ -371,9 +377,9 @@
       <listAttributes name="orientacion"/>
       <listAttributes name="tipoDocumento"/>
       <listAttributes name="tabladeretenciondocumental"/>
-      <listAttributes name="fechaCreacion"/>
+      <listAttributes name="fechaCreacion" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="anexo"/>
-      <listAttributes name="tipo" ElementoRealizacionValueAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.2/@listElementoRealizacionAttribute.0" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
+      <listAttributes name="tipo" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="comentarios"/>
     </listEntity>
     <listEntity xsi:type="gestionmodelosconsultas.entitymodel:AssociativeEntity" name="autordocumento">
@@ -382,20 +388,20 @@
       <listAttributes name="documento"/>
       <listAttributes name="descripcionModificacion"/>
     </listEntity>
-    <listEntity name="contacto" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.3">
+    <listEntity name="contacto" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.2">
       <listAttributes name="idContacto" attributeType="primaryKey"/>
       <listAttributes name="nombre" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="email"/>
       <listAttributes name="telefono"/>
       <listAttributes name="direccion"/>
       <listAttributes name="directorio"/>
-      <listAttributes name="username" ElementoRealizacionValueAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.3/@listElementoRealizacionAttribute.0" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
+      <listAttributes name="username" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="password" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="descripcion"/>
     </listEntity>
-    <listEntity name="comunicacion" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.4">
-      <listAttributes name="idComunicacion" attributeType="primaryKey"/>
-      <listAttributes name="asunto"/>
+    <listEntity name="comunicacion" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.3">
+      <listAttributes name="idComunicacion" attributeType="primaryKey" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
+      <listAttributes name="asunto" ElementoRealizacionVisibleAttribute="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@realizacionVisibleAttribute"/>
       <listAttributes name="contenidoCom"/>
       <listAttributes name="estado"/>
       <listAttributes name="remitente"/>
@@ -432,25 +438,25 @@
       <listAttributes name="idArmario" attributeType="primaryKey"/>
       <listAttributes name="descripcion"/>
     </listEntity>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="contactoquien_quien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.10" atributteForeingKeySource="quien" atributtePrimaryKeyTarget="idQuien" source="//@diagramEntity/@listEntity.4" target="//@diagramEntity/@listEntity.0"/>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actor_quien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.7" atributteForeingKeySource="idActor" atributtePrimaryKeyTarget="idQuien" multiplicitySource="one_to_one" multiplicityTarget="one_to_one" source="//@diagramEntity/@listEntity.2" target="//@diagramEntity/@listEntity.0"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="contactoquien_quien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.14" atributteForeingKeySource="quien" atributtePrimaryKeyTarget="idQuien" source="//@diagramEntity/@listEntity.4" target="//@diagramEntity/@listEntity.0"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actor_quien" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.12" atributteForeingKeySource="idActor" atributtePrimaryKeyTarget="idQuien" multiplicitySource="one_to_one" multiplicityTarget="one_to_one" source="//@diagramEntity/@listEntity.2" target="//@diagramEntity/@listEntity.0"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="rol_quien" atributteForeingKeySource="idRol" atributtePrimaryKeyTarget="idQuien" multiplicitySource="one_to_one" multiplicityTarget="one_to_one" source="//@diagramEntity/@listEntity.1" target="//@diagramEntity/@listEntity.0"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="unidadorganizacional_quien" atributteForeingKeySource="idUnidadOrganizacional" atributtePrimaryKeyTarget="idQuien" multiplicitySource="one_to_one" multiplicityTarget="one_to_one" source="//@diagramEntity/@listEntity.6" target="//@diagramEntity/@listEntity.0"/>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="rol_unidadorganizacional" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.12" atributteForeingKeySource="unidadOrganizacional" atributtePrimaryKeyTarget="idUnidadOrganizacional" source="//@diagramEntity/@listEntity.1" target="//@diagramEntity/@listEntity.6"/>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actorrol_rol" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.14" atributteForeingKeySource="rol" atributtePrimaryKeyTarget="idRol" source="//@diagramEntity/@listEntity.3" target="//@diagramEntity/@listEntity.1"/>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actorrol_actor" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.16" atributteForeingKeySource="actor" atributtePrimaryKeyTarget="idActor" source="//@diagramEntity/@listEntity.3" target="//@diagramEntity/@listEntity.2"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="rol_unidadorganizacional" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.6" atributteForeingKeySource="unidadOrganizacional" atributtePrimaryKeyTarget="idUnidadOrganizacional" source="//@diagramEntity/@listEntity.1" target="//@diagramEntity/@listEntity.6"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actorrol_rol" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.8" atributteForeingKeySource="rol" atributtePrimaryKeyTarget="idRol" source="//@diagramEntity/@listEntity.3" target="//@diagramEntity/@listEntity.1"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actorrol_actor" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.10" atributteForeingKeySource="actor" atributtePrimaryKeyTarget="idActor" source="//@diagramEntity/@listEntity.3" target="//@diagramEntity/@listEntity.2"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actoractividadproceso_actor" atributteForeingKeySource="actor" atributtePrimaryKeyTarget="idActor" source="//@diagramEntity/@listEntity.5" target="//@diagramEntity/@listEntity.2"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actoractividadproceso_actividadproceso" atributteForeingKeySource="actividadProceso" atributtePrimaryKeyTarget="idActividadProceso" source="//@diagramEntity/@listEntity.5" target="//@diagramEntity/@listEntity.8"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="instanciaproceso_unidadorganizacional" atributteForeingKeySource="unidadOrganizacional" atributtePrimaryKeyTarget="idUnidadOrganizacional" source="//@diagramEntity/@listEntity.7" target="//@diagramEntity/@listEntity.6"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="actividadproceso_instanciaproceso" atributteForeingKeySource="instanciaProceso" atributtePrimaryKeyTarget="idInstanciaProceso" source="//@diagramEntity/@listEntity.8" target="//@diagramEntity/@listEntity.7"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="documentoactividad_actividadproceso" atributteForeingKeySource="actividadProceso" atributtePrimaryKeyTarget="idActividadProceso" source="//@diagramEntity/@listEntity.9" target="//@diagramEntity/@listEntity.8"/>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="contactoquien_contacto" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.11" atributteForeingKeySource="contacto" atributtePrimaryKeyTarget="idContacto" source="//@diagramEntity/@listEntity.4" target="//@diagramEntity/@listEntity.12"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="contactoquien_contacto" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.16" atributteForeingKeySource="contacto" atributtePrimaryKeyTarget="idContacto" source="//@diagramEntity/@listEntity.4" target="//@diagramEntity/@listEntity.12"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="documentoactividad_documento" atributteForeingKeySource="documento" atributtePrimaryKeyTarget="idDocumento" source="//@diagramEntity/@listEntity.9" target="//@diagramEntity/@listEntity.10"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="instanciaproceso_actor" atributteForeingKeySource="responsable" atributtePrimaryKeyTarget="idActor" source="//@diagramEntity/@listEntity.7" target="//@diagramEntity/@listEntity.2"/>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="comunicacion_contacto" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.5" atributteForeingKeySource="remitente" atributtePrimaryKeyTarget="idContacto" source="//@diagramEntity/@listEntity.13" target="//@diagramEntity/@listEntity.12"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="comunicacion_contacto" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.4" atributteForeingKeySource="remitente" atributtePrimaryKeyTarget="idContacto" source="//@diagramEntity/@listEntity.13" target="//@diagramEntity/@listEntity.12"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="autordocumento_documento" atributteForeingKeySource="documento" atributtePrimaryKeyTarget="idDocumento" source="//@diagramEntity/@listEntity.11" target="//@diagramEntity/@listEntity.10"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="autordocumento_actor" atributteForeingKeySource="actor" atributtePrimaryKeyTarget="idActor" source="//@diagramEntity/@listEntity.11" target="//@diagramEntity/@listEntity.2"/>
-    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="comunicacion_documento" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.6" atributteForeingKeySource="idComunicacion" atributtePrimaryKeyTarget="idDocumento" multiplicitySource="one_to_one" multiplicityTarget="one_to_one" source="//@diagramEntity/@listEntity.13" target="//@diagramEntity/@listEntity.10"/>
+    <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="comunicacion_documento" ElementoRealizacionDiagramEntity="//@factoryModeloConsultas/@listModeloConsulta.0/@realizacionDiagramEntity/@listElementoRealizacionDiagramEntity.5" atributteForeingKeySource="idComunicacion" atributtePrimaryKeyTarget="idDocumento" multiplicitySource="one_to_one" multiplicityTarget="one_to_one" source="//@diagramEntity/@listEntity.13" target="//@diagramEntity/@listEntity.10"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="producto_documento" atributteForeingKeySource="documento" atributtePrimaryKeyTarget="idDocumento" source="//@diagramEntity/@listEntity.14" target="//@diagramEntity/@listEntity.10"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="documento_documento" atributteForeingKeySource="documentobase" atributtePrimaryKeyTarget="idDocumento" source="//@diagramEntity/@listEntity.10" target="//@diagramEntity/@listEntity.10"/>
     <listEntityRelation xsi:type="gestionmodelosconsultas.entitymodel:SimpleRelation" name="unidadorganizacional_unidadorganizacional" atributteForeingKeySource="unidadOrganizacional" atributtePrimaryKeyTarget="idUnidadOrganizacional" source="//@diagramEntity/@listEntity.6" target="//@diagramEntity/@listEntity.6"/>
