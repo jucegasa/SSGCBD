@@ -33,7 +33,7 @@ public class Reportes extends ViewPart {
 
 	ModelFactory modelFactory;
 	
-	DataformGeneration g;
+	DataformGenerator g;
 	
 	public Reportes() {
 		inicializar();
@@ -88,7 +88,7 @@ public class Reportes extends ViewPart {
 				   Unzip unzip = new Unzip();
 				   unzip.unzip(root,s);
 				   String url = unzip.getDir(s);
-				   g = new DataformGeneration(url,root);
+				   g = new DataformGenerator(url,root);
 				try {
 					g.generate();
 					JOptionPane.showMessageDialog(null,"se genero");
@@ -119,7 +119,7 @@ public class Reportes extends ViewPart {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				DataformDiagramGeneration dfDG = new DataformDiagramGeneration(g.modelFactory);
+				DataformDiagramGenerator dfDG = new DataformDiagramGenerator(g.modelFactory);
 				dfDG.generateDiagram();
 			}
 		});

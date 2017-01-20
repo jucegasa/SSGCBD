@@ -33,7 +33,7 @@ public class Unzip {
 		Enumeration<?> entries;
 		ZipFile zipFile;
 		
-		String dir = getDir(di)+"/";
+		String dir = "OpenXML/" + getDir(di)+"/";
 		
 		System.out.println(dir);
 		try {
