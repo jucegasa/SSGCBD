@@ -90,6 +90,12 @@ public class DataformGenerator{
 	 protected Interface interface1;
 	 
 	 /**
+	  * Contenedor Principal que contiene todos
+	  * los elementos de la interfaz
+	  */
+	 protected Container container;
+	 
+	 /**
 	  * Contiene la ruta de los archivos xmls
 	  * extraidos en el excel
 	  */
@@ -199,6 +205,11 @@ public class DataformGenerator{
 	
 	protected int posCellIniData;
 	
+	protected String nombresComboBox[];
+	
+	protected Coordinate coordenadasComboBox[];
+	
+	protected int cantidadCombos; 
 	 
 	//--------------------------------------------------------
 	//Constructor
@@ -217,6 +228,10 @@ public class DataformGenerator{
 		 tablas = new ArrayList<GraphicalContainer>();
 		 coordenadasInicioContenedores = new ArrayList<Coordinate>();
 		 coordenadasFinContenedores  = new ArrayList<Coordinate>();
+		 
+		 nombresComboBox = new String [100];
+		 coordenadasComboBox = new Coordinate[100];
+		 
 	 }
 	 
 	//--------------------------------------------------------
@@ -274,8 +289,12 @@ public class DataformGenerator{
 	    libro = WorkbookFactory.create(is);
 	    sheet = libro.getSheetAt(0);
 	    
-	    
 	    getOrderViewModel();
+	    
+	    for(int i=0;i < cantidadCombos ;i++ ){
+	    	listComboBox.add(nombresComboBox[i]);
+	    	listComboCordinate.add(coordenadasComboBox[i]);
+	    }
 	    
         //Se realiza identifican y se agregan las mergedRegions
 	    identifyMergedRegions();
@@ -384,9 +403,12 @@ public class DataformGenerator{
 		dataformDiagram = ConcretaFactory.eINSTANCE.createDataForm_Diagram();
 		domainDiagram   = CoreFactory.eINSTANCE.createDomain_Diagram();
 		interface1      = ConcretaFactory.eINSTANCE.createInterface();
+		container       = ConcretaFactory.eINSTANCE.createContainer();
+		
 		
 		//Se dan las dimensiones y ubicacion de la interfaz
-		setBoundsGraphicalContainer(interface1, 10, 10 ,size.getX()  + 80, size.getY() + 60);	
+		setBoundsGraphicalContainer(interface1, 10, 10 ,size.getX()  + 120, size.getY() + 100);	
+		setBoundsGraphicalContainer(container, 15, 15, size.getX()  + 80, size.getX()  + 60);
 		
 		/*Se relacionan adecuadamente los objetos incializados anteriormente
 		 *Para generar un dataform sin errores
@@ -403,8 +425,12 @@ public class DataformGenerator{
 		project.getListDiagram().add(domainDiagram);
 		project.getListDataFormDiagram().add(dataformDiagram);
 		project.setTheModelFactory(modelFactory);
+		
+		interface1.getListGraphicalContainer().add(container);
+		
 		modelFactory.getListProyecto().add(project);
 	}
+	
 	
 	/**
 	 * Metodo que obtiene los combobox que estan en el reporte.
@@ -422,18 +448,27 @@ public class DataformGenerator{
 		//Obejto necesario para obtener una fila en el excel
 		Row r = null;
 		
+		cantidadCombos = 0;
 		//Recorre la hoja hasta encontrar el primer Combo
 		for (int i = 0; i <nmax; i++) {
 			r =  sheet.getRow(i);
         	if(r == null) continue;
         	for (int j = 0; j <r.getLastCellNum(); j++) {
 	    		c = r.getCell(j);
-	            if(c != null && getCellValue(c).equals("*") ) { 
+	            
+	    		if(c != null && getCellValue(c).contains("*") ) { 
 	            	//Es combo          	
-	            	listComboBox.add(getCellValue(c));
-	    			listComboCordinate.add(new Coordinate(i, j-1));
+	    			
+	    			int id = Integer.parseInt( getCellValue(c).substring(1) );
+	    			
+	    			//listComboCordinate.add(new Coordinate(i, j-1));
+	    			
 	    			visit[i][j] = visit[i][j-1]= ++nContainers;
+	    			
 	    			c = r.getCell(j-1);
+	    			
+	    			nombresComboBox[id-1]= getCellValue(c);
+	    			coordenadasComboBox[id-1]= new Coordinate(i, j);
 	    			
 	    			ComboView combo =  ConcretaFactory.eINSTANCE.createComboView();
 	    			combo.setName(getCellValue(c));
@@ -441,11 +476,14 @@ public class DataformGenerator{
 	    			ItemCombo item = ConcretaFactory.eINSTANCE.createItemCombo();
 	    			item.setName("nombre");
 	    			combo.setTheItem(item);
-	    			interface1.getListGraphicalContainer().add(combo);
+	    			container .getListGraphicalContainer().add(combo);
+	    			cantidadCombos++;
 	            }
 	        }
-	    }	
-	}	 
+	    }
+	}	
+	
+
 	
 	/**
 	 * Este metodo se encarga de identificar, extraer y marcar
@@ -489,7 +527,7 @@ public class DataformGenerator{
 				MergedRegion mergeRegion = new MergedRegion(textRange, range.getFirstColumn(), range.getLastColumn(), 
 						range.getFirstRow(), range.getLastRow());
 				GraphicalContainer container = exploreMergedRegios(mergeRegion);
-				interface1.getListGraphicalContainer().add(container);
+				this.container.getListGraphicalContainer().add(container);
 				visitRegion(mergeRegion);
 				nContainers++;
 			}	
@@ -508,7 +546,6 @@ public class DataformGenerator{
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	
@@ -877,7 +914,7 @@ public class DataformGenerator{
 			
 			tablas.add(containerTablas);
 			//Se agrega el contendor a la interfaz 
-			interface1.getListGraphicalContainer().add(containerTablas);
+			container.getListGraphicalContainer().add(containerTablas);
 		}	
 	}
 	
@@ -978,8 +1015,8 @@ public class DataformGenerator{
 			if(v>0)
 			 ys+= c + (s* 15);
 			
-			interface1.getListGraphicalContainer().get(contenedor).setPositionX(xs);
-			interface1.getListGraphicalContainer().get(contenedor).setPositionY(ys);
+			container.getListGraphicalContainer().get(contenedor).setPositionX(xs);
+			container.getListGraphicalContainer().get(contenedor).setPositionY(ys);
 		}
 	}
 	
@@ -1125,7 +1162,7 @@ public class DataformGenerator{
 	            	
 	            	Container containerTablas = createContainer(i, j);
 	            	
-	         		interface1.getListGraphicalContainer().add(containerTablas);
+	         		container.getListGraphicalContainer().add(containerTablas);
 	            }
 	        }
 	    }
@@ -1399,7 +1436,24 @@ public class DataformGenerator{
 		}
 		return res;
 	}
-		
+	
+	
+	public String[] getNombresComboBox() {
+		return nombresComboBox;
+	}
+
+	public void setNombresComboBox(String[] nombresComboBox) {
+		this.nombresComboBox = nombresComboBox;
+	}
+
+	public int getCantidadCombos() {
+		return cantidadCombos;
+	}
+
+	public void setCantidadCombos(int cantidadCombos) {
+		this.cantidadCombos = cantidadCombos;
+	}
+
 	/**
 	 * Metodo que sirve para capturar valores de las celdas en excel
 	 * y transformarlas en string

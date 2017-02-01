@@ -17,7 +17,6 @@ import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.StylesDocument;
 
 import tooldataform.ModelFactory;
 import tooldataform.core.Project;
@@ -64,6 +63,10 @@ public class DataformDiagramGenerator {
 		this.interface1 = dataformDiagram.getTheInterface();
 	}
 
+	public ModelFactory getModelFactory(){
+		return modelFactory;
+	}
+	
 	/**
 	 * Metodo que guarda el diagrama dataform en la produccion
 	 * @param diagram El diagrama a ser guardado
@@ -79,6 +82,21 @@ public class DataformDiagramGenerator {
 			e.printStackTrace();
 		}
 	}
+	
+	public void cargarDiagram() {
+		
+		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("platform:/resource/GestionConsultas/domain/model.tooldataform");
+		org.eclipse.emf.ecore.resource.ResourceSet resourceSet= new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource(uri);
+		try {
+			resource.load(java.util.Collections.EMPTY_MAP);
+			modelFactory =  (ModelFactory) resource.getContents().get(0);
+		} catch (java.io.IOException e) {
+			// TO-DO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	
 	/**
 	 * Metodo que guarda el Diagram que se genero
@@ -314,6 +332,7 @@ public class DataformDiagramGenerator {
 	 * @param height alto del LabelView en pixeles
 	 * @return Un Nodo que contiene un LabelView
 	 */
+	@SuppressWarnings("unchecked")
 	public Node createLabelView(int x, int y, int width, int height) {
 		
 		Node node = createNode("3006");
@@ -491,4 +510,14 @@ public class DataformDiagramGenerator {
 					"Unable to open editor", e); //$NON-NLS-1$
 		}
 	}
+
+	public DataForm_Diagram getDataformDiagram() {
+		return dataformDiagram;
+	}
+
+	public void setDataformDiagram(DataForm_Diagram dataformDiagram) {
+		this.dataformDiagram = dataformDiagram;
+	}
+	
+	
 }

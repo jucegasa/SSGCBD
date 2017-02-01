@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
@@ -20,9 +21,12 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.xml.sax.SAXException;
 
+import gestionmodelosconsultas.compilador.CompiladorProyeccion;
+import gestionmodelosconsultas.modeloconsultas.model.Relacion;
 import reportes.ModelFactory;
 import reportes.model.ModelFactoryModel;
 import reportes.ui.impl.ReporteImpl;
+import tooldataform.formmodel.concreta.RelacionDataForm;
 
 public class Reportes extends ViewPart {
 
@@ -33,7 +37,14 @@ public class Reportes extends ViewPart {
 
 	ModelFactory modelFactory;
 	
-	DataformGenerator g;
+	DataformGenerator dfGenerator;
+	
+	DataformDiagramGenerator dfdGenerator; 
+	
+	whoownme.model.ModelFactoryModel modelFactoryModelGC = whoownme.model.ModelFactoryModel.getInstance();
+	
+	gestionmodelosconsultas.ModelFactory modelFactoryGC;
+
 	
 	public Reportes() {
 		inicializar();
@@ -41,6 +52,7 @@ public class Reportes extends ViewPart {
 	
 	public void inicializar() {
 		modelFactory = modelFactoryModel.getModelFactory();
+		modelFactoryGC = modelFactoryModelGC.getModelFactory();
 	}
 
 	/**
@@ -88,9 +100,9 @@ public class Reportes extends ViewPart {
 				   Unzip unzip = new Unzip();
 				   unzip.unzip(root,s);
 				   String url = unzip.getDir(s);
-				   g = new DataformGenerator(url,root);
+				   dfGenerator = new DataformGenerator(url,root);
 				try {
-					g.generate();
+					dfGenerator.generate();
 					JOptionPane.showMessageDialog(null,"se genero");
 				} catch (ParserConfigurationException e1) {
 					// TODO Auto-generated catch block
@@ -119,8 +131,8 @@ public class Reportes extends ViewPart {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				DataformDiagramGenerator dfDG = new DataformDiagramGenerator(g.modelFactory);
-				dfDG.generateDiagram();
+				dfdGenerator = new DataformDiagramGenerator(dfGenerator.modelFactory);
+				dfdGenerator.generateDiagram();
 			}
 		});
 		btnGenerarDiagrama.setBounds(175, 30, 107, 25);
@@ -137,17 +149,44 @@ public class Reportes extends ViewPart {
 				String s = file.getSelectedFile().getName();
 				String root = file.getSelectedFile().getAbsolutePath();
 				try {
-					ExcelGenerator eG = new ExcelGenerator(root, g.getListComboBox(), g.getListComboCordinate(), 
-							g.getPosRowIniData(), g.getPosCellIniData());
+					ExcelGenerator excelGenarator = new ExcelGenerator(root, dfGenerator.getListComboBox(), 
+							dfGenerator.getListComboCordinate(), dfGenerator.getPosRowIniData(), dfGenerator.getPosCellIniData(),modelFactoryGC);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnGenetarExcel.setBounds(310, 30, 101, 25);
+		btnGenetarExcel.setBounds(241, 98, 101, 25);
 		toolkit.adapt(btnGenetarExcel, true, true);
 		btnGenetarExcel.setText("Genetar Excel");
+		
+		Button btnNewButton = new Button(container, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ViewModelGenerator vmGenerator = new ViewModelGenerator( dfGenerator.getListComboBox());
+				vmGenerator.generateViewModel();
+			}
+		});
+		btnNewButton.setBounds(298, 30, 129, 25);
+		toolkit.adapt(btnNewButton, true, true);
+		btnNewButton.setText("Generar ViewModel");
+		
+		Button btnCompilar = new Button(container, SWT.NONE);
+		btnCompilar.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				modelFactoryGC = modelFactoryGC.cargar();
+				modelFactoryModelGC.setModelFactory(modelFactoryGC);
+				CompiladorProyeccion compiladorProyeccion = new CompiladorProyeccion();
+				compiladorProyeccion.compilarProyeccion(modelFactoryGC);
+			}
+		});
+		btnCompilar.setBounds(471, 30, 75, 25);
+		toolkit.adapt(btnCompilar, true, true);
+		btnCompilar.setText("Compilar");
 		createActions();
 		initializeToolBar();
 		initializeMenu();

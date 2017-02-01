@@ -18,6 +18,7 @@ import gestionmodelosconsultas.modeloconsultas.donde.Disco;
 import gestionmodelosconsultas.modeloconsultas.donde.DondeFactory;
 import gestionmodelosconsultas.modeloconsultas.model.EADiagram;
 import gestionmodelosconsultas.modeloconsultas.model.ElementoConsulta;
+import gestionmodelosconsultas.modeloconsultas.model.Relacion;
 import gestionmodelosconsultas.modeloconsultas.que.Comunicacion;
 import gestionmodelosconsultas.modeloconsultas.que.Documento;
 import gestionmodelosconsultas.modeloconsultas.que.QueFactory;
@@ -28,10 +29,10 @@ import gestionmodelosconsultas.modeloconsultas.quien.QuienFactory;
 import gestionmodelosconsultas.modeloconsultas.quien.Rol;
 import gestionmodelosconsultas.modeloconsultas.quien.UnidadOrganizacional;
 import tooldataform.ModelFactory;
-import tooldataform.formmodel.concreta.Container;
-import tooldataform.formmodel.concreta.Containment;
 import tooldataform.formmodel.concreta.DataForm_Diagram;
 import tooldataform.formmodel.concreta.RelacionDataForm;
+import tooldataform.formmodel.concreta.impl.ContainerImpl;
+import tooldataform.formmodel.concreta.impl.ContainmentImpl;
 
 public class ViewModelGenerator {
 	
@@ -47,19 +48,20 @@ public class ViewModelGenerator {
 	
 	HashMap<String , ElementoConsulta> elementosConsulta;
 	
-	public ViewModelGenerator(DataForm_Diagram dfDiagram) {
+	public ViewModelGenerator(ArrayList<String> namesViewModel) {
+
 		
-		this.dfDiagram = dfDiagram;
-		relations =  dfDiagram.getListarelacion();
-		namesViewModel = new ArrayList<String>();
+		this.namesViewModel = new ArrayList<String>();
 		elementosConsulta  = new HashMap<String, ElementoConsulta>();
+		
+	}
+	
+	public void generateViewModel(){
 		initMap();
 		inicializarMC();
-		exploreRelations();
 		createViewModel();
 		JOptionPane.showMessageDialog(null, "Se genero ViewModel");
 	}
-	
 	public String getNameEntity(String rol) {	
 		return rol.substring(4, rol.length());
 	}
@@ -69,9 +71,8 @@ public class ViewModelGenerator {
 		RelacionDataForm relation = null;
 		String bRol;
 		for (int i = 0; i < relations.size(); i++) {
-			
 			relation = relations.get(i);
-			if(relation.getSource() instanceof Container && relation instanceof Containment) {
+			if(relation.getSource().get(0) instanceof ContainerImpl && relation instanceof ContainmentImpl) {
 				break;
 			}
 		}
@@ -80,9 +81,10 @@ public class ViewModelGenerator {
 			
 			bRol = getNameEntity(relation.getBRol());
 			relation = null;
+			
 			for (int i = 0; i < relations.size(); i++) {
 				
-				if(relations.get(i).getARol().equals("ownedBy"+bRol) && relation instanceof Containment) {
+				if(relations.get(i).getARol().equals("ownedBy"+bRol) && relations.get(i) instanceof ContainmentImpl) {
 					relation = relations.get(i);
 				}
 			}
@@ -90,6 +92,7 @@ public class ViewModelGenerator {
 			namesViewModel.add(bRol);
 		}
 	}
+	
 	public void inicializarMC() {
 		
 		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("platform:/resource/GestionConsultas/modelos/produccion.gestionmodelosconsultas");
@@ -106,22 +109,28 @@ public class ViewModelGenerator {
 	}
 
 	public void createViewModel() {
-		EList<EADiagram> listaViewModel = modelFactoryMC.getFactoryModeloConsultas().getListModeloConsulta().get(0).getListEADiagram();
-		EADiagram vm = null;
 		
-		for (int i = 0; i < namesViewModel.size(); i++) {
-			
-			vm = gestionmodelosconsultas.modeloconsultas.model.ModelFactory.eINSTANCE.createViewModel();
-			
+		EList<EADiagram> listaViewModel = modelFactoryMC.getFactoryModeloConsultas().getListModeloConsulta().get(0).getListEADiagram();
+		EADiagram vm = gestionmodelosconsultas.modeloconsultas.model.ModelFactory.eINSTANCE.createViewModel();;
+		
+		for (int i = 0; i < namesViewModel.size(); i++) {	
 			ElementoConsulta elementoConsulta = elementosConsulta.get(  namesViewModel.get(i) );
 			elementoConsulta.setOrder(i+1);
-			vm.getListElementoConsulta().add(elementoConsulta);
-			
-			listaViewModel.add(vm);
+			vm.getListElementoConsulta().add(elementoConsulta);		
+		}
+				
+		for (int i = 0; i < namesViewModel.size()-1; i++) {
+			Relacion r = gestionmodelosconsultas.modeloconsultas.model.ModelFactory.eINSTANCE.createRelacion();
+			r.setOrder(i+1);
+			r.setSource(vm.getListElementoConsulta().get(i));
+			r.setTarget(vm.getListElementoConsulta().get(i+1));
+			vm.getListRelacion().add(r);
 		}
 		
+		listaViewModel.add(vm);
 		modelFactoryMC.salvar();
 	}
+	
 	
 	void initMap(){
 		

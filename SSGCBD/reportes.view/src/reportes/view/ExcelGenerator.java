@@ -27,9 +27,23 @@ import org.apache.poi.xssf.usermodel.XSSFDataValidationConstraint;
 import org.apache.poi.xssf.usermodel.XSSFDataValidationHelper;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.eclipse.emf.common.util.EList;
 
-
-
+import gestionmodelosconsultas.ModelFactory;
+import gestionmodelosconsultas.modeloconsultas.resultset.ElementoModeloResultado;
+import gestionmodelosconsultas.modeloconsultas.resultset.ResultElement;
+import gestionmodelosconsultas.modeloconsultas.resultset.Resultado;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultcomo.ActividadProceso;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultcomo.InstanciaProceso;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.Armario;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.Deposito;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultdonde.Disco;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultque.Comunicacion;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultque.Documento;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultquien.Actor;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultquien.Contacto;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultquien.Rol;
+import gestionmodelosconsultas.modeloconsultas.resultset.resultquien.UnidadOrganizacional;
 
 public class ExcelGenerator {
 	
@@ -42,6 +56,9 @@ public class ExcelGenerator {
 	private Sheet dataSheet;
 	
 	private Sheet sheet;
+	
+	
+	ModelFactory modelFactoryGC;
 	
 	/**
 	 * Matriz variable con los datos del Excel
@@ -73,6 +90,11 @@ public class ExcelGenerator {
 	 */
 	String[] listFixed;
 	
+	
+	ArrayList<String> listaTuplas;
+	
+	ArrayList<String> columns;
+	
 	/**
 	 * Entero que acumula el numero de filtros indirectos
 	 */
@@ -84,27 +106,40 @@ public class ExcelGenerator {
 	 * @param absolutePath
 	 * @param listFilter
 	 * @param posFilters
+	 * @param modelFactoryGC 
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public ExcelGenerator(String absolutePath, ArrayList<String> listFilter, ArrayList<Coordinate> posFilters,int posRowIniData, int posCellIniData) throws FileNotFoundException, IOException {
+	public ExcelGenerator(String absolutePath, ArrayList<String> listFilter, ArrayList<Coordinate> posFilters,int posRowIniData, int posCellIniData, ModelFactory modelFactoryGC) throws FileNotFoundException, IOException {
 		
 		this.absolutePath = absolutePath;
 		this.listFilter = listFilter;
 		this.posFilters = posFilters;
 		firstRowFilter = 2;
-		 
+		
+		
+		
+		listaTuplas = new ArrayList<String>();
+		columns  =    new ArrayList<String>();
+		
+		this.modelFactoryGC = modelFactoryGC;
+		initDataSheet();
+		
 		workbook = readFile();
 		resultSet = getResulSet(dataSheet);
 		createNames();
 		init();
-	
+		
 		execute(listFilter, titlesMap, acc, posRowIniData, posCellIniData);
 		saveExcel();
 	}
-
+	
+	
+	
+	
 	public void init() {
-
+		
+		
 		titlesMap = getTitles(resultSet);
 		setResult = removeDuplicateValues(resultSet);
 
@@ -123,6 +158,54 @@ public class ExcelGenerator {
 			acc += listDependenceMap.get(i).size();
 		}
 
+	}
+	
+	
+	public void initDataSheet(){
+		//dataSheet = workbook.createSheet();
+		
+		Resultado resultado = modelFactoryGC.getFactoryModeloConsultas().getListModeloConsulta().get(0).getListResultado().get(0);
+		
+		ElementoModeloResultado element;
+		element = (ElementoModeloResultado) resultado.getListResultElement().get(0);
+		exploreColumns(element.getListElementoModeloResultado());
+		
+		for(int i=0;i<resultado.getListResultElement().size();i++){
+			element = (ElementoModeloResultado) resultado.getListResultElement().get(i);
+			String s = getAtributtes(element);
+			exploreResult(element.getListElementoModeloResultado(),s);
+			
+		}
+		
+		for(int i=0;i<columns.size();i++){
+			System.out.println(columns.get(i) ) ;
+		}
+	}
+	
+	
+	public void exploreColumns(EList<ElementoModeloResultado> listaR ){
+		
+		if(listaR.size() == 0)
+			return;
+		
+		ElementoModeloResultado ans = listaR.get(0);
+		getColumnsNames(ans);
+		exploreColumns(ans.getListElementoModeloResultado());
+	}
+	
+	public void exploreResult(EList<ElementoModeloResultado> listaR, String tupla){
+		
+		if(listaR.size() == 0){
+			listaTuplas.add(tupla);
+			return;
+		}
+		
+		ElementoModeloResultado ans;
+		for(int i=0;i < listaR.size();i++){
+			ans = listaR.get(i);
+			String s = getAtributtes(ans);
+			exploreResult(ans.getListElementoModeloResultado() ,tupla+ "," +s);
+		}
 	}
 
 	public void execute(ArrayList<String> listFilter,
@@ -536,5 +619,271 @@ public class ExcelGenerator {
 			setResult.add(getSetColum(resultSet, i));
 		return setResult;
 	}
+	
+	
+	
+	void getNameColumns(ResultElement element){
+		
 
+	}
+	
+	public String getAtributtes(ResultElement element){
+		
+		String answer = "";
+		
+		if(element instanceof UnidadOrganizacional){
+			
+			UnidadOrganizacional unidadOrganizacional = (UnidadOrganizacional) element;
+			if(unidadOrganizacional.getNombre()!=null)
+				answer+=unidadOrganizacional.getNombre();
+			
+		} else if(element instanceof Actor){
+			
+			Actor  actor = (Actor) element;
+			
+			if(actor.getNombre()!=null )
+				answer+= actor.getNombre();
+			
+			if(actor.getApellido()!=null)
+				answer+= "," + actor.getApellido();
+			
+			if(actor.getEmail()!=null)
+				answer+= "," + actor.getEmail();
+			
+		} else if(element instanceof Rol){
+			
+			Rol rol = (Rol) element;
+			
+			if(rol.getNombre()!=null )
+				answer+=rol.getNombre();
+			
+		}else if(element instanceof Contacto){
+			
+			Contacto contacto  = (Contacto) element;
+		
+			if(contacto.getNombre()!= null)
+				answer+= contacto.getNombre();
+			
+			if(contacto.getUsername()!= null )
+				answer+= "," + contacto.getUsername();
+			
+			if(contacto.getTelefono()!= null )
+				answer+= "," + contacto.getTelefono();
+			
+			if(contacto.getPassword()!= null )
+				answer+= "," + contacto.getPassword();
+			
+		} else if(element instanceof Documento){
+				
+			 Documento documento = (Documento) element; 	
+			 
+			 if(documento.getTitulo()!= null )
+				 answer+= documento.getTitulo();
+			
+			 if(documento.getTipo()!= null )
+				answer+= "," + documento.getTipo();
+				
+			if( documento.getFechaCreacion()!=null )
+				answer+= "," + documento.getFechaCreacion();
+				
+			if(documento.getEstado()!= null )
+				answer+= "," +documento.getEstado();
+			
+			if(documento.getComentarios()!= null )
+				answer+= "," +documento.getComentarios();
+			
+			if(documento.getEdicion()!= null )
+				answer+= "," +documento.getEdicion(); 
+			
+			if(documento.getAnexo()!= null )
+				answer+= "," + documento.getAnexo(); 
+			 
+		} else if(element instanceof Comunicacion){
+			
+			Comunicacion comunicacion = (Comunicacion) element;
+			
+			 if(comunicacion.getAsunto()!=null )
+				 answer+= comunicacion.getAsunto();
+			 
+		} else if(element instanceof ActividadProceso){
+			
+			ActividadProceso actividadProceso = (ActividadProceso) element;
+			
+			if(actividadProceso.getNombre()!=null )
+				 answer+= actividadProceso.getNombre();
+			
+			if(actividadProceso.getDescripcion()!=null )
+				answer+= "," + actividadProceso.getDescripcion();
+			
+			if(actividadProceso.getFechaInicio()!=null)
+				answer+= "," + actividadProceso.getFechaInicio();
+			
+			if(actividadProceso.getFechaFin()!=null )
+				answer+= "," + actividadProceso.getFechaFin();
+			
+		} else if(element instanceof InstanciaProceso){
+			
+			InstanciaProceso instanciaProceso = (InstanciaProceso) element;
+			
+			if(instanciaProceso.getNombre()!=null )
+				 answer+= instanciaProceso.getNombre();
+			
+			if(instanciaProceso.getDescripcion()!=null )
+				answer+= "," + instanciaProceso.getDescripcion();
+			
+		} else if(element instanceof Deposito){
+			
+			Deposito deposito = (Deposito) element;
+			
+			if(deposito.getDescripcion()!=null )
+				 answer+= deposito.getDescripcion();
+			
+		} else if(element instanceof Disco){
+			
+			Disco disco = (Disco) element;
+			
+			if(disco.getReferencia()!=null )
+				 answer+= disco.getReferencia();
+			
+			if(disco.getDescripcion()!=null)
+				answer+= "," + disco.getDescripcion();
+			
+		} else if(element instanceof Armario){
+			
+			Armario armario = (Armario) element;
+			
+			if(armario.getDescripcion()!=null )
+				 answer+= armario.getDescripcion();
+		}
+		
+		return answer;
+	}
+	
+	void getColumnsNames(ResultElement element){
+		
+		if(element instanceof UnidadOrganizacional){
+			
+			UnidadOrganizacional unidadOrganizacional = (UnidadOrganizacional) element;
+			if(unidadOrganizacional.getNombre()!=null)
+				columns.add("Nombre UnidadOrganizacional");
+			
+		} else if(element instanceof Actor){
+			
+			Actor  actor = (Actor) element;
+			
+			if(actor.getNombre()!=null )
+				columns.add("Nombre Actor");
+			
+			if(actor.getApellido()!=null)
+				columns.add("Apellido Actor");
+			
+			if(actor.getEmail()!=null)
+				columns.add("Email Actor");
+			
+		} else if(element instanceof Rol){
+			
+			Rol rol = (Rol) element;
+			
+			if(rol.getNombre()!=null )
+				columns.add("Nombre Rol");
+			
+		}else if(element instanceof Contacto){
+			
+			Contacto contacto  = (Contacto) element;
+		
+			if(contacto.getNombre()!= null)
+				columns.add("Nombre Contacto");
+			
+			if(contacto.getUsername()!= null )
+				columns.add("Username Contacto");
+			
+			if(contacto.getTelefono()!= null )
+				columns.add("Telefono Contacto");
+			
+			if(contacto.getPassword()!= null )
+				columns.add("Password Contacto");
+			
+		} else if(element instanceof Documento){
+				
+			 Documento documento = (Documento) element; 	
+			 
+			 if(documento.getTitulo()!= null )
+				 columns.add("Titulo Documento");
+			
+			 if(documento.getTipo()!= null )
+				 columns.add("Tipo Documento");
+				
+			if( documento.getFechaCreacion()!=null )
+				columns.add("FechaCreacion Documento");
+				
+			if(documento.getEstado()!= null )
+				columns.add("Estado Documento");
+			
+			if(documento.getComentarios()!= null )
+				columns.add("Comentarios Documento");
+			
+			if(documento.getEdicion()!= null )
+				columns.add("Edicion Documento");
+			
+			if(documento.getAnexo()!= null )
+				columns.add("Anexo Documento");
+			 
+		} else if(element instanceof Comunicacion){
+			
+			Comunicacion comunicacion = (Comunicacion) element;
+			
+			 if(comunicacion.getAsunto()!=null )
+				 columns.add("Asunto Comunicacion");
+			 
+		} else if(element instanceof ActividadProceso){
+			
+			ActividadProceso actividadProceso = (ActividadProceso) element;
+			
+			if(actividadProceso.getNombre()!=null )
+				columns.add("Nombre Actividad Proceso");
+			
+			if(actividadProceso.getDescripcion()!=null )
+				columns.add("Descripcion ActividadProceso");
+			
+			if(actividadProceso.getFechaInicio()!=null)
+				columns.add("FechaInicio ActividadProceso");
+			
+			if(actividadProceso.getFechaFin()!=null )
+				columns.add("FechaFin actividadProceso");
+			
+		} else if(element instanceof InstanciaProceso){
+			
+			InstanciaProceso instanciaProceso = (InstanciaProceso) element;
+			
+			if(instanciaProceso.getNombre()!=null )
+				columns.add("Nombre InstanciaProceso");
+			
+			if(instanciaProceso.getDescripcion()!=null )
+				columns.add("Descripcion Instancia Proceso");
+			
+		} else if(element instanceof Deposito){
+			
+			Deposito deposito = (Deposito) element;
+			
+			if(deposito.getDescripcion()!=null )
+				columns.add("Descripcion Deposito");
+			
+		} else if(element instanceof Disco){
+			
+			Disco disco = (Disco) element;
+			
+			if(disco.getReferencia()!=null )
+				columns.add("Disco Referencia");
+			
+			if(disco.getDescripcion()!=null)
+				columns.add("Descripcion Disco");
+			
+		} else if(element instanceof Armario){
+			
+			Armario armario = (Armario) element;
+			
+			if(armario.getDescripcion()!=null )
+				columns.add("Descripcion Armario");
+		}
+	}
 }

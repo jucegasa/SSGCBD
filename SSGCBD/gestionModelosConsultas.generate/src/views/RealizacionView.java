@@ -1,23 +1,15 @@
 package views;
 
-
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import gestionmodelosconsultas.ModelFactory;
 import gestionmodelosconsultas.compilador.CompiladorProyeccion;
-import gestionmodelosconsultas.compilador.CompiladorRealizacion;
 import gestionmodelosconsultas.modeloconsultas.ModeloConsulta;
-import gestionmodelosconsultas.modeloconsultas.ModeloconsultasFactory;
-import gestionmodelosconsultas.modeloconsultas.que.Documento;
 import gestionmodelosconsultas.modeloconsultas.resultset.ResultElement;
-import gestionmodelosconsultas.modeloconsultas.resultset.Resultado;
 import gestionmodelosconsultas.modeloconsultas.resultset.resultque.impl.DocumentoImpl;
-import gestionmodelosconsultas.world.Padre;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -38,7 +30,6 @@ import whoownme.model.ModelFactoryModel;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Text;
 
 
 
