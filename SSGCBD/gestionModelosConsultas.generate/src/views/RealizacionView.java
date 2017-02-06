@@ -11,11 +11,6 @@ import gestionmodelosconsultas.modeloconsultas.ModeloConsulta;
 import gestionmodelosconsultas.modeloconsultas.resultset.ResultElement;
 import gestionmodelosconsultas.modeloconsultas.resultset.resultque.impl.DocumentoImpl;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -69,6 +64,7 @@ public class RealizacionView extends ViewPart {
 				modelFactoryModel.setModelFactory(modelFactory);
 				CompiladorProyeccion compiladorProyeccion = new CompiladorProyeccion();
 				compiladorProyeccion.compilarProyeccion(modelFactory);
+				JOptionPane.showMessageDialog(null, "Se ejecuto la consulta.");
 			}
 		});
 		btnCompilar.setBounds(10, 10, 103, 25);
@@ -86,46 +82,6 @@ public class RealizacionView extends ViewPart {
 				
 				ModeloConsulta modeloConsulta = modelFactory.getFactoryModeloConsultas().getListModeloConsulta().get(0);
 				EList<ResultElement> resultados =  modeloConsulta.getListResultado().get(0).getListResultElement();
-				
-				try {
-					
-					 Workbook wb = new XSSFWorkbook();
-					 FileOutputStream fileOut;
-					fileOut = new FileOutputStream("C:/Users/admin/Desktop/workbook.xlsx");
-					
-					Sheet sheet = wb.createSheet("Reporte");
-					Cell cell = null;
-				    
-				
-				    for (int i = 0; i < resultados.size(); i++) {
-				    	
-				    	DocumentoImpl doc =  (DocumentoImpl) resultados.get(i);
-				    	
-				    	Row row = sheet.createRow(i);
-					    
-				    	cell =  row.createCell(0);
-				    	cell = sheet.getRow(i).getCell(0);
-					    cell.setCellValue(doc.getTipo());
-					    
-					    cell =  row.createCell(1);
-				    	cell = sheet.getRow(i).getCell(1);
-					    cell.setCellValue(doc.getKey());
-					    
-					    cell =  row.createCell(2);
-					    cell = sheet.getRow(i).getCell(2);
-					    cell.setCellValue(doc.getFechaCreacion() );
-				    }
-				    	    
-				    
-				    wb.write(fileOut);
-				    fileOut.close();
-				    wb.close();
-				    
-				    JOptionPane.showMessageDialog(null, "Se generó el excel");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			    	
 			}
 		});

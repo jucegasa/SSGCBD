@@ -27,6 +27,7 @@ import reportes.ModelFactory;
 import reportes.model.ModelFactoryModel;
 import reportes.ui.impl.ReporteImpl;
 import tooldataform.formmodel.concreta.RelacionDataForm;
+import org.eclipse.swt.widgets.Group;
 
 public class Reportes extends ViewPart {
 
@@ -41,9 +42,15 @@ public class Reportes extends ViewPart {
 	
 	DataformDiagramGenerator dfdGenerator; 
 	
+	ExcelGenerator excelGenarator;
+	
 	whoownme.model.ModelFactoryModel modelFactoryModelGC = whoownme.model.ModelFactoryModel.getInstance();
 	
 	gestionmodelosconsultas.ModelFactory modelFactoryGC;
+	
+	String fileName;
+	
+	String filePath; 
 
 	
 	public Reportes() {
@@ -87,23 +94,43 @@ public class Reportes extends ViewPart {
 				}
 			}
 		});
-		btnGenerarReporte.setBounds(30, 132, 120, 25);
+		btnGenerarReporte.setBounds(30, 324, 120, 25);
 		
-		Button btnGenerardataform = new Button(container, SWT.NONE);
+		Button btnNewButton = new Button(container, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ViewModelGenerator vmGenerator = new ViewModelGenerator( dfGenerator.getListComboBox());
+				vmGenerator.generateViewModel();
+			}
+		});
+		btnNewButton.setBounds(189, 324, 129, 25);
+		toolkit.adapt(btnNewButton, true, true);
+		btnNewButton.setText("Generar ViewModel");
+		
+		Group grpCicloDeVida = new Group(container, SWT.NONE);
+		grpCicloDeVida.setText("Ciclo de vida del Reporte");
+		grpCicloDeVida.setBounds(10, 10, 500, 153);
+		toolkit.adapt(grpCicloDeVida);
+		toolkit.paintBordersFor(grpCicloDeVida);
+		
+		Button btnGenerardataform = new Button(grpCicloDeVida, SWT.NONE);
+		btnGenerardataform.setBounds(23, 43, 120, 25);
 		btnGenerardataform.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				 JFileChooser file=new JFileChooser();
-				   file.showOpenDialog(null);
-				   String s = file.getSelectedFile().getName();
-				   String root = file.getSelectedFile().getAbsolutePath();
-				   Unzip unzip = new Unzip();
-				   unzip.unzip(root,s);
-				   String url = unzip.getDir(s);
-				   dfGenerator = new DataformGenerator(url,root);
+				JFileChooser file=new JFileChooser();
+				file.showOpenDialog(null);
+				fileName = file.getSelectedFile().getName();
+				filePath = file.getSelectedFile().getAbsolutePath();
+				Unzip unzip = new Unzip();
+				unzip.unzip(filePath, fileName);
+				String url = unzip.getDir(fileName);
+				dfGenerator = new DataformGenerator(url, filePath);
+				
 				try {
 					dfGenerator.generate();
-					JOptionPane.showMessageDialog(null,"se genero");
+					JOptionPane.showMessageDialog(null,"Se genero el Dataform");
 				} catch (ParserConfigurationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -122,11 +149,11 @@ public class Reportes extends ViewPart {
 				}
 			}
 		});
-		btnGenerardataform.setBounds(30, 30, 120, 25);
 		toolkit.adapt(btnGenerardataform, true, true);
 		btnGenerardataform.setText("GenerarDataform");
 		
-		Button btnGenerarDiagrama = new Button(container, SWT.NONE);
+		Button btnGenerarDiagrama = new Button(grpCicloDeVida, SWT.NONE);
+		btnGenerarDiagrama.setBounds(185, 43, 107, 25);
 		btnGenerarDiagrama.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -135,45 +162,11 @@ public class Reportes extends ViewPart {
 				dfdGenerator.generateDiagram();
 			}
 		});
-		btnGenerarDiagrama.setBounds(175, 30, 107, 25);
 		toolkit.adapt(btnGenerarDiagrama, true, true);
 		btnGenerarDiagrama.setText("Generar Diagrama");
 		
-		Button btnGenetarExcel = new Button(container, SWT.NONE);
-		btnGenetarExcel.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-				JFileChooser file=new JFileChooser();
-				file.showOpenDialog(null);
-				String s = file.getSelectedFile().getName();
-				String root = file.getSelectedFile().getAbsolutePath();
-				try {
-					ExcelGenerator excelGenarator = new ExcelGenerator(root, dfGenerator.getListComboBox(), 
-							dfGenerator.getListComboCordinate(), dfGenerator.getPosRowIniData(), dfGenerator.getPosCellIniData(),modelFactoryGC);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnGenetarExcel.setBounds(241, 98, 101, 25);
-		toolkit.adapt(btnGenetarExcel, true, true);
-		btnGenetarExcel.setText("Genetar Excel");
-		
-		Button btnNewButton = new Button(container, SWT.NONE);
-		btnNewButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				ViewModelGenerator vmGenerator = new ViewModelGenerator( dfGenerator.getListComboBox());
-				vmGenerator.generateViewModel();
-			}
-		});
-		btnNewButton.setBounds(298, 30, 129, 25);
-		toolkit.adapt(btnNewButton, true, true);
-		btnNewButton.setText("Generar ViewModel");
-		
-		Button btnCompilar = new Button(container, SWT.NONE);
+		Button btnCompilar = new Button(grpCicloDeVida, SWT.NONE);
+		btnCompilar.setBounds(326, 43, 107, 25);
 		btnCompilar.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -184,9 +177,49 @@ public class Reportes extends ViewPart {
 				compiladorProyeccion.compilarProyeccion(modelFactoryGC);
 			}
 		});
-		btnCompilar.setBounds(471, 30, 75, 25);
 		toolkit.adapt(btnCompilar, true, true);
 		btnCompilar.setText("Compilar");
+		
+		Button btnGenetarExcel = new Button(grpCicloDeVida, SWT.NONE);
+		btnGenetarExcel.setBounds(185, 105, 107, 25);
+		btnGenetarExcel.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				try {
+					excelGenarator.createDataSheet();
+					excelGenarator.createRelations(dfGenerator.getPosRowIniData(), dfGenerator.getPosCellIniData());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		toolkit.adapt(btnGenetarExcel, true, true);
+		btnGenetarExcel.setText("Genetar Excel");
+		
+		Button btnNewButton_1 = new Button(grpCicloDeVida, SWT.NONE);
+		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				try {
+					excelGenarator = new ExcelGenerator(filePath, dfGenerator.getListComboBox(), 
+							dfGenerator.getListComboCordinate(), modelFactoryGC);
+					
+					excelGenarator.writeFileColumns();
+					
+					JOptionPane.showConfirmDialog(null, "Puede ver las columnas del resultado de la consulta en el archivo Excel.");
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_1.setBounds(23, 105, 120, 25);
+		toolkit.adapt(btnNewButton_1, true, true);
+		btnNewButton_1.setText("Ver Columnas");
 		createActions();
 		initializeToolBar();
 		initializeMenu();

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 14 resources" deleteContents="true" description="Delete 14 resources" element1="/gestionModelosConsultas" element10="/reportes.edit" element11="/reportes.editor" element12="/reportes.model" element13="/reportes.tests" element14="/reportes.view" element2="/gestionModelosConsultas.diagram_ENTITY" element3="/gestionModelosConsultas.diagram_PROYECCION" element4="/gestionModelosConsultas.diagram_VIEWMODEL" element5="/gestionModelosConsultas.edit" element6="/gestionModelosConsultas.editor" element7="/gestionModelosConsultas.generate" element8="/gestionModelosConsultas.model" element9="/reportes" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="14" stamp="1486411869596"/>
+</session>

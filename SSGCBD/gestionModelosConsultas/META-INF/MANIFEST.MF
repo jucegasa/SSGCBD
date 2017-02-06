@@ -3,14 +3,20 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: gestionModelosConsultas;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-ClassPath: poi/curvesapi-1.03.jar,
- poi/poi-3.14-20160307.jar,
- poi/poi-examples-3.14-20160307.jar,
- poi/poi-excelant-3.14-20160307.jar,
- poi/poi-ooxml-3.14-20160307.jar,
- poi/poi-ooxml-schemas-3.14-20160307.jar,
- poi/poi-scratchpad-3.14-20160307.jar,
- poi/xmlbeans-2.6.0.jar,
+Bundle-ClassPath: poi-3.15/openxml4j_android-src-beta-090725.jar,
+ poi-3.15/poi-3.15.jar,
+ poi-3.15/poi-examples-3.15.jar,
+ poi-3.15/poi-excelant-3.15.jar,
+ poi-3.15/poi-ooxml-3.15.jar,
+ poi-3.15/poi-ooxml-schemas-3.15.jar,
+ poi-3.15/poi-scratchpad-3.15.jar,
+ poi-3.15/ooxml-lib/curvesapi-1.04.jar,
+ poi-3.15/ooxml-lib/xmlbeans-2.6.0.jar,
+ poi-3.15/lib/commons-codec-1.10.jar,
+ poi-3.15/lib/commons-collections4-4.1.jar,
+ poi-3.15/lib/commons-logging-1.2.jar,
+ poi-3.15/lib/junit-4.12.jar,
+ poi-3.15/lib/log4j-1.2.17.jar,
  .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -97,13 +103,7 @@ Export-Package: gestionmodelosconsultas,
  gestionmodelosconsultas.sysinfo.vision,
  gestionmodelosconsultas.sysinfo.vision.impl,
  gestionmodelosconsultas.sysinfo.vision.util,
- gestionmodelosconsultas.util,
- org.apache.poi,
- org.apache.poi.hssf.util,
- org.apache.poi.openxml4j.exceptions,
- org.apache.poi.ss.usermodel,
- org.apache.poi.ss.util,
- org.apache.poi.xssf.usermodel
+ gestionmodelosconsultas.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

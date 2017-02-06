@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.poi.hssf.util.AreaReference;
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataValidation;
@@ -22,12 +23,19 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFDataValidation;
 import org.apache.poi.xssf.usermodel.XSSFDataValidationConstraint;
 import org.apache.poi.xssf.usermodel.XSSFDataValidationHelper;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFTable;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.eclipse.emf.common.util.EList;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTable;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableColumn;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableColumns;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableStyleInfo;
 
 import gestionmodelosconsultas.ModelFactory;
 import gestionmodelosconsultas.modeloconsultas.resultset.ElementoModeloResultado;
@@ -51,11 +59,11 @@ public class ExcelGenerator {
 	
 	private XSSFWorkbook workbook;
 	
-	private Sheet newDataSheet;
+	private XSSFSheet newDataSheet;
 	
-	private Sheet dataSheet;
+	private XSSFSheet dataSheet;
 	
-	private Sheet sheet;
+	private XSSFSheet sheet;
 	
 	
 	ModelFactory modelFactoryGC;
@@ -83,17 +91,25 @@ public class ExcelGenerator {
 	/**
 	 * Se guardan los valores unicos de cada columna del resultset
 	 */
-	ArrayList<Set<String>> setResult;
+	private ArrayList<Set<String>> setResult;
 	
 	/**
 	 * Se crea un arreglo de los valores del primer filtro que es el unico que no tiene dependencia
 	 */
-	String[] listFixed;
+	private String[] listFixed;
+	
+	/**
+	 * Resultado de la consulta
+	 */
+	private Resultado resultado;
+	
+	private ArrayList<String> listaTuplas;
+	
+	private ArrayList<String> columns;
 	
 	
-	ArrayList<String> listaTuplas;
-	
-	ArrayList<String> columns;
+	ArrayList< String > columnsNames;
+	ArrayList <Integer> columnsIndex;
 	
 	/**
 	 * Entero que acumula el numero de filtros indirectos
@@ -110,39 +126,50 @@ public class ExcelGenerator {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public ExcelGenerator(String absolutePath, ArrayList<String> listFilter, ArrayList<Coordinate> posFilters,int posRowIniData, int posCellIniData, ModelFactory modelFactoryGC) throws FileNotFoundException, IOException {
+	public ExcelGenerator(String absolutePath, ArrayList<String> listFilter, ArrayList<Coordinate> posFilters, ModelFactory modelFactoryGC) throws FileNotFoundException, IOException {
 		
 		this.absolutePath = absolutePath;
 		this.listFilter = listFilter;
 		this.posFilters = posFilters;
 		firstRowFilter = 2;
 		
-		
+		titlesMap = new HashMap<String, Integer>();
 		
 		listaTuplas = new ArrayList<String>();
 		columns  =    new ArrayList<String>();
+		columnsNames = new ArrayList<String>();
+		columnsIndex = new ArrayList<Integer>();
 		
 		this.modelFactoryGC = modelFactoryGC;
-		initDataSheet();
+		
+		resultado = modelFactoryGC.getFactoryModeloConsultas().getListModeloConsulta().get(0).getListResultado().get(0);
 		
 		workbook = readFile();
-		resultSet = getResulSet(dataSheet);
-		createNames();
-		init();
 		
-		execute(listFilter, titlesMap, acc, posRowIniData, posCellIniData);
-		saveExcel();
+		//resultSet = getResulSet(dataSheet);
+		//createNames();
+		//init();
+		
+		//execute(listFilter, titlesMap, acc, posRowIniData, posCellIniData);
+		//saveExcel();
 	}
 	
 	
-	
+	public void createRelations(int posRowIniData, int posCellIniData) throws FileNotFoundException, IOException{
+		
+		resultSet = getResulSet(dataSheet);
+		createNames();
+		init();				
+		execute(listFilter, titlesMap, acc, posRowIniData, posCellIniData);
+		saveExcel();	
+	}
 	
 	public void init() {
 		
 		
 		titlesMap = getTitles(resultSet);
 		setResult = removeDuplicateValues(resultSet);
-
+	
 		listFixed = setResult.get(titlesMap.get(listFilter.get(0)))
 				.toArray(new String[setResult.get(titlesMap.get(listFilter.get(0))).size()]);
 		createListBox(listFixed, sheet, 0, 3);
@@ -161,27 +188,140 @@ public class ExcelGenerator {
 	}
 	
 	
-	public void initDataSheet(){
+
+	
+	public void initDataSheet(int indexColum [] ) throws FileNotFoundException, IOException{
 		//dataSheet = workbook.createSheet();
-		
-		Resultado resultado = modelFactoryGC.getFactoryModeloConsultas().getListModeloConsulta().get(0).getListResultado().get(0);
-		
+			
 		ElementoModeloResultado element;
-		element = (ElementoModeloResultado) resultado.getListResultElement().get(0);
-		exploreColumns(element.getListElementoModeloResultado());
 		
 		for(int i=0;i<resultado.getListResultElement().size();i++){
 			element = (ElementoModeloResultado) resultado.getListResultElement().get(i);
 			String s = getAtributtes(element);
-			exploreResult(element.getListElementoModeloResultado(),s);
-			
+			exploreResult(element.getListElementoModeloResultado(),s);	
 		}
 		
-		for(int i=0;i<columns.size();i++){
-			System.out.println(columns.get(i) ) ;
+		dataSheet = workbook.createSheet();
+		
+		
+		for(int i=0;i<listaTuplas.size();i++){
+			String s= listaTuplas.get(i);
+			Row r = dataSheet.createRow(i);
+			
+			String tuplas[] = s.split(",");
+			
+			for(int j=0;j<indexColum.length;j++){
+				Cell c = r.createCell(j);
+				c.setCellValue(  tuplas[  indexColum[j] ] );
+			}
 		}
+		
+		saveExcel();
 	}
 	
+		
+	public void writeFileColumns() throws IOException{
+		
+		
+		ElementoModeloResultado element = (ElementoModeloResultado) resultado.getListResultElement().get(0);
+		getColumnsNames(element);
+		exploreColumns(element.getListElementoModeloResultado());
+		
+		dataSheet = workbook.getSheet("ResultSet");
+		if(dataSheet == null)
+			dataSheet = workbook.createSheet("ResultSet");
+		
+		createTable(columns, 1);
+		saveExcel();
+	}
+	
+	
+	private void createTable(ArrayList<String> columns, int tam) {
+		
+		XSSFTable table =  dataSheet.createTable();
+		
+		CTTable cttable = table.getCTTable();
+		
+		CTTableStyleInfo table_style = cttable.addNewTableStyleInfo();
+	    table_style.setName("TableStyleMedium9"); 
+	    table_style.setShowColumnStripes(false); //showColumnStripes=0
+	    table_style.setShowRowStripes(true); //showRowStripes=1
+		
+	    /* Define the data range including headers */
+	    AreaReference my_data_range = new AreaReference(new CellReference(0, 0), new CellReference(tam, columns.size()-1));
+	    
+	    /* Set Range to the Table */
+	    cttable.setRef(my_data_range.formatAsString());
+	    cttable.setDisplayName("ResultSet");      /* this is the display name of the table */
+	    cttable.setName("ResultSet");    /* This maps to "displayName" attribute in <table>, OOXML */            
+	    cttable.setId(1L); //id attribute against table as long value
+	    
+	    CTTableColumns columnsTable = cttable.addNewTableColumns();
+	    columnsTable.setCount(columns.size()); //define number of columns
+	    
+	    /* Define Header Information for the Table */
+	    XSSFRow row = dataSheet.createRow(0);
+	    XSSFCell cell;
+	    
+	    
+	    for (int i = 0; i < columns.size(); i++) {
+	    	CTTableColumn column = columnsTable.addNewTableColumn();   
+	    	column.setName("Column");      
+	        column.setId(i+1);
+	        cell = row.createCell(i);
+            cell.setCellValue(columns.get(i));
+	    }
+	    
+	}
+	
+	public void createDataSheet() throws FileNotFoundException, IOException {
+		
+		workbook = readFile();
+		
+		dataSheet = workbook.getSheet("ResultSet");
+									 
+		XSSFRow row = dataSheet.getRow(1);
+		
+		XSSFCell cell;
+	
+		for(int i =0;i < columns.size();i++){
+			cell  = row.getCell(i);
+			if(cell !=null){
+				String value = getCellValue(cell);
+				if(value!=""){
+					columnsNames.add(value);
+					columnsIndex.add(i);
+				}
+			}
+		}
+		
+		workbook.removeSheetAt( workbook.getSheetIndex("ResultSet"));
+		dataSheet = workbook.createSheet("ResultSet");
+		
+		
+		ElementoModeloResultado element;
+		
+		for(int i=0;i<resultado.getListResultElement().size();i++){
+			element = (ElementoModeloResultado) resultado.getListResultElement().get(i);
+			String s = getAtributtes(element);
+			exploreResult(element.getListElementoModeloResultado(),s);	
+		}
+		
+		createTable(columnsNames, listaTuplas.size());
+		
+		for(int i=0;i<listaTuplas.size();i++){
+			String s= listaTuplas.get(i);
+			Row r = dataSheet.createRow(i+1);
+			
+			String tuplas[] = s.split(",");
+			
+			for(int j=0;j<columnsIndex.size();j++){
+				Cell c = r.createCell(j);
+				c.setCellValue(  tuplas[  columnsIndex.get(j) ] );
+			}
+		}
+		saveExcel();
+	}
 	
 	public void exploreColumns(EList<ElementoModeloResultado> listaR ){
 		
@@ -468,7 +608,7 @@ public class ExcelGenerator {
 		for (int i = 0; i < names.size(); i++) {
 			name = workbook.createName();
 			name.setNameName(names.get(i).replaceAll(" ", "_"));
-			name.setRefersToFormula("Tabla1[" + names.get(i) + "]");
+			name.setRefersToFormula("ResultSet[" + names.get(i) + "]");
 		}
 	}
 
@@ -494,9 +634,9 @@ public class ExcelGenerator {
 	public  void countFormula(int targetRow, int targetCell) {
 		Row row = newDataSheet.createRow(targetRow);
 		Cell cell = row.createCell(targetCell);
-		String formula = "COUNTIFS(Tabla1["+listFilter.get(0)+"],"+sheet.getSheetName()+"!"+getNumToCol(posFilters.get(0).getY())+(posFilters.get(0).getX()+1);
+		String formula = "COUNTIFS(ResultSet["+listFilter.get(0)+"],"+sheet.getSheetName()+"!"+getNumToCol(posFilters.get(0).getY())+(posFilters.get(0).getX()+1);
 		for(int i = 1; i < listFilter.size();i++){
-			formula+=",Tabla1["+listFilter.get(i)+"],"+sheet.getSheetName()+"!"+getNumToCol(posFilters.get(i).getY())+(posFilters.get(i).getX()+1);
+			formula+=",ResultSet["+listFilter.get(i)+"],"+sheet.getSheetName()+"!"+getNumToCol(posFilters.get(i).getY())+(posFilters.get(i).getX()+1);
 		}
 		formula+=")";
 		cell.setCellFormula(formula);
@@ -597,6 +737,7 @@ public class ExcelGenerator {
 	 */
 	public  Map<String, Integer> getTitles(ArrayList<ArrayList<String>> resultSet) {
 		Map<String, Integer> titlesMap = new HashMap<>();
+		
 		for (int i = 0; i < resultSet.get(0).size(); i++) {
 			String key = resultSet.get(0).get(i);
 			titlesMap.put(key, new Integer(i));
@@ -885,5 +1026,27 @@ public class ExcelGenerator {
 			if(armario.getDescripcion()!=null )
 				columns.add("Descripcion Armario");
 		}
+	}
+	
+	/**
+	 * Metodo que sirve para capturar valores de las celdas en excel
+	 * y transformarlas en string
+	 * @param cell celda que queremos extraer su valor
+	 * @return un string con el contenido de la celda 	
+	 */
+	public String getCellValue(Cell cell){
+		 int cel_Type = cell.getCellType();                           
+	     String res="";
+		 switch(cel_Type){
+	     	case 0: res+=cell.getNumericCellValue();
+	             	break;
+	     	case 1: res+=cell.getStringCellValue();
+	     			break;
+	     	case 4:res+=cell.getBooleanCellValue();
+	             	break;
+	     	case 3:res+="";
+	     			break; 
+	     }
+		 return res;
 	}
 }

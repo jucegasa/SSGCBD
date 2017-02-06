@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -192,7 +193,7 @@ public class DataformGenerator{
 	  * Objeto que sirve para representar el archivo excel
 	  * que se quiere analzar
 	  */
-	 protected Workbook libro;
+	 protected XSSFWorkbook libro;
 	 
 	/**
 	 * Lista que contiene las coordenadas de inicio de cada contenedor
@@ -286,7 +287,7 @@ public class DataformGenerator{
 		
 		//Se carga el excel a analizar
 		InputStream is = new FileInputStream(absolutePath);
-	    libro = WorkbookFactory.create(is);
+	    libro = new XSSFWorkbook(is);
 	    sheet = libro.getSheetAt(0);
 	    
 	    getOrderViewModel();
@@ -511,7 +512,7 @@ public class DataformGenerator{
 		List<CellRangeAddress> sortedRegions = sheet.getMergedRegions();
 	
 		//Ordenamos de mayor a menor las regiones con respecto a las filas
-		Collections.sort(sortedRegions, new rangeComparator());
+		Collections.sort(sortedRegions, new ComparatorRange());
 		
 		//Inicializamos la estructura de datos que se tiene por conveniencia
 		//y facilidad para manejar las regiones combinadas
@@ -1477,7 +1478,7 @@ public class DataformGenerator{
 	}
 }
 
-class rangeComparator implements Comparator<CellRangeAddress>{
+class ComparatorRange implements Comparator<CellRangeAddress>{
 	 @Override
 	 public int compare(CellRangeAddress o1, CellRangeAddress o2) {
 		 if(o1.getFirstRow() > o2.getFirstRow()){

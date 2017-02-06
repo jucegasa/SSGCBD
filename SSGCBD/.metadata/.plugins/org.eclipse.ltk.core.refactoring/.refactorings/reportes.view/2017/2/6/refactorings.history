@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;s&apos; in &apos;reportes.view.Reportes.createPartControl(...).new SelectionAdapter() {...}.widgetSelected(...)&apos; to &apos;fileName&apos;&#x0D;&#x0A;- Original project: &apos;reportes.view&apos;&#x0D;&#x0A;- Original element: &apos;reportes.view.Reportes.createPartControl(...).new SelectionAdapter() {...}.widgetSelected(SelectionEvent).s&apos;&#x0D;&#x0A;- Renamed element: &apos;s&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;s&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;reportes.view{Reportes.java[Reportes~createPartControl~QComposite;[!2~widgetSelected~QSelectionEvent;@s!3624!3667!3631!3631!QString;!0!false" name="fileName" references="true" stamp="1486073118164" version="1.0"/>
+</session>

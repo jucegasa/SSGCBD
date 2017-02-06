@@ -29,13 +29,5 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: mysql-connector-java-5.1.17-bin.jar,
- poi/curvesapi-1.03.jar,
- poi/poi-3.14-20160307.jar,
- poi/poi-examples-3.14-20160307.jar,
- poi/poi-excelant-3.14-20160307.jar,
- poi/poi-ooxml-3.14-20160307.jar,
- poi/poi-ooxml-schemas-3.14-20160307.jar,
- poi/poi-scratchpad-3.14-20160307.jar,
- poi/xmlbeans-2.6.0.jar,
  .
 Export-Package: gestionmodelosconsultas.compilador
