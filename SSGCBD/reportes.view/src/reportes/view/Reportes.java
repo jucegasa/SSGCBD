@@ -115,7 +115,7 @@ public class Reportes extends ViewPart {
 		toolkit.paintBordersFor(grpCicloDeVida);
 		
 		Button btnGenerardataform = new Button(grpCicloDeVida, SWT.NONE);
-		btnGenerardataform.setBounds(23, 43, 120, 25);
+		btnGenerardataform.setBounds(30, 40, 120, 25);
 		btnGenerardataform.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -130,7 +130,7 @@ public class Reportes extends ViewPart {
 				
 				try {
 					dfGenerator.generate();
-					JOptionPane.showMessageDialog(null,"Se genero el Dataform");
+					JOptionPane.showMessageDialog(null,"Se genero el modelo Dataform.");
 				} catch (ParserConfigurationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -153,7 +153,7 @@ public class Reportes extends ViewPart {
 		btnGenerardataform.setText("GenerarDataform");
 		
 		Button btnGenerarDiagrama = new Button(grpCicloDeVida, SWT.NONE);
-		btnGenerarDiagrama.setBounds(185, 43, 107, 25);
+		btnGenerarDiagrama.setBounds(180, 40, 120, 25);
 		btnGenerarDiagrama.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -166,7 +166,7 @@ public class Reportes extends ViewPart {
 		btnGenerarDiagrama.setText("Generar Diagrama");
 		
 		Button btnCompilar = new Button(grpCicloDeVida, SWT.NONE);
-		btnCompilar.setBounds(326, 43, 107, 25);
+		btnCompilar.setBounds(330, 40, 120, 25);
 		btnCompilar.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -175,20 +175,25 @@ public class Reportes extends ViewPart {
 				modelFactoryModelGC.setModelFactory(modelFactoryGC);
 				CompiladorProyeccion compiladorProyeccion = new CompiladorProyeccion();
 				compiladorProyeccion.compilarProyeccion(modelFactoryGC);
+				
+				JOptionPane.showMessageDialog(null, "Se genero la consulta.");
 			}
 		});
 		toolkit.adapt(btnCompilar, true, true);
 		btnCompilar.setText("Compilar");
 		
 		Button btnGenetarExcel = new Button(grpCicloDeVida, SWT.NONE);
-		btnGenetarExcel.setBounds(185, 105, 107, 25);
+		btnGenetarExcel.setBounds(180, 100, 120, 25);
 		btnGenetarExcel.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
 				try {
 					excelGenarator.createDataSheet();
-					excelGenarator.createRelations(dfGenerator.getPosRowIniData(), dfGenerator.getPosCellIniData());
+					if(excelGenarator.getListFilter().size() != 0)
+						excelGenarator.createRelations();
+					
+					JOptionPane.showMessageDialog(null, "Reporte creado.");
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -196,7 +201,7 @@ public class Reportes extends ViewPart {
 			}
 		});
 		toolkit.adapt(btnGenetarExcel, true, true);
-		btnGenetarExcel.setText("Genetar Excel");
+		btnGenetarExcel.setText("Generar Excel");
 		
 		Button btnNewButton_1 = new Button(grpCicloDeVida, SWT.NONE);
 		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
@@ -205,11 +210,12 @@ public class Reportes extends ViewPart {
 				
 				try {
 					excelGenarator = new ExcelGenerator(filePath, dfGenerator.getListComboBox(), 
-							dfGenerator.getListComboCordinate(), modelFactoryGC);
+							dfGenerator.getListComboCordinate(), modelFactoryGC, 
+							dfGenerator.getPosRowIniData(), dfGenerator.getPosCellIniData());
 					
 					excelGenarator.writeFileColumns();
 					
-					JOptionPane.showConfirmDialog(null, "Puede ver las columnas del resultado de la consulta en el archivo Excel.");
+					JOptionPane.showMessageDialog(null, "Puede ver las columnas del resultado de la consulta en el archivo Excel.");
 					
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -217,7 +223,7 @@ public class Reportes extends ViewPart {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(23, 105, 120, 25);
+		btnNewButton_1.setBounds(30, 100, 120, 25);
 		toolkit.adapt(btnNewButton_1, true, true);
 		btnNewButton_1.setText("Ver Columnas");
 		createActions();

@@ -393,7 +393,6 @@ public class GeneradorElementoResultado {
 
 	private Documento crearDocumento(ArrayList<String[]> campos,
 			Documento documento) {
-		// TODO Auto-generated method stub
 		for(String[] campo: campos){
 		
 			if(campo[0].equals("idComunicacion")){
@@ -423,6 +422,9 @@ public class GeneradorElementoResultado {
 			if(campo[0].equals("comentarios")){
 				documento.setComentarios(campo[1]);
 			}
+			if(campo[0].equals("descripcion")){
+				documento.setComentarios(campo[1]);
+			}
 		}
 		return documento;
 	}
@@ -442,8 +444,8 @@ public class GeneradorElementoResultado {
 		return comunicacion;
 	}
 
-	private Contacto crearContacto(ArrayList<String[]> campos, Contacto contacto) {
-		// TODO Auto-generated method stub
+	private Contacto crearContacto(ArrayList<String[]> campos, 
+				Contacto contacto) {
 		for(String[] campo: campos){
 			
 			if(campo[0].equals("idContacto")){
@@ -451,6 +453,9 @@ public class GeneradorElementoResultado {
 			}
 			if(campo[0].equals("nombre")){
 				contacto.setNombre(campo[1]);
+			}
+			if(campo[0].equals("email")){
+				contacto.setUsername(campo[1]);
 			}
 			if(campo[0].equals("username")){
 				contacto.setUsername(campo[1]);
@@ -498,7 +503,7 @@ public class GeneradorElementoResultado {
 			if(campo[0].equals("nombre")){
 				rol.setNombre(campo[1]);
 			}
-			if(campo[0].equals("idRol")){
+			if(campo[0].equals("descripcion")){
 				rol.setDescripcion(campo[1]);
 			}
 		}

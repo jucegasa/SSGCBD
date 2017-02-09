@@ -37,6 +37,8 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableColumn;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableColumns;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableStyleInfo;
 
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Woodstox;
+
 import gestionmodelosconsultas.ModelFactory;
 import gestionmodelosconsultas.modeloconsultas.resultset.ElementoModeloResultado;
 import gestionmodelosconsultas.modeloconsultas.resultset.ResultElement;
@@ -118,6 +120,10 @@ public class ExcelGenerator {
 	
 	private int firstRowFilter;
 	
+	int posRowIniData;
+	
+	int posCellIniData;
+	
 	/**
 	 * @param absolutePath
 	 * @param listFilter
@@ -126,11 +132,14 @@ public class ExcelGenerator {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public ExcelGenerator(String absolutePath, ArrayList<String> listFilter, ArrayList<Coordinate> posFilters, ModelFactory modelFactoryGC) throws FileNotFoundException, IOException {
+	public ExcelGenerator(String absolutePath, ArrayList<String> listFilter, ArrayList<Coordinate> posFilters,
+			ModelFactory modelFactoryGC, int posRowIniData, int posCellIniData) throws FileNotFoundException, IOException {
 		
 		this.absolutePath = absolutePath;
 		this.listFilter = listFilter;
 		this.posFilters = posFilters;
+		this.posRowIniData = posRowIniData;
+		this.posCellIniData = posCellIniData;
 		firstRowFilter = 2;
 		
 		titlesMap = new HashMap<String, Integer>();
@@ -155,7 +164,16 @@ public class ExcelGenerator {
 	}
 	
 	
-	public void createRelations(int posRowIniData, int posCellIniData) throws FileNotFoundException, IOException{
+	public void createRelations() throws FileNotFoundException, IOException{
+		
+		sheet = workbook.getSheetAt(0);
+		
+		if(workbook.getSheet("Datos")==null){
+			newDataSheet = workbook.createSheet("Datos");
+		}else{
+			workbook.removeSheetAt(workbook.getSheetIndex("Datos"));
+			newDataSheet = workbook.createSheet("Datos");
+		}
 		
 		resultSet = getResulSet(dataSheet);
 		createNames();
@@ -169,10 +187,12 @@ public class ExcelGenerator {
 		
 		titlesMap = getTitles(resultSet);
 		setResult = removeDuplicateValues(resultSet);
-	
-		listFixed = setResult.get(titlesMap.get(listFilter.get(0)))
-				.toArray(new String[setResult.get(titlesMap.get(listFilter.get(0))).size()]);
-		createListBox(listFixed, sheet, 0, 3);
+		
+		String cadena = listFilter.get(0);
+		Integer n = titlesMap.get(cadena);
+		listFixed = setResult.get(n)
+				.toArray(new String[setResult.get(n).size()]);
+		createListBox(listFixed, sheet, posFilters.get(0).x, posFilters.get(0).y);
 
 		// Se crean las dependencias de los filtros
 		ArrayList<Map<String, Set<String>>> listDependenceMap = createDependence(resultSet, titlesMap, listFilter);
@@ -277,16 +297,13 @@ public class ExcelGenerator {
 	public void createDataSheet() throws FileNotFoundException, IOException {
 		
 		workbook = readFile();
-		
-		dataSheet = workbook.getSheet("ResultSet");
-									 
+		dataSheet = workbook.getSheet("ResultSet");						 
 		XSSFRow row = dataSheet.getRow(1);
-		
 		XSSFCell cell;
 	
-		for(int i =0;i < columns.size();i++){
+		for(int i =0; i < columns.size(); i++){
 			cell  = row.getCell(i);
-			if(cell !=null){
+			if(cell != null){
 				String value = getCellValue(cell);
 				if(value!=""){
 					columnsNames.add(value);
@@ -296,30 +313,50 @@ public class ExcelGenerator {
 		}
 		
 		workbook.removeSheetAt( workbook.getSheetIndex("ResultSet"));
-		dataSheet = workbook.createSheet("ResultSet");
-		
 		
 		ElementoModeloResultado element;
-		
-		for(int i=0;i<resultado.getListResultElement().size();i++){
+		for(int i=0; i<resultado.getListResultElement().size(); i++){
 			element = (ElementoModeloResultado) resultado.getListResultElement().get(i);
 			String s = getAtributtes(element);
 			exploreResult(element.getListElementoModeloResultado(),s);	
 		}
 		
-		createTable(columnsNames, listaTuplas.size());
-		
 		for(int i=0;i<listaTuplas.size();i++){
-			String s= listaTuplas.get(i);
-			Row r = dataSheet.createRow(i+1);
+			System.out.println(listaTuplas.get(i));
+		}
+		
+		if(listFilter.size() == 0) {
 			
-			String tuplas[] = s.split(",");
+			dataSheet = workbook.getSheetAt(0);
+			for(int i=0, rowIndex = posRowIniData; i < listaTuplas.size(); i++, rowIndex++){
+				String s= listaTuplas.get(i);
+				Row r = dataSheet.getRow(rowIndex);
+				if(r == null) r = dataSheet.createRow(rowIndex);
+				String tuplas[] = s.split(",");
+				
+				for(int j=0, cellIndex = posCellIniData; j < columnsIndex.size(); j++, cellIndex++){
+					Cell c = r.getCell(cellIndex);
+					if(c == null) c = r.createCell(cellIndex);
+					c.setCellValue(tuplas[columnsIndex.get(j)]);
+				}
+			}
 			
-			for(int j=0;j<columnsIndex.size();j++){
-				Cell c = r.createCell(j);
-				c.setCellValue(  tuplas[  columnsIndex.get(j) ] );
+		} else {
+			
+			dataSheet = workbook.createSheet("ResultSet");
+			createTable(columnsNames, listaTuplas.size());
+			for(int i=0; i<listaTuplas.size(); i++){
+				String s= listaTuplas.get(i);
+				Row r = dataSheet.createRow(i+1);
+				String tuplas[] = s.split(",");
+				
+				for(int j=0;j<columnsIndex.size();j++){
+					Cell c = r.createCell(j);
+					c.setCellValue(tuplas[columnsIndex.get(j)]);
+				}
 			}
 		}
+		
 		saveExcel();
 	}
 	
@@ -348,8 +385,9 @@ public class ExcelGenerator {
 		}
 	}
 
-	public void execute(ArrayList<String> listFilter,
-			Map<String, Integer> titlesMap, int acc, int posRowIniData, int posCellIniData) {
+	public void execute(ArrayList<String> listFilter, Map<String, Integer> titlesMap,
+			int acc, int posRowIniData, int posCellIniData) {
+		
 		// Se escriben las formulas de indirecto en el Excel
 		setIndirect();
 
@@ -533,7 +571,7 @@ public class ExcelGenerator {
 		int i = rowN;
 		Iterator<String> it = map.keySet().iterator();
 		while (it.hasNext()) {
-			int j = 0;
+			int j = 0; 
 			String key = (String) it.next();
 			row = sheet.createRow(i);
 			for (String value : map.get(key)) {
@@ -568,11 +606,13 @@ public class ExcelGenerator {
 		for (int i = 1; i < posFilters.size(); i++) {
 			String cell = getNumToCol(posFilters.get(i-1).getY());
 			constraint = helper.createFormulaListConstraint(
-					"INDIRECT(" + sheet.getSheetName() + "!$" + cell + "$" + (posFilters.get(i-1).getX() + 1) + ")");
+					"INDIRECT(SUBSTITUTE(" + sheet.getSheetName() + "!$" + cell + "$" + (posFilters.get(i-1).getX() + 1) + ",\" \", \"_\"))");
+			System.out.println(posFilters.get(i-1).getX()+" "+posFilters.get(i-1).getX()+" "+posFilters.get(i-1).getY()+" "+posFilters.get(i-1).getY());
 			System.out.println(
-					"INDIRECT(" + sheet.getSheetName() + "!$" + cell + "$" + (posFilters.get(i-1).getX() + 1) + ")");
-			validation = helper.createValidation(constraint, new CellRangeAddressList(posFilters.get(i-1).getX(),
-					posFilters.get(i-1).getX(), posFilters.get(i-1).getY(), posFilters.get(i-1).getY()));
+					"INDIRECT(SUBSTITUTE(" + sheet.getSheetName() + "!$" + cell + "$" + (posFilters.get(i-1).getX() + 1) + ",\" \", \"_\"))");
+			
+			validation = helper.createValidation(constraint, new CellRangeAddressList(posFilters.get(i).getX(),
+					posFilters.get(i).getX(), posFilters.get(i).getY(), posFilters.get(i).getY()));
 			sheet.addValidationData(validation);
 		}
 	}
@@ -695,8 +735,8 @@ public class ExcelGenerator {
 				String si = "IF(" + constraint + ",ROW(" + listFilter.get(listFilter.size()-1).replaceAll(" ", "_")
 						+ ")-ROW(" + hoja2 + "!$" + getNumToCol(firstCellFilter) + "$" + firstRowFilter + ")+1)";
 				String formula = "IF(" + filas + "<=" + newDataSheet.getSheetName() + "!$" + getNumToCol(countCell) + "$"
-						+ (countRow + 1) + ",INDEX(INDIRECT(" + getNumToCol(targetCell + j) + "$" + (targetRow - 1)
-						+ "),SMALL(" + si + "," + filas + ")),\"\")";
+						+ (countRow + 1) + ",INDEX(INDIRECT(SUBSTITUTE(" + getNumToCol(targetCell + j) + "$" + (targetRow - 1)
+						+ ",\" \",\"_\")),SMALL(" + si + "," + filas + ")),\"\")";
 				System.out.println(formula);
 				sheet.setArrayFormula(formula,
 						new CellRangeAddress((targetRow + i) - 1, (targetRow + i) - 1, targetCell + j, targetCell + j));
@@ -720,10 +760,13 @@ public class ExcelGenerator {
 	 */
 	public  ArrayList<Map<String, Set<String>>> createDependence(ArrayList<ArrayList<String>> resultSet,
 			Map<String, Integer> titlesMap, ArrayList<String> listFilter) {
+		
 		ArrayList<Map<String, Set<String>>> listDependenceMap = new ArrayList<>();
+		
 		for (int i = 1; i < listFilter.size(); i++)
 			listDependenceMap.add(getMapOfColumnByColumn(resultSet, titlesMap.get(listFilter.get((i - 1))),
 					titlesMap.get(listFilter.get(i))));
+		
 		return listDependenceMap;
 	}
 
@@ -782,15 +825,17 @@ public class ExcelGenerator {
 			
 			Actor  actor = (Actor) element;
 			
-			if(actor.getNombre()!=null )
+			if(actor.getNombre()!=null ){
 				answer+= actor.getNombre();
-			
-			if(actor.getApellido()!=null)
-				answer+= "," + actor.getApellido();
-			
-			if(actor.getEmail()!=null)
-				answer+= "," + actor.getEmail();
-			
+			}
+			if(actor.getApellido()!=null){
+				if(answer.length()>0) answer+= ",";
+				answer+= actor.getApellido();
+			}
+			if(actor.getEmail()!=null){
+				if(answer.length()>0) answer+= ",";
+				answer+=actor.getEmail();
+			}
 		} else if(element instanceof Rol){
 			
 			Rol rol = (Rol) element;
@@ -798,6 +843,11 @@ public class ExcelGenerator {
 			if(rol.getNombre()!=null )
 				answer+=rol.getNombre();
 			
+			if(rol.getDescripcion()!= null ){
+				if(answer.length()>0) answer+= ",";
+					answer+=rol.getDescripcion();			
+			}
+
 		}else if(element instanceof Contacto){
 			
 			Contacto contacto  = (Contacto) element;
@@ -805,15 +855,18 @@ public class ExcelGenerator {
 			if(contacto.getNombre()!= null)
 				answer+= contacto.getNombre();
 			
-			if(contacto.getUsername()!= null )
-				answer+= "," + contacto.getUsername();
-			
-			if(contacto.getTelefono()!= null )
-				answer+= "," + contacto.getTelefono();
-			
-			if(contacto.getPassword()!= null )
-				answer+= "," + contacto.getPassword();
-			
+			if(contacto.getUsername()!= null ){
+				if(answer.length()>0) answer+= ",";
+				answer+=contacto.getUsername();
+			}
+			if(contacto.getTelefono()!= null ){
+				if(answer.length()>0) answer+= ",";
+				answer+= contacto.getTelefono();
+			}
+			if(contacto.getPassword()!= null ){
+				if(answer.length()>0) answer+= ",";
+				answer+= contacto.getPassword();
+			}
 		} else if(element instanceof Documento){
 				
 			 Documento documento = (Documento) element; 	
@@ -821,24 +874,31 @@ public class ExcelGenerator {
 			 if(documento.getTitulo()!= null )
 				 answer+= documento.getTitulo();
 			
-			 if(documento.getTipo()!= null )
-				answer+= "," + documento.getTipo();
+			 if(documento.getTipo()!= null ){
+				if(answer.length()>0) answer+= ",";
+				 answer+=documento.getTipo();
+			 }		
+			if( documento.getFechaCreacion()!=null ){
+				if(answer.length()>0) answer+= ",";
+				answer+=documento.getFechaCreacion();
+			}
 				
-			if( documento.getFechaCreacion()!=null )
-				answer+= "," + documento.getFechaCreacion();
-				
-			if(documento.getEstado()!= null )
-				answer+= "," +documento.getEstado();
-			
-			if(documento.getComentarios()!= null )
-				answer+= "," +documento.getComentarios();
-			
-			if(documento.getEdicion()!= null )
-				answer+= "," +documento.getEdicion(); 
-			
-			if(documento.getAnexo()!= null )
-				answer+= "," + documento.getAnexo(); 
-			 
+			if(documento.getEstado()!= null ){
+				if(answer.length()>0) answer+= ",";
+				answer+= documento.getEstado();
+			}
+			if(documento.getComentarios()!= null ){
+				if(answer.length()>0) answer+= ",";
+				answer+= documento.getComentarios();
+			}
+			if(documento.getEdicion()!= null ){
+				if(answer.length()>0) answer+= ",";
+				answer+=documento.getEdicion(); 
+			}
+			if(documento.getAnexo()!= null ){
+				if(answer.length()>0) answer+= ",";
+				answer+=documento.getAnexo(); 
+			}
 		} else if(element instanceof Comunicacion){
 			
 			Comunicacion comunicacion = (Comunicacion) element;
@@ -851,17 +911,20 @@ public class ExcelGenerator {
 			ActividadProceso actividadProceso = (ActividadProceso) element;
 			
 			if(actividadProceso.getNombre()!=null )
-				 answer+= actividadProceso.getNombre();
+				answer+= actividadProceso.getNombre();
 			
-			if(actividadProceso.getDescripcion()!=null )
-				answer+= "," + actividadProceso.getDescripcion();
-			
-			if(actividadProceso.getFechaInicio()!=null)
-				answer+= "," + actividadProceso.getFechaInicio();
-			
-			if(actividadProceso.getFechaFin()!=null )
-				answer+= "," + actividadProceso.getFechaFin();
-			
+			if(actividadProceso.getDescripcion()!=null ){
+				if(answer.length()>0) answer+= ",";
+				answer+= actividadProceso.getDescripcion();
+			}
+			if(actividadProceso.getFechaInicio()!=null){
+				if(answer.length()>0) answer+= ",";
+					answer+= actividadProceso.getFechaInicio();
+			}
+			if(actividadProceso.getFechaFin()!=null ){
+				if(answer.length()>0) answer+= ",";
+				answer+=actividadProceso.getFechaFin();
+			}
 		} else if(element instanceof InstanciaProceso){
 			
 			InstanciaProceso instanciaProceso = (InstanciaProceso) element;
@@ -869,9 +932,10 @@ public class ExcelGenerator {
 			if(instanciaProceso.getNombre()!=null )
 				 answer+= instanciaProceso.getNombre();
 			
-			if(instanciaProceso.getDescripcion()!=null )
-				answer+= "," + instanciaProceso.getDescripcion();
-			
+			if(instanciaProceso.getDescripcion()!=null ){
+				if(answer.length()>0) answer+= ",";
+				answer+=instanciaProceso.getDescripcion();
+			}
 		} else if(element instanceof Deposito){
 			
 			Deposito deposito = (Deposito) element;
@@ -886,9 +950,10 @@ public class ExcelGenerator {
 			if(disco.getReferencia()!=null )
 				 answer+= disco.getReferencia();
 			
-			if(disco.getDescripcion()!=null)
-				answer+= "," + disco.getDescripcion();
-			
+			if(disco.getDescripcion()!=null){
+				if(answer.length()>0) answer+= ",";
+					answer+=disco.getDescripcion();
+			}
 		} else if(element instanceof Armario){
 			
 			Armario armario = (Armario) element;
@@ -927,6 +992,9 @@ public class ExcelGenerator {
 			
 			if(rol.getNombre()!=null )
 				columns.add("Nombre Rol");
+			
+			if(rol.getDescripcion()!=null )
+				columns.add("Descripcion Rol");
 			
 		}else if(element instanceof Contacto){
 			
@@ -1049,4 +1117,15 @@ public class ExcelGenerator {
 	     }
 		 return res;
 	}
+
+
+	public ArrayList<String> getListFilter() {
+		return listFilter;
+	}
+
+	public void setListFilter(ArrayList<String> listFilter) {
+		this.listFilter = listFilter;
+	}
+	
+	
 }
