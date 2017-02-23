@@ -3,6 +3,7 @@ package gestionconsultassqlmodels.generate.conexionBD;
 
 
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 
@@ -25,29 +26,30 @@ public class DataConnection {
 	
 	/**
 	 * datos de la conexion
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 */
-	public static void performConnection(){
+	public static void performConnection() throws ClassNotFoundException, SQLException{
 		
-		String host = "127.0.0.1";
-		String user = "root";
+		String host = "10.0.67.30";
+		String user = "trabajo";
 		String pass = "12345";
 		String dtbs = "sysinfo";
 		
-		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String newConnectionURL = "jdbc:mysql://" + host + "/" + dtbs
 					+ "?" + "user=" + user + "&password=" + pass;
 					con = (Connection) DriverManager.getConnection(newConnectionURL);
 					System.out.println("Conexión efectuada con éxito");
-		}catch (Exception e) {
-			System.out.println("Error en la conexión");
-		}
+	
 	}
 	
 	/**
 	 * crear una instancia de una conexion
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	private synchronized static void createInstance() {
+	private synchronized static void createInstance() throws ClassNotFoundException, SQLException {
         if (INSTANCE == null) { 
             INSTANCE = new DataConnection();
             performConnection();
@@ -57,8 +59,10 @@ public class DataConnection {
     /**
      * metodo para obtener una instancia, si ya existe la retorna, sino la crea
      * @return instancia si existe
+     * @throws SQLException 
+     * @throws ClassNotFoundException 
      */
-    public static DataConnection getInstance() {
+    public static DataConnection getInstance() throws ClassNotFoundException, SQLException {
         if (INSTANCE == null) createInstance();
         return INSTANCE;
     }

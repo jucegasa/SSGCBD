@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,6 +24,7 @@ import org.apache.poi.ss.usermodel.DataValidationHelper;
 import org.apache.poi.ss.usermodel.Name;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -40,6 +44,7 @@ import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableStyleInfo;
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Woodstox;
 
 import gestionmodelosconsultas.ModelFactory;
+import gestionmodelosconsultas.consulta.ConsultaMySql;
 import gestionmodelosconsultas.modeloconsultas.resultset.ElementoModeloResultado;
 import gestionmodelosconsultas.modeloconsultas.resultset.ResultElement;
 import gestionmodelosconsultas.modeloconsultas.resultset.Resultado;
@@ -64,6 +69,8 @@ public class ExcelGenerator {
 	private XSSFSheet newDataSheet;
 	
 	private XSSFSheet dataSheet;
+	
+	private XSSFSheet colmunSheet;
 	
 	private XSSFSheet sheet;
 	
@@ -109,7 +116,6 @@ public class ExcelGenerator {
 	
 	private ArrayList<String> columns;
 	
-	
 	ArrayList< String > columnsNames;
 	ArrayList <Integer> columnsIndex;
 	
@@ -124,6 +130,8 @@ public class ExcelGenerator {
 	
 	int posCellIniData;
 	
+	private String consulta;
+	
 	/**
 	 * @param absolutePath
 	 * @param listFilter
@@ -133,7 +141,7 @@ public class ExcelGenerator {
 	 * @throws IOException
 	 */
 	public ExcelGenerator(String absolutePath, ArrayList<String> listFilter, ArrayList<Coordinate> posFilters,
-			ModelFactory modelFactoryGC, int posRowIniData, int posCellIniData) throws FileNotFoundException, IOException {
+			ModelFactory modelFactoryGC, int posRowIniData, int posCellIniData, String consulta) throws FileNotFoundException, IOException {
 		
 		this.absolutePath = absolutePath;
 		this.listFilter = listFilter;
@@ -141,7 +149,7 @@ public class ExcelGenerator {
 		this.posRowIniData = posRowIniData;
 		this.posCellIniData = posCellIniData;
 		firstRowFilter = 2;
-		
+		this.consulta = consulta;
 		titlesMap = new HashMap<String, Integer>();
 		
 		listaTuplas = new ArrayList<String>();
@@ -155,6 +163,7 @@ public class ExcelGenerator {
 		
 		workbook = readFile();
 		
+		createSheetQuery();
 		//resultSet = getResulSet(dataSheet);
 		//createNames();
 		//init();
@@ -162,7 +171,20 @@ public class ExcelGenerator {
 		//execute(listFilter, titlesMap, acc, posRowIniData, posCellIniData);
 		//saveExcel();
 	}
-	
+	public ExcelGenerator(String absolutePath,ArrayList<String> listFilter, ArrayList<Coordinate> posFilters) {
+		this.absolutePath = absolutePath;
+		this.listFilter=listFilter;
+		this.posFilters = posFilters;
+		posCellIniData = posFilters.get( posFilters.size()-1).y;
+		posRowIniData  = posFilters.get( posFilters.size()-1).x;
+		this.posFilters.remove(posFilters.size()-1);
+		
+		columnsNames = new ArrayList<String>();
+		columnsIndex = new ArrayList<Integer>();
+		listaTuplas = new ArrayList<String>();
+		titlesMap = new HashMap<String, Integer>();
+		firstRowFilter = 2;
+	}
 	
 	public void createRelations() throws FileNotFoundException, IOException{
 		
@@ -239,26 +261,30 @@ public class ExcelGenerator {
 		saveExcel();
 	}
 	
+	
+	public void writeFileColumns(ResultSet rs) throws IOException, SQLException{
 		
-	public void writeFileColumns() throws IOException{
+		ResultSetMetaData data = rs.getMetaData();
+		ArrayList<String> list = new ArrayList<String>();
+		int column = data.getColumnCount();
 		
+		for(int i=1;i<=column ;i++){
+			String columnName = data.getTableName(i)+"."+data.getColumnName(i);
+			columns.add(columnName);
+		}
 		
-		ElementoModeloResultado element = (ElementoModeloResultado) resultado.getListResultElement().get(0);
-		getColumnsNames(element);
-		exploreColumns(element.getListElementoModeloResultado());
+		colmunSheet = workbook.getSheet("Columns");
+		if(colmunSheet == null)
+			colmunSheet = workbook.createSheet("Columns");
 		
-		dataSheet = workbook.getSheet("ResultSet");
-		if(dataSheet == null)
-			dataSheet = workbook.createSheet("ResultSet");
-		
-		createTable(columns, 1);
+		createTable(columns, 1, colmunSheet);
 		saveExcel();
 	}
 	
 	
-	private void createTable(ArrayList<String> columns, int tam) {
+	private void createTable(ArrayList<String> columns, int tam, XSSFSheet sheet) {
 		
-		XSSFTable table =  dataSheet.createTable();
+		XSSFTable table =  sheet.createTable();
 		
 		CTTable cttable = table.getCTTable();
 		
@@ -270,20 +296,19 @@ public class ExcelGenerator {
 	    /* Define the data range including headers */
 	    AreaReference my_data_range = new AreaReference(new CellReference(0, 0), new CellReference(tam, columns.size()-1));
 	    
-	    /* Set Range to the Table */
+	    /* Set Range to the Table */ 
 	    cttable.setRef(my_data_range.formatAsString());
-	    cttable.setDisplayName("ResultSet");      /* this is the display name of the table */
-	    cttable.setName("ResultSet");    /* This maps to "displayName" attribute in <table>, OOXML */            
-	    cttable.setId(1L); //id attribute against table as long value
+	    cttable.setDisplayName(sheet.getSheetName());      /* this is the display name of the table */
+	    cttable.setName(sheet.getSheetName());    /* This maps to "displayName" attribute in <table>, OOXML */            
+	    cttable.setId( (long) (workbook.getSheetIndex(sheet)+1) ); //id attribute against table as long value
 	    
 	    CTTableColumns columnsTable = cttable.addNewTableColumns();
 	    columnsTable.setCount(columns.size()); //define number of columns
 	    
 	    /* Define Header Information for the Table */
-	    XSSFRow row = dataSheet.createRow(0);
+	    XSSFRow row = sheet.createRow(0);
 	    XSSFCell cell;
-	    
-	    
+	    	    
 	    for (int i = 0; i < columns.size(); i++) {
 	    	CTTableColumn column = columnsTable.addNewTableColumn();   
 	    	column.setName("Column");      
@@ -291,17 +316,16 @@ public class ExcelGenerator {
 	        cell = row.createCell(i);
             cell.setCellValue(columns.get(i));
 	    }
-	    
 	}
 	
-	public void createDataSheet() throws FileNotFoundException, IOException {
+	public void createDataSheet(ResultSet rs) throws FileNotFoundException, IOException, SQLException {
 		
 		workbook = readFile();
-		dataSheet = workbook.getSheet("ResultSet");						 
-		XSSFRow row = dataSheet.getRow(1);
+		colmunSheet = workbook.getSheet("Columns");						 
+		XSSFRow row = colmunSheet.getRow(1);
 		XSSFCell cell;
 	
-		for(int i =0; i < columns.size(); i++){
+		for(int i =0; i <= row.getLastCellNum(); i++){
 			cell  = row.getCell(i);
 			if(cell != null){
 				String value = getCellValue(cell);
@@ -312,13 +336,19 @@ public class ExcelGenerator {
 			}
 		}
 		
-		workbook.removeSheetAt( workbook.getSheetIndex("ResultSet"));
-		
-		ElementoModeloResultado element;
-		for(int i=0; i<resultado.getListResultElement().size(); i++){
-			element = (ElementoModeloResultado) resultado.getListResultElement().get(i);
-			String s = getAtributtes(element);
-			exploreResult(element.getListElementoModeloResultado(),s);	
+		ResultSetMetaData data = rs.getMetaData();
+		ArrayList<String> list = new ArrayList<String>();
+		int column = data.getColumnCount();
+	
+		while(rs.next()){
+			String string="";
+			for (int i = 1; i <= column; i++) {
+				if(i==column)
+					string += rs.getString(i);
+				else
+					string +=rs.getString(i)+",";
+			}
+			listaTuplas.add(string);
 		}
 		
 		for(int i=0;i<listaTuplas.size();i++){
@@ -342,9 +372,15 @@ public class ExcelGenerator {
 			}
 			
 		} else {
+			workbook.setSheetHidden(workbook.getSheetIndex("Columns"), true);
+			if(workbook.getSheet("ResultSet")==null)
+				dataSheet = workbook.createSheet("ResultSet");
+			else{
+				workbook.removeSheetAt(workbook.getSheetIndex("ResultSet"));
+				dataSheet = workbook.createSheet("ResultSet");
+			}
+			createTable(columnsNames, listaTuplas.size(),dataSheet);
 			
-			dataSheet = workbook.createSheet("ResultSet");
-			createTable(columnsNames, listaTuplas.size());
 			for(int i=0; i<listaTuplas.size(); i++){
 				String s= listaTuplas.get(i);
 				Row r = dataSheet.createRow(i+1);
@@ -1127,5 +1163,35 @@ public class ExcelGenerator {
 		this.listFilter = listFilter;
 	}
 	
+	public void createSheetQuery(){
+		Sheet query = workbook.createSheet("Query");
+		Row row = query.createRow(0);
+		Cell cell = row.createCell(0);
+		cell.setCellValue(consulta);
+		
+		int i =1;
+		for(;i<= listFilter.size();i++){
+			row = query.createRow(i);
+			
+			cell = row.createCell(0);
+			cell.setCellValue(""+ posFilters.get(i-1).x);
+			
+			cell = row.createCell(1);
+			cell.setCellValue(""+ posFilters.get(i-1).y);
+			
+			cell = row.createCell(2);
+			cell.setCellValue(""+ listFilter.get(i-1));
+		}
+		
+		row = query.createRow(i);
+		
+		cell = row.createCell(0);
+		cell.setCellValue(""+ posRowIniData);
+		
+		cell = row.createCell(1);
+		cell.setCellValue(""+ posCellIniData);
+		
+		workbook.setSheetHidden(workbook.getSheetIndex("Query"), Workbook.SHEET_STATE_HIDDEN);
+	}
 	
 }

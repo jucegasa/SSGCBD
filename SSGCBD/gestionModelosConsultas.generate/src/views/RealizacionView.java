@@ -2,6 +2,7 @@ package views;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -37,6 +38,8 @@ public class RealizacionView extends ViewPart {
 	
 	ModelFactory modelFactory;
 	
+	String consulta;
+	
 	public RealizacionView() {
 		inicializar();
 	}
@@ -63,7 +66,16 @@ public class RealizacionView extends ViewPart {
 				modelFactory = modelFactory.cargar();
 				modelFactoryModel.setModelFactory(modelFactory);
 				CompiladorProyeccion compiladorProyeccion = new CompiladorProyeccion();
-				compiladorProyeccion.compilarProyeccion(modelFactory);
+				try {
+					compiladorProyeccion.compilarProyeccion(modelFactory);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				consulta = compiladorProyeccion.getCompiladorRealizacion().getConsultaGenerica().getConsultaMySql().getConsultaId();
 				JOptionPane.showMessageDialog(null, "Se ejecuto la consulta.");
 			}
 		});

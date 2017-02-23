@@ -1,5 +1,6 @@
 package gestionmodelosconsultas.compilador;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -19,7 +20,7 @@ import gestionmodelosconsultas.rules.factoryrules.EntityName;
 
 public class CompiladorProyeccion {
 
-	public void compilarProyeccion(ModelFactory modelFactory) {
+	public void compilarProyeccion(ModelFactory modelFactory) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		
 		ArrayList<String> entidades = new ArrayList<String>();
@@ -105,12 +106,14 @@ public class CompiladorProyeccion {
 	 * @param atributosSeleccion
 	 * @param relaciones
 	 * @param elementosReglas
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	private void transformarProyeccionRealizacion(ArrayList<String> entidades,
 			ArrayList<String[]> atributosCriterio,
 			ArrayList<String[]> atributosSeleccion,
 			ArrayList<String> relaciones, ArrayList<String[]> elementosReglas,
-			ModelFactory modelFactory) {
+			ModelFactory modelFactory) throws ClassNotFoundException, SQLException {
 		
 		if (modelFactory.getFactoryModeloConsultas().getListModeloConsulta()
 				.get(0).getRealizacionDiagramEntity() != null) {
@@ -356,7 +359,17 @@ public class CompiladorProyeccion {
 		modelFactory.salvar();
 		CompiladorRealizacion compiladorRealizacion = new CompiladorRealizacion();
 		compiladorRealizacion.compilarRealizacionDiagramEntity(modelFactory);
-		
+		this.compiladorRealizacion = compiladorRealizacion;
+	}
+	
+	private CompiladorRealizacion compiladorRealizacion;
+	
+	public CompiladorRealizacion getCompiladorRealizacion() {
+		return compiladorRealizacion;
+	}
+
+	public void setCompiladorRealizacion(CompiladorRealizacion compiladorRealizacion) {
+		this.compiladorRealizacion = compiladorRealizacion;
 	}
 
 	/**

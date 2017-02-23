@@ -6,6 +6,7 @@ import gestionmodelosconsultas.modeloconsultas.model.EADiagram;
 import gestionmodelosconsultas.modeloconsultas.que.Documento;
 import gestionmodelosconsultas.modeloconsultas.que.QueFactory;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
@@ -92,7 +93,7 @@ public class GenerateCode {
 		modelFactoryMC.salvar();
 	}
 	
-	public void compilarConsulta() {	
+	public void compilarConsulta() throws ClassNotFoundException, SQLException {	
 		modelFactoryMC = modelFactoryMC.cargar();
 		modelFactoryModel.setModelFactory(modelFactoryMC);
 		CompiladorProyeccion compiladorProyeccion = new CompiladorProyeccion();

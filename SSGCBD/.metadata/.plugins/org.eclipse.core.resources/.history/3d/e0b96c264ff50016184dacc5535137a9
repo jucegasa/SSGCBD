@@ -1,0 +1,523 @@
+package gestionmodelosconsultas.consulta;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import gestionconsultassqlmodels.generate.query.MySqlQuery;
+import gestionmodelosconsultas.ModelFactory;
+import gestionmodelosconsultas.compilador.CompiladorProyeccion;
+import gestionmodelosconsultas.compilador.CompiladorResulsetResultado;
+import gestionmodelosconsultas.entitymodel.EntitymodelFactory;
+import gestionmodelosconsultas.entitymodel.RealizacionDiagramEntity;
+import gestionmodelosconsultas.entitymodel.SimpleRelation;
+import gestionmodelosconsultas.entitymodel.Value;
+import gestionmodelosconsultas.modeloconsultas.model.Proyeccion;
+
+public class ConsultaMySql {
+
+	/**
+	 * Genera el texto de la consulta MySql
+	 * 
+	 * @param realizacionDiagramEntity
+	 */
+	public void generarTextoConsulta(ModelFactory modelFactory) {
+		// TODO Auto-generated method stub
+
+		RealizacionDiagramEntity realizacionDiagramEntity = EntitymodelFactory.eINSTANCE
+				.createRealizacionDiagramEntity();
+		realizacionDiagramEntity = obtenerRealizacionDiagramEntity(modelFactory);
+		Proyeccion proyeccion = gestionmodelosconsultas.modeloconsultas.model.ModelFactory.eINSTANCE
+				.createProyeccion();
+		proyeccion = obtenerProyeccionEADiagram(modelFactory);
+		if (proyeccion == null
+				|| proyeccion.getListElementoConsulta().isEmpty()) {
+			System.err
+					.println("La proyeccion no existe o no tiene elementos de consulta");
+			return;
+		}
+		ArrayList<String> tablas = new ArrayList<String>();
+		ArrayList<String> condicionesOn = new ArrayList<String>();
+		ArrayList<String> campos = new ArrayList<String>();
+		ArrayList<ArrayList<String>> parametros = new ArrayList<ArrayList<String>>();
+
+		campos = obtenerCamposSeleccion(realizacionDiagramEntity);
+		tablas = obtenerNombresTablas(realizacionDiagramEntity);
+		condicionesOn = obtenerCondicionesOn(realizacionDiagramEntity);
+		parametros = obtenerParametros(realizacionDiagramEntity);
+
+		String consulta = "";
+		String camposQuery = "";
+		String tablasQuery = "";
+		String condicionesOnQuery = "";
+		String parametrosQuery = "";
+
+		for (int i = 0; i < tablas.size(); i++) {
+			if ((i + 1) == tablas.size()) {
+				tablasQuery += tablas.get(i);
+			} else {
+				tablasQuery += tablas.get(i) + " JOIN ";
+			}
+		}
+
+		for (int i = 0; i < condicionesOn.size(); i++) {
+			if ((i + 1) == condicionesOn.size()) {
+				condicionesOnQuery += condicionesOn.get(i);
+			} else {
+				condicionesOnQuery += condicionesOn.get(i) + " AND ";
+			}
+		}
+		for (int i = 0; i < campos.size(); i++) {
+			if ((i + 1) == campos.size()) {
+				camposQuery += campos.get(i);
+			} else {
+				camposQuery += campos.get(i) + ", ";
+			}
+		}
+		for (int i = 0; i < parametros.size(); i++) {
+			if ((i + 1) == parametros.size()) {
+				String parametrostemp = "";
+				for (int j = 0; j < parametros.get(i).size(); j++) {
+
+					if ((j + 1) == parametros.get(i).size()) {
+
+						parametrostemp += "(" + parametros.get(i).get(j) + ")";
+
+					} else {
+
+						parametrostemp += "(" + parametros.get(i).get(j)
+								+ ") OR ";
+					}
+				}
+
+				parametrosQuery += "(" + parametrostemp + ")";
+
+			} else {
+				String parametrostemp = "";
+				for (int j = 0; j < parametros.get(i).size(); j++) {
+
+					if ((j + 1) == parametros.get(i).size()) {
+
+						parametrostemp += "(" + parametros.get(i).get(j) + ")";
+
+					} else {
+
+						parametrostemp += "(" + parametros.get(i).get(j)
+								+ ") OR ";
+					}
+				}
+
+				parametrosQuery += "(" + parametrostemp + ") AND ";
+			}
+		}
+
+		// ----- ID DE LA CONSULTA PARA EL ORDEN
+		ArrayList<String> campoTemp = new ArrayList<String>();
+		campoTemp = campos;
+		String camposQueryConsulta = "";
+		ArrayList<String> idConsulta = new ArrayList<String>();
+		idConsulta = obtenerIdConsulta(campos, modelFactory);
+
+		for (String idTemp : idConsulta) {
+
+			for (int i = 0; i < campoTemp.size(); i++) {
+
+				if (campoTemp.get(i).equals(idTemp)) {
+
+					campoTemp.remove(i);
+					break;
+				}
+			}
+
+		}
+
+		for (int i = 0; i < idConsulta.size(); i++) {
+			if ((i + 1) == idConsulta.size()) {
+				camposQueryConsulta += idConsulta.get(i);
+			} else {
+				camposQueryConsulta += idConsulta.get(i) + ", ";
+			}
+		}
+
+		for (int i = 0; i < campoTemp.size(); i++) {
+
+			camposQueryConsulta += ", " + campos.get(i);
+
+		}
+		String consultaId = "";
+		if (campos.size() > 0) {
+
+			if (condicionesOn.size() > 0) {
+
+				if (parametros.size() > 0) {
+
+					consulta = "SELECT " + camposQuery + " FROM " + tablasQuery
+							+ " ON (" + condicionesOnQuery + ") WHERE ("
+							+ parametrosQuery + ")";
+					consultaId = "SELECT " + camposQueryConsulta + " FROM "
+							+ tablasQuery + " ON (" + condicionesOnQuery
+							+ ") WHERE (" + parametrosQuery + ")";
+				} else {
+					consulta = "SELECT " + camposQuery + " FROM " + tablasQuery
+							+ " ON (" + condicionesOnQuery + ")";
+					consultaId = "SELECT " + camposQueryConsulta + " FROM "
+							+ tablasQuery + " ON (" + condicionesOnQuery + ")";
+				}
+			} else {
+
+				if (parametros.size() > 0) {
+
+					consulta = "SELECT " + camposQuery + " FROM " + tablasQuery
+							+ " WHERE (" + parametrosQuery + ")";
+					consultaId = "SELECT " + camposQueryConsulta + " FROM "
+							+ tablasQuery + " WHERE (" + parametrosQuery + ")";
+				} else {
+					consulta = "SELECT " + camposQuery + " FROM " + tablasQuery;
+					consultaId = "SELECT " + camposQueryConsulta + " FROM "
+							+ tablasQuery;
+				}
+			}
+
+			System.out.println("Consulta: " + consulta);
+			System.out.println("ConsultaId: " + consultaId);
+			MySqlQuery mySqlQuery = new MySqlQuery();
+			ResultSet rs = mySqlQuery.consultarCodigo(consultaId);
+			this.consultaId = consultaId;
+			CompiladorResulsetResultado compiladorResulsetResultado = new CompiladorResulsetResultado();
+			compiladorResulsetResultado.generarResultado(rs, modelFactory,
+					idConsulta, campos, tablas);
+		} else {
+			System.err.println("No hay campos para mostrar");
+		}
+
+	}
+	private String consultaId;
+
+	public String getConsultaId() {
+		return consultaId;
+	}
+
+	public void setConsultaId(String consultaId) {
+		this.consultaId = consultaId;
+	}
+
+	/**
+	 * Obtiene el Id de las tablas de las Consultas
+	 * 
+	 * @param campos
+	 * @param modelFactory
+	 */
+	private ArrayList<String> obtenerIdConsulta(ArrayList<String> campos,
+			ModelFactory modelFactory) {
+		// TODO Auto-generated method stub
+
+		CompiladorProyeccion compiladorProyeccion = new CompiladorProyeccion();
+		ArrayList<String> entidades = new ArrayList<String>();
+		ArrayList<String> idConsulta = new ArrayList<String>();
+		entidades = compiladorProyeccion.obtenerEntidades(modelFactory);
+		for (String temp : entidades) {
+
+			for (int i = 0; i < modelFactory.getDiagramEntity().getListEntity()
+					.size(); i++) {
+
+				if (temp.equals(modelFactory.getDiagramEntity().getListEntity()
+						.get(i).getName())) {
+
+					for (int j = 0; j < modelFactory.getDiagramEntity()
+							.getListEntity().get(i).getListAttributes().size(); j++) {
+
+						if (modelFactory.getDiagramEntity().getListEntity()
+								.get(i).getListAttributes().get(j)
+								.getAttributeType().getName()
+								.equals("primaryKey")) {
+
+							idConsulta.add(temp
+									+ "."
+									+ modelFactory.getDiagramEntity()
+											.getListEntity().get(i)
+											.getListAttributes().get(j)
+											.getName());
+							break;
+						}
+					}
+
+					break;
+				}
+			}
+		}
+		return idConsulta;
+
+	}
+
+	/**
+	 * Obtiene los campos que van en el Select
+	 * 
+	 * @param proyeccion
+	 * @return
+	 */
+	private ArrayList<String> obtenerCamposSeleccion(
+			RealizacionDiagramEntity realizacionDiagramEntity) {
+		// TODO Auto-generated method stub
+		ArrayList<String> campos = new ArrayList<String>();
+		for (int i = 0; i < realizacionDiagramEntity
+				.getRealizacionVisibleAttribute().getVisibleAttribute().size(); i++) {
+
+			campos.add(realizacionDiagramEntity
+					.getRealizacionVisibleAttribute().getVisibleAttribute()
+					.get(i).getEntity().getName()
+					+ "."
+					+ realizacionDiagramEntity.getRealizacionVisibleAttribute()
+							.getVisibleAttribute().get(i).getName());
+		}
+
+		return campos;
+	}
+
+	/**
+	 * Obtiene los nombres de las tablas
+	 * 
+	 * @param realizacionDiagramEntity
+	 * @return
+	 */
+	private ArrayList<String> obtenerNombresTablas(
+			RealizacionDiagramEntity realizacionDiagramEntity) {
+		ArrayList<String> tablas = new ArrayList<String>();
+		for (int i = 0; i < realizacionDiagramEntity
+				.getListElementoRealizacionDiagramEntity().size(); i++) {
+
+			if (realizacionDiagramEntity
+					.getListElementoRealizacionDiagramEntity().get(i).getTipo()
+					.getName().equals("entity")) {
+
+				tablas.add(realizacionDiagramEntity
+						.getListElementoRealizacionDiagramEntity().get(i)
+						.getModelElementEntity().getName());
+			}
+		}
+
+		return tablas;
+	}
+
+	/**
+	 * Obtiene las condiciones del ON
+	 * 
+	 * @param realizacionDiagramEntity
+	 * @return
+	 */
+	private ArrayList<String> obtenerCondicionesOn(
+			RealizacionDiagramEntity realizacionDiagramEntity) {
+		// TODO Auto-generated method stub
+		ArrayList<String> condicionesOn = new ArrayList<String>();
+		String foreingKey = "";
+		String primaryKey = "";
+		for (int i = 0; i < realizacionDiagramEntity
+				.getListElementoRealizacionDiagramEntity().size(); i++) {
+
+			if (realizacionDiagramEntity
+					.getListElementoRealizacionDiagramEntity().get(i).getTipo()
+					.getName().equals("relation")) {
+
+				SimpleRelation simpleRelation = EntitymodelFactory.eINSTANCE
+						.createSimpleRelation();
+				simpleRelation = (SimpleRelation) realizacionDiagramEntity
+						.getListElementoRealizacionDiagramEntity().get(i)
+						.getModelElementEntity();
+				foreingKey = simpleRelation.getSource().getName() + "."
+						+ simpleRelation.getAtributteForeingKeySource();
+				primaryKey = simpleRelation.getTarget().getName() + "."
+						+ simpleRelation.getAtributtePrimaryKeyTarget();
+				condicionesOn.add(foreingKey + "=" + primaryKey);
+			}
+		}
+		return condicionesOn;
+	}
+
+	/**
+	 * Obtiene los parametros de la consulta
+	 * 
+	 * @param realizacionDiagramEntity
+	 * @return
+	 */
+	private ArrayList<ArrayList<String>> obtenerParametros(
+			RealizacionDiagramEntity realizacionDiagramEntity) {
+		// TODO Auto-generated method stub
+		ArrayList<ArrayList<String>> parametros = new ArrayList<ArrayList<String>>();
+
+		// realizacionDiagramEntity =
+		// llenarAtributosValue(realizacionDiagramEntity);
+
+		for (int i = 0; i < realizacionDiagramEntity
+				.getListElementoRealizacionDiagramEntity().size(); i++) {
+
+			if (realizacionDiagramEntity
+					.getListElementoRealizacionDiagramEntity().get(i)
+					.getListElementoRealizacionAttribute().size() > 0) {
+				ArrayList<String> parametrosEntidad = new ArrayList<String>();
+				for (int j = 0; j < realizacionDiagramEntity
+						.getListElementoRealizacionDiagramEntity().get(i)
+						.getListElementoRealizacionAttribute().size(); j++) {
+
+					String parametrosQuery = "";
+					for (int k = 0; k < realizacionDiagramEntity
+							.getListElementoRealizacionDiagramEntity().get(i)
+							.getListElementoRealizacionAttribute().get(j)
+							.getValues().size(); k++) {
+
+						if ((k + 1) == realizacionDiagramEntity
+								.getListElementoRealizacionDiagramEntity()
+								.get(i).getListElementoRealizacionAttribute()
+								.get(j).getValues().size()) {
+							if (realizacionDiagramEntity
+									.getListElementoRealizacionDiagramEntity()
+									.get(i)
+									.getListElementoRealizacionAttribute()
+									.get(j).getValueAttribute().get(k)
+									.getName().equals("fechaCreacion")) {
+								//JOptionPane.showMessageDialog(null, "volamos");
+								parametrosQuery += realizacionDiagramEntity
+										.getListElementoRealizacionDiagramEntity()
+										.get(i)
+										.getListElementoRealizacionAttribute()
+										.get(j).getValueAttribute().get(k)
+										.getEntity().getName()
+										+ "."
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValueAttribute()
+												.get(k).getName()
+										+ " LIKE '"
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValues().get(k)
+												.getValue() + "%'";
+							} else {
+								parametrosQuery += realizacionDiagramEntity
+										.getListElementoRealizacionDiagramEntity()
+										.get(i)
+										.getListElementoRealizacionAttribute()
+										.get(j).getValueAttribute().get(k)
+										.getEntity().getName()
+										+ "."
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValueAttribute()
+												.get(k).getName()
+										+ "= '"
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValues().get(k)
+												.getValue() + "'";
+							}
+						} else {
+							if (realizacionDiagramEntity
+									.getListElementoRealizacionDiagramEntity()
+									.get(i)
+									.getListElementoRealizacionAttribute()
+									.get(j).getValueAttribute().get(k)
+									.getName().equals("fechaCreacion")) {
+								//JOptionPane.showMessageDialog(null, "volamos");
+								parametrosQuery += realizacionDiagramEntity
+										.getListElementoRealizacionDiagramEntity()
+										.get(i)
+										.getListElementoRealizacionAttribute()
+										.get(j).getValueAttribute().get(k)
+										.getEntity().getName()
+										+ "."
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValueAttribute()
+												.get(k).getName()
+										+ " LIKE '"
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValues().get(k)
+												.getValue() + "%' AND ";
+							} else {
+								parametrosQuery += realizacionDiagramEntity
+										.getListElementoRealizacionDiagramEntity()
+										.get(i)
+										.getListElementoRealizacionAttribute()
+										.get(j).getValueAttribute().get(k)
+										.getEntity().getName()
+										+ "."
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValueAttribute()
+												.get(k).getName()
+										+ "= '"
+										+ realizacionDiagramEntity
+												.getListElementoRealizacionDiagramEntity()
+												.get(i)
+												.getListElementoRealizacionAttribute()
+												.get(j).getValues().get(k)
+												.getValue() + "' AND ";
+							}
+						}
+					}
+					parametrosEntidad.add(parametrosQuery);
+
+				}
+				parametros.add(parametrosEntidad);
+			}
+		}
+
+		return parametros;
+	}
+
+	/**
+	 * Obtenie la Realizacion
+	 * 
+	 * @param modelFactory
+	 * @return
+	 */
+	private RealizacionDiagramEntity obtenerRealizacionDiagramEntity(
+			ModelFactory modelFactory) {
+		// TODO Auto-generated method stub
+		if (modelFactory.getFactoryModeloConsultas().getListModeloConsulta()
+				.get(0).getRealizacionDiagramEntity() != null) {
+			return modelFactory.getFactoryModeloConsultas()
+					.getListModeloConsulta().get(0)
+					.getRealizacionDiagramEntity();
+		}
+		return null;
+	}
+
+	/**
+	 * Obtiene la Proyeccion de ModelFactory
+	 * 
+	 * @param modelFactory
+	 * @return
+	 */
+	private Proyeccion obtenerProyeccionEADiagram(ModelFactory modelFactory) {
+		// TODO Auto-generated method stub
+
+		for (int i = 0; i < modelFactory.getFactoryModeloConsultas()
+				.getListModeloConsulta().get(0).getListEADiagram().size(); i++) {
+
+			if (modelFactory.getFactoryModeloConsultas()
+					.getListModeloConsulta().get(0).getListEADiagram().get(i) instanceof Proyeccion) {
+				return (Proyeccion) modelFactory.getFactoryModeloConsultas()
+						.getListModeloConsulta().get(0).getListEADiagram()
+						.get(i);
+			}
+
+		}
+		return null;
+	}
+}

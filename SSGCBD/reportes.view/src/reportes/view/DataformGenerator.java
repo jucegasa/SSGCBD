@@ -27,8 +27,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
@@ -297,6 +295,8 @@ public class DataformGenerator{
 	    	listComboCordinate.add(coordenadasComboBox[i]);
 	    }
 	    
+	    nContainers++;
+	    
         //Se realiza identifican y se agregan las mergedRegions
 	    identifyMergedRegions();
           
@@ -317,8 +317,8 @@ public class DataformGenerator{
 		salvarDF();
 	}
 
+	@SuppressWarnings("deprecation")
 	private void searchBegin() {
-		// TODO Auto-generated method stub
 		Row r;
 		Cell c;
 		for(int i = 0; i < visit.length; i++) {
@@ -355,7 +355,7 @@ public class DataformGenerator{
 	/**
 	 * Metodo que sirve para setear los atributos de una relacion
 	 * @param c relacion de contaiment a la cual se le setearean los atributos
-	 * @param i i dentificador de la tabla que es due�a de la relacion
+	 * @param i i dentificador de la tabla que es dueï¿½a de la relacion
 	 */
 	public void setAtributesContaimentRelation(tooldataform.formmodel.concreta.Containment c, String  name){
 		c.setAMultiplicidad(tooldataform.pmoo.Cardinalidad.N);
@@ -388,7 +388,9 @@ public class DataformGenerator{
 		//Se obtienen las dimensiones de la matriz de visitados
 		int w = toInt(stractColumn(fin)); int h = ( Integer.parseInt(capturarNumeros(fin)));
 		visit = new int[ h + 1][w +1 ];
-		nContainers = 1;
+		
+		nContainers = 0;
+		
 		//Se obtienen las coordenandas relativas
 		Coordinate coordinate = getCoordinates(inicio);
 		nx = coordinate.getX();   ny = coordinate.getY();
@@ -432,7 +434,6 @@ public class DataformGenerator{
 		modelFactory.getListProyecto().add(project);
 	}
 	
-	
 	/**
 	 * Metodo que obtiene los combobox que estan en el reporte.
 	 * @param libro Documento XLS del cual se captura la forma del reporte.
@@ -471,9 +472,12 @@ public class DataformGenerator{
 	    			nombresComboBox[id-1]= getCellValue(c);
 	    			coordenadasComboBox[id-1]= new Coordinate(i, j);
 	    			
-	    			ComboView combo =  ConcretaFactory.eINSTANCE.createComboView();
+	    			coordenadasInicioContenedores.add(new Coordinate(i, j-1));
+	    	    	coordenadasFinContenedores.add(new Coordinate(i+1, j));
+	    			
+	    	    	ComboView combo =  ConcretaFactory.eINSTANCE.createComboView();
 	    			combo.setName(getCellValue(c));
-	    			setBoundsGraphicalContainer(combo, 0 , 0, 200, 50);
+	    			setBoundsGraphicalContainer(combo, 0 , 0, 240, 20);
 	    			ItemCombo item = ConcretaFactory.eINSTANCE.createItemCombo();
 	    			item.setName("nombre");
 	    			combo.setTheItem(item);
@@ -483,8 +487,6 @@ public class DataformGenerator{
 	        }
 	    }
 	}	
-	
-
 	
 	/**
 	 * Este metodo se encarga de identificar, extraer y marcar
@@ -504,7 +506,7 @@ public class DataformGenerator{
 	 * Metodo que obtiene la lista de 
 	 * regiones combinadas de toda la hoja
 	 * y explora esa zona para obtener la adecuada 
-	 * abstracción del view model
+	 * abstracciÃ³n del view model
 	 */
 	public void identifyMergedRegions(){
 			
@@ -828,7 +830,7 @@ public class DataformGenerator{
 	 * Este metodo se encarga de explorar el xml del excel
 	 * y se encarga de extraer las propiedades de cada tabla
 	 * que se encuentran en el y agregar las tablas a la 
-	 * producci�n del datafrom
+	 * producciï¿½n del datafrom
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 * @throws IOException
@@ -837,13 +839,12 @@ public class DataformGenerator{
 		
 		//Obtiene el numero de tablas a agregar al dataform
 		int n = getNumberTables();
-		nContainers = n+1;
 		nTables =n;
 		//Documento xml del excel
 		Document doc;
 		for(int i=1;i<=n;i++){
 			
-			//Se crea el container que contendr� la tabla
+			//Se crea el container que contendrï¿½ la tabla
 			Container containerTablas = ConcretaFactory.eINSTANCE.createContainer();
 			containerTablas.setName("Table"+i);
 			
@@ -968,6 +969,7 @@ public class DataformGenerator{
         	//Se obtiene la dimension de la tabla que viene en formato "CeldaInicio:CeldaFinal" ejemplo: C1:P44
         	String inicio = sizes.get(i).split(":")[0], fin =  sizes.get(i).split(":")[1];
         	
+        	
         	//Se recorre las filas de la dimension
         	for(int  j = Integer.parseInt(capturarNumeros(inicio))-1 ; j <Integer.parseInt(capturarNumeros(fin)) ;j++){
         		
@@ -977,9 +979,10 @@ public class DataformGenerator{
         		
         		//Se recorre las columnas de la dimension
         		for(int k = wi; k <=wf;k++ ){
-        			visit[j][k] = i+1;
+        			visit[j][k] = nContainers;
         		}
         	}
+        	nContainers++;
         }
 	}
 	
@@ -1060,6 +1063,7 @@ public class DataformGenerator{
 	 * @param sheetV Hoja del libro de visitados
 	 * @return una lista de coordenadas con las celdas que se visitaron en la exploracion
 	 */
+	@SuppressWarnings("deprecation")
 	public ArrayList<Coordinate> bfs(int i, int j) {	
 		
 		//Se extrae la fila y columna inicial
@@ -1137,6 +1141,7 @@ public class DataformGenerator{
 	 * @param visit Libro de excel que contiene cuales celdas ya se han analizado
  	 * @throws IOException
 	 */
+	@SuppressWarnings("deprecation")
 	public void recorrerHoja() throws IOException {
 		
 		//Se obtiene la ultima fila a anlizar
@@ -1295,7 +1300,7 @@ public class DataformGenerator{
 	 * que estan a la izquierda de este contenedor
 	 * @param i numero de fila donde se encuentra el contenedor
 	 * @param j numero de columna donde se encuentra el contenedor
-	 * @param fini final del arhivo en fi�as
+	 * @param fini final del arhivo en fiï¿½as
 	 * @param sheetV hoja de visitados para verificar los contendores
 	 * @return la cantidad de containers que hay a la izquierda del contenedor 
 	 * 		   que se encuentra en la posicion (i, j) del excel
@@ -1313,7 +1318,7 @@ public class DataformGenerator{
 	
 	/**
 	 * Este metodo sirve para extraer los numero de una celda que venga en el formato de celdas en excel
-	 * por ejemplo si la celda es la AA345 este metodo retornar� 345 en formato string
+	 * por ejemplo si la celda es la AA345 este metodo retornarï¿½ 345 en formato string
 	 * @param s string que contiene la celda a la cual le queremos extraer los numeros para saber la fila
 	 * @return un string con los numeros consecutivos del string por parametro
 	 */
@@ -1341,7 +1346,7 @@ public class DataformGenerator{
 	}
 	
 	/**
-	 * Este metodo sirve para calcular el tama�o en pixeles de un contenedor
+	 * Este metodo sirve para calcular el tamaï¿½o en pixeles de un contenedor
 	 * a traves de sus dimensiones de filas y columnas establecidas en el excel
 	 * @param inicio es la celda donde empieza el contendor. (esquina izquierda superior)
 	 * @param fin es la celda donde termina el contenedor. (esquina derecha inferior)

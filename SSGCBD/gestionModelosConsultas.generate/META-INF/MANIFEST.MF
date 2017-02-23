@@ -30,4 +30,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: mysql-connector-java-5.1.17-bin.jar,
  .
-Export-Package: gestionmodelosconsultas.compilador
+Export-Package: com.mysql.jdbc,
+ gestionconsultassqlmodels.generate.conexionBD,
+ gestionmodelosconsultas.compilador,
+ gestionmodelosconsultas.consulta

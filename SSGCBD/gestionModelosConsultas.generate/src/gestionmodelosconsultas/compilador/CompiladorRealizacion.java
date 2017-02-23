@@ -1,18 +1,27 @@
 package gestionmodelosconsultas.compilador;
 
+import java.sql.SQLException;
+
 import gestionmodelosconsultas.ModelFactory;
 import gestionmodelosconsultas.consulta.ConsultaGenerica;
 import gestionmodelosconsultas.entitymodel.RealizacionDiagramEntity;
 
 public class CompiladorRealizacion {
-
-	public void compilarRealizacionDiagramEntity(ModelFactory modelFactory) {
+	
+	private ConsultaGenerica consultaGenerica;
+	public ConsultaGenerica getConsultaGenerica() {
+		return consultaGenerica;
+	}
+	public void setConsultaGenerica(ConsultaGenerica consultaGenerica) {
+		this.consultaGenerica = consultaGenerica;
+	}
+	public void compilarRealizacionDiagramEntity(ModelFactory modelFactory) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		
 //		RealizacionDiagramEntity realizacionDiagramEntity = obtenerRealizacionDiagramEntity(modelFactory);
 //		if(realizacionDiagramEntity!=null){
 			
-			ConsultaGenerica consultaGenerica = new ConsultaGenerica();
+			consultaGenerica = new ConsultaGenerica();
 			consultaGenerica.GenerarConsulta(modelFactory);
 //		}
 //		else{

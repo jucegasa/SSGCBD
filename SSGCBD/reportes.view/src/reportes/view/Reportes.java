@@ -1,6 +1,8 @@
 package reportes.view;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,6 +23,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.xml.sax.SAXException;
 
+import gestionconsultassqlmodels.generate.conexionBD.DataConnection;
 import gestionmodelosconsultas.compilador.CompiladorProyeccion;
 import gestionmodelosconsultas.modeloconsultas.model.Relacion;
 import reportes.ModelFactory;
@@ -52,6 +55,9 @@ public class Reportes extends ViewPart {
 	
 	String filePath; 
 
+	String consulta;
+	
+	ResultSet rs;
 	
 	public Reportes() {
 		inicializar();
@@ -70,43 +76,6 @@ public class Reportes extends ViewPart {
 	public void createPartControl(Composite parent) {
 		Composite container = toolkit.createComposite(parent, SWT.NONE);
 		toolkit.paintBordersFor(container);
-		
-		Button btnGenerarReporte = toolkit.createButton(container, "Generar Reporte", SWT.NONE);
-		btnGenerarReporte.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				modelFactory = modelFactory.cargar();
-				modelFactoryModel.setModelFactory(modelFactory);
-				ReporteImpl reporteView = (ReporteImpl) modelFactory.getTheUI().getTheReporte();
-				try {
-					reporteView.generarReporte();
-					GenerateCode generateCode = new GenerateCode();
-					generateCode.getNamesViewModel();
-					generateCode.crearViewModels();
-					generateCode.compilarConsulta();
-					//generateCode.copiarResultado();
-					JOptionPane.showMessageDialog(null, "Se ejecuto la consulta");
-					modelFactory.copiarProducciones();
-					JOptionPane.showMessageDialog(null, "Se ha generado el reporte");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnGenerarReporte.setBounds(30, 324, 120, 25);
-		
-		Button btnNewButton = new Button(container, SWT.NONE);
-		btnNewButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				ViewModelGenerator vmGenerator = new ViewModelGenerator( dfGenerator.getListComboBox());
-				vmGenerator.generateViewModel();
-			}
-		});
-		btnNewButton.setBounds(189, 324, 129, 25);
-		toolkit.adapt(btnNewButton, true, true);
-		btnNewButton.setText("Generar ViewModel");
 		
 		Group grpCicloDeVida = new Group(container, SWT.NONE);
 		grpCicloDeVida.setText("Ciclo de vida del Reporte");
@@ -174,7 +143,19 @@ public class Reportes extends ViewPart {
 				modelFactoryGC = modelFactoryGC.cargar();
 				modelFactoryModelGC.setModelFactory(modelFactoryGC);
 				CompiladorProyeccion compiladorProyeccion = new CompiladorProyeccion();
-				compiladorProyeccion.compilarProyeccion(modelFactoryGC);
+				try {
+					compiladorProyeccion.compilarProyeccion(modelFactoryGC);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				consulta = compiladorProyeccion.getCompiladorRealizacion().getConsultaGenerica().getConsultaMySql().getConsultaId();
+				compiladorProyeccion.getCompiladorRealizacion().getConsultaGenerica();
+				
+				rs = compiladorProyeccion.getCompiladorRealizacion().getConsultaGenerica().getConsultaMySql().getRs();
 				
 				JOptionPane.showMessageDialog(null, "Se genero la consulta.");
 			}
@@ -189,12 +170,12 @@ public class Reportes extends ViewPart {
 			public void widgetSelected(SelectionEvent e) {
 				
 				try {
-					excelGenarator.createDataSheet();
+					excelGenarator.createDataSheet(rs);
 					if(excelGenarator.getListFilter().size() != 0)
 						excelGenarator.createRelations();
 					
 					JOptionPane.showMessageDialog(null, "Reporte creado.");
-				} catch (IOException e1) {
+				} catch (IOException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -211,13 +192,13 @@ public class Reportes extends ViewPart {
 				try {
 					excelGenarator = new ExcelGenerator(filePath, dfGenerator.getListComboBox(), 
 							dfGenerator.getListComboCordinate(), modelFactoryGC, 
-							dfGenerator.getPosRowIniData(), dfGenerator.getPosCellIniData());
+							dfGenerator.getPosRowIniData(), dfGenerator.getPosCellIniData(),consulta);
 					
-					excelGenarator.writeFileColumns();
+					excelGenarator.writeFileColumns(rs);
 					
 					JOptionPane.showMessageDialog(null, "Puede ver las columnas del resultado de la consulta en el archivo Excel.");
 					
-				} catch (IOException e1) {
+				} catch (IOException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -226,6 +207,36 @@ public class Reportes extends ViewPart {
 		btnNewButton_1.setBounds(30, 100, 120, 25);
 		toolkit.adapt(btnNewButton_1, true, true);
 		btnNewButton_1.setText("Ver Columnas");
+		
+		Button btnNewButton = new Button(container, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				JFileChooser file=new JFileChooser();
+				file.showOpenDialog(null);
+				fileName = file.getSelectedFile().getName();
+				filePath = file.getSelectedFile().getAbsolutePath();
+				
+				try {
+					Actualizar a = new Actualizar(fileName, filePath);
+					a.refresh();
+					JOptionPane.showMessageDialog(null, "Se actualizo el reporte con Exito\n");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		btnNewButton.setBounds(40, 170, 120, 25);
+		toolkit.adapt(btnNewButton, true, true);
+		btnNewButton.setText("Actualizar");
 		createActions();
 		initializeToolBar();
 		initializeMenu();
